@@ -42,26 +42,26 @@ impl Realizer {
         }
     }
     /// Realizes the set of packings into optimally bad Wordle solutions.
-    pub fn realize(&self, solutions: &HashSet<Packing>) -> Vec<BadWordleSolution> {
-        solutions
+    #[must_use]
+    pub fn realize(&self, solutions: &HashSet<Packing>) -> HashSet<BadWordleSolution> {
+        let realizations: HashSet<_> = solutions
             .par_iter()
             .flat_map(|solution| self.realize_solution(solution))
-            .collect::<HashSet<_>>()
-            .into_iter()
-            .collect()
+            .collect();
+        realizations
     }
     /// Realizes a packing into an optimally bad Wordle solution.
-    pub fn realize_solution(&self, solution: &Packing) -> Vec<BadWordleSolution> {
-        let a = solution.answer();
+    pub fn realize_solution(&self, solution: &Packing) -> HashSet<BadWordleSolution> {
+        let a = &solution.answer();
         let [g1, g2, g3, g4, g5, g6] = solution.guesses();
         let combinations: [Vec<String>; 7] = [
-            self.answer_realizations.get(&a).unwrap().clone(),
-            self.guess_realizations.get(&g1).unwrap().clone(),
-            self.guess_realizations.get(&g2).unwrap().clone(),
-            self.guess_realizations.get(&g3).unwrap().clone(),
-            self.guess_realizations.get(&g4).unwrap().clone(),
-            self.guess_realizations.get(&g5).unwrap().clone(),
-            self.guess_realizations.get(&g6).unwrap().clone(),
+            self.answer_realizations.get(a).unwrap().clone(),
+            self.guess_realizations.get(g1).unwrap().clone(),
+            self.guess_realizations.get(g2).unwrap().clone(),
+            self.guess_realizations.get(g3).unwrap().clone(),
+            self.guess_realizations.get(g4).unwrap().clone(),
+            self.guess_realizations.get(g5).unwrap().clone(),
+            self.guess_realizations.get(g6).unwrap().clone(),
         ];
 
         combinations
@@ -77,7 +77,7 @@ impl Realizer {
 }
 
 /// A maximally bad Wordle solution.
-#[derive(Debug, Clone, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct BadWordleSolution {
     answer: String,
     guesses: [String; 6],
@@ -99,15 +99,3 @@ impl BadWordleSolution {
         &self.guesses
     }
 }
-
-impl PartialEq for BadWordleSolution {
-    fn eq(&self, other: &Self) -> bool {
-        if self.answer == other.answer {
-            return true;
-        }
-        let solution_set: HashSet<BadWordleSolution> = HashSet::from([self.clone(), other.clone()]);
-        solution_set.len() == 1
-    }
-}
-
-impl Eq for BadWordleSolution {}

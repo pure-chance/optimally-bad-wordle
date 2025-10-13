@@ -34,4 +34,4 @@ The filtering phase produces solutions in terms of lettersets rather than actual
 
 ## Results
 
-The complete solution set contains 1,120,598 optimally bad Wordle combinations, computed using Wordle's official answer list and extended guess vocabulary.
+The complete solution set contains 1,122,348 optimally bad Wordle combinations, computed using Wordle's official answer list and extended guess vocabulary.

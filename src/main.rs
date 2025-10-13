@@ -7,6 +7,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let realizer = Realizer::new(ANSWERS, GUESSES);
     let results = realizer.realize(&packings);
+
+    println!(
+        "There are {} (optimally bad) wordle solutions.",
+        results.len()
+    );
     write(&results, "results.json")?;
 
     Ok(())
