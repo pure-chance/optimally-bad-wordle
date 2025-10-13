@@ -2,6 +2,13 @@
 name = "wrong_wordle"
 version = "0.1.0"
 edition = "2024"
+authors = ["Chance Addis <chance.h.addis@proton.me>"]
+description = "Finds all optimally bad Wordle solutions using set-packing and bitset optimizations."
+license = "MIT"
+repository = "https://github.com/pure-chance/optimally-bad-wordle"
+keywords = ["wordle", "optimization", "set-packing", "parallel", "rayon"]
+categories = ["algorithm", "puzzle", "optimization"]
+readme = "README.md"
 
 [dependencies]
 itertools = "0.14.0"

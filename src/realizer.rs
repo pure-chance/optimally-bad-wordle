@@ -17,28 +17,21 @@ pub struct Realizer {
 
 impl Realizer {
     /// Construct a new `Realizer` from a list of answers and guesses.
+    #[must_use]
     pub fn new(answers: &[&str], guesses: &[&str]) -> Self {
-        let mut answer_lettersets = HashMap::new();
-        for &answer in answers {
-            let letterset = LetterSet::new(answer);
-            answer_lettersets
-                .entry(letterset)
-                .or_insert_with(Vec::new)
-                .push(answer.to_string());
-        }
+        let answer_realizations: HashMap<LetterSet, Vec<String>> = answers
+            .iter()
+            .map(|&answer| (LetterSet::new(answer), answer.to_string()))
+            .into_group_map();
 
-        let mut guess_lettersets = HashMap::new();
-        for &guess in guesses {
-            let letterset = LetterSet::new(guess);
-            guess_lettersets
-                .entry(letterset)
-                .or_insert_with(Vec::new)
-                .push(guess.to_string());
-        }
+        let guess_realizations: HashMap<LetterSet, Vec<String>> = guesses
+            .iter()
+            .map(|&guess| (LetterSet::new(guess), guess.to_string()))
+            .into_group_map();
 
         Self {
-            answer_realizations: answer_lettersets,
-            guess_realizations: guess_lettersets,
+            answer_realizations,
+            guess_realizations,
         }
     }
     /// Realizes the set of packings into optimally bad Wordle solutions.
@@ -51,6 +44,13 @@ impl Realizer {
         realizations
     }
     /// Realizes a packing into an optimally bad Wordle solution.
+    ///
+    /// # Panics
+    ///
+    /// Panics if any of the lettersets in the packing are not found either the
+    /// `answer_realizations` or `guess_realizations`. This will never happen if
+    /// the packing is valid.
+    #[must_use]
     pub fn realize_solution(&self, solution: &Packing) -> HashSet<BadWordleSolution> {
         let a = &solution.answer();
         let [g1, g2, g3, g4, g5, g6] = solution.guesses();
@@ -84,18 +84,22 @@ pub struct BadWordleSolution {
 }
 
 impl BadWordleSolution {
-    /// Construct a new `BadWordleSolution` from an answer and a list of guesses.
+    /// Construct a new `BadWordleSolution` from an answer and a list of
+    /// guesses.
+    #[must_use]
     pub fn new(answer: String, guesses: [String; 6]) -> Self {
         let mut guesses = guesses;
         guesses.sort();
         Self { answer, guesses }
     }
     /// Returns the answer of the `BadWordleSolution`.
-    pub fn answer(&self) -> &str {
+    #[must_use]
+    pub const fn answer(&self) -> &String {
         &self.answer
     }
     /// Returns the guesses of the `BadWordleSolution`.
-    pub fn guesses(&self) -> &[String; 6] {
+    #[must_use]
+    pub const fn guesses(&self) -> &[String; 6] {
         &self.guesses
     }
 }

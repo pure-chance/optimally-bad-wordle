@@ -1,6 +1,8 @@
 use std::collections::{HashMap, HashSet};
+use std::sync::atomic::{AtomicUsize, Ordering};
 
 use itertools::Itertools;
+use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::letterset::LetterSet;
@@ -14,70 +16,69 @@ pub struct Filterer {
 
 impl Filterer {
     /// Construct a new `Filterer` with the given answers and guesses.
+    #[must_use]
     pub fn new(answers: &[&str], guesses: &[&str]) -> Self {
         let answer_sets: Vec<LetterSet> = answers.iter().map(|&w| w.into()).unique().collect();
         let guess_sets: Vec<LetterSet> = guesses.iter().map(|&w| w.into()).unique().collect();
-
-        Filterer {
+        Self {
             answer_sets,
             guess_sets,
         }
     }
     /// Find all possible packings of answer + 6 guesses.
     pub fn find_packings(&self) -> HashSet<Packing> {
-        use rayon::prelude::*;
-        use std::sync::atomic::{AtomicUsize, Ordering};
-
         let counter = AtomicUsize::new(0);
         let total = self.answer_sets.len();
 
         self.answer_sets
             .par_iter()
             .map(|answer| {
-                let current = counter.fetch_add(1, Ordering::Relaxed) + 1;
-                println!("Processing answer: {:?} ({}/{})", answer, current, total);
-                self.find_packing_for_answer(*answer)
+                let progress = counter.fetch_add(1, Ordering::Relaxed) + 1;
+                println!("Processing answer: {answer:?} ({progress}/{total})");
+                self.find_packings_for_answer(*answer)
             })
-            .reduce(HashSet::new, |mut acc, cliques_for_answer| {
-                acc.extend(cliques_for_answer);
+            .reduce(HashSet::new, |mut acc, packings_for_answer| {
+                acc.extend(packings_for_answer);
                 acc
             })
     }
     /// Find all possible packings of this particular answer + 6 guesses.
-    pub fn find_packing_for_answer(&self, answer: LetterSet) -> HashSet<Packing> {
-        let triples = self.find_triples_for_answer(answer);
+    #[must_use]
+    pub fn find_packings_for_answer(&self, answer: LetterSet) -> HashSet<Packing> {
+        let triples = Self::find_triples_for_answer(answer, &self.guess_sets);
         let partition = LetterSet::new("seaoriltnu");
-        let partitions = self.partition_triples_by_letterset(&triples, partition);
-        self.compare_compatible_triples(partitions, answer)
+        let partitions = Self::partition_triples_by_letterset(&triples, partition);
+        Self::compare_compatible_triples(&partitions, answer)
             .into_iter()
             .collect()
     }
     /// Find all triples for this particular answer.
-    fn find_triples_for_answer(&self, answer: LetterSet) -> Vec<Triple> {
-        let guesses: Vec<LetterSet> = self
-            .guess_sets
+    fn find_triples_for_answer(answer: LetterSet, guess_sets: &[LetterSet]) -> Vec<Triple> {
+        let guess_sets: Vec<LetterSet> = guess_sets
             .iter()
             .copied()
             .filter(|&ls| ls.disjoint(answer))
             .collect();
+
         let mut triples = Vec::new();
-        for (i, &ls1) in guesses.iter().enumerate() {
-            for (j, &ls2) in guesses.iter().enumerate().skip(i + 1) {
-                if ls1.disjoint(ls2) {
-                    for &ls3 in guesses.iter().skip(j + 1) {
-                        if ls1.union(ls2).disjoint(ls3) {
-                            let triple = Triple::new(ls1, ls2, ls3);
-                            triples.push(triple);
-                        }
+        for (i, &ls1) in guess_sets.iter().enumerate() {
+            for (j, &ls2) in guess_sets.iter().enumerate().skip(i + 1) {
+                if !ls1.disjoint(ls2) {
+                    continue;
+                }
+                for (_, &ls3) in guess_sets.iter().enumerate().skip(j + 1) {
+                    if ls1.union(ls2).disjoint(ls3) {
+                        let triple = Triple::new(ls1, ls2, ls3);
+                        triples.push(triple);
                     }
                 }
             }
         }
+
         triples
     }
     /// Partition triples by some partition letterset.
     fn partition_triples_by_letterset(
-        &self,
         triples: &[Triple],
         partition: LetterSet,
     ) -> HashMap<LetterSet, Vec<Triple>> {
@@ -90,27 +91,26 @@ impl Filterer {
     }
     /// Compare compatible triples in the partition.
     fn compare_compatible_triples(
-        &self,
-        partition: HashMap<LetterSet, Vec<Triple>>,
+        partition: &HashMap<LetterSet, Vec<Triple>>,
         answer: LetterSet,
     ) -> Vec<Packing> {
-        let mut cliques = Vec::new();
+        let mut packings = Vec::new();
         for keys in partition.iter().combinations_with_replacement(2) {
             let (&key1, triples1) = keys[0];
             let (&key2, triples2) = keys[1];
-            if key1.disjoint(key2) {
-                for &triple1 in triples1 {
-                    for &triple2 in triples2 {
-                        if triple1.disjoint(triple2) {
-                            let [ls1, ls2, ls3] = triple1.lettersets;
-                            let [ls4, ls5, ls6] = triple2.lettersets;
-                            cliques.push(Packing::new(answer, [ls1, ls2, ls3, ls4, ls5, ls6]));
-                        }
-                    }
+            if !key1.disjoint(key2) {
+                continue;
+            }
+            for (&triple1, &triple2) in triples1.iter().cartesian_product(triples2.iter()) {
+                if !triple1.disjoint(triple2) {
+                    continue;
                 }
+                let [ls1, ls2, ls3] = triple1.lettersets;
+                let [ls4, ls5, ls6] = triple2.lettersets;
+                packings.push(Packing::new(answer, [ls1, ls2, ls3, ls4, ls5, ls6]));
             }
         }
-        cliques
+        packings
     }
 }
 
@@ -124,17 +124,21 @@ pub struct Packing {
 impl Packing {
     /// Construct a new `Packing` with the given answer and guesses.
     ///
-    /// A clique is sorted to ensure that comparisons depend exclusively on membership.
+    /// A clique is sorted to ensure that comparisons depend exclusively on
+    /// membership.
+    #[must_use]
     pub fn new(answer: LetterSet, mut guesses: [LetterSet; 6]) -> Self {
         guesses.sort();
         Self { answer, guesses }
     }
     /// Return the answer of the clique.
-    pub fn answer(&self) -> LetterSet {
+    #[must_use]
+    pub const fn answer(&self) -> LetterSet {
         self.answer
     }
     /// Return the guesses of the clique.
-    pub fn guesses(&self) -> &[LetterSet; 6] {
+    #[must_use]
+    pub const fn guesses(&self) -> &[LetterSet; 6] {
         &self.guesses
     }
 }
@@ -147,13 +151,13 @@ struct Triple {
 
 impl Triple {
     /// Construct a new `Triple` with the given lettersets.
-    fn new(ls1: LetterSet, ls2: LetterSet, ls3: LetterSet) -> Self {
+    const fn new(ls1: LetterSet, ls2: LetterSet, ls3: LetterSet) -> Self {
         let lettersets = [ls1, ls2, ls3];
         let mask = ls1.union(ls2).union(ls3);
         Self { lettersets, mask }
     }
     /// Check if two triples are disjoint.
-    fn disjoint(&self, other: Triple) -> bool {
+    const fn disjoint(&self, other: Self) -> bool {
         self.mask.disjoint(other.mask)
     }
 }
