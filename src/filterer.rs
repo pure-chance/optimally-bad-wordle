@@ -65,7 +65,7 @@ impl Filterer {
             for (j, &ls2) in guess_sets.iter().enumerate().skip(i + 1) {
                 if !ls1.disjoint(ls2) {
                     continue;
-                }
+                };
                 for (_, &ls3) in guess_sets.iter().enumerate().skip(j + 1) {
                     if ls1.union(ls2).disjoint(ls3) {
                         let triple = Triple::new(ls1, ls2, ls3);

@@ -37,31 +37,31 @@ impl Realizer {
     /// Realizes the set of packings into optimally bad Wordle solutions.
     #[must_use]
     pub fn realize(&self, solutions: &HashSet<Packing>) -> HashSet<BadWordleSolution> {
-        let realizations: HashSet<_> = solutions
+        solutions
             .par_iter()
             .flat_map(|solution| self.realize_solution(solution))
-            .collect();
-        realizations
+            .collect()
     }
     /// Realizes a packing into an optimally bad Wordle solution.
     ///
     /// # Panics
     ///
-    /// Panics if any of the lettersets in the packing are not found either the
-    /// `answer_realizations` or `guess_realizations`. This will never happen if
-    /// the packing is valid.
+    /// Panics if any of the lettersets in the packing are not found in either
+    /// the `answer_realizations` or `guess_realizations`. This will never
+    /// happen if the lettersets are from the answers and guesses word list.
     #[must_use]
     pub fn realize_solution(&self, solution: &Packing) -> HashSet<BadWordleSolution> {
         let a = &solution.answer();
         let [g1, g2, g3, g4, g5, g6] = solution.guesses();
-        let combinations: [Vec<String>; 7] = [
-            self.answer_realizations.get(a).unwrap().clone(),
-            self.guess_realizations.get(g1).unwrap().clone(),
-            self.guess_realizations.get(g2).unwrap().clone(),
-            self.guess_realizations.get(g3).unwrap().clone(),
-            self.guess_realizations.get(g4).unwrap().clone(),
-            self.guess_realizations.get(g5).unwrap().clone(),
-            self.guess_realizations.get(g6).unwrap().clone(),
+
+        let combinations = [
+            self.answer_realizations[a].clone(),
+            self.guess_realizations[g1].clone(),
+            self.guess_realizations[g2].clone(),
+            self.guess_realizations[g3].clone(),
+            self.guess_realizations[g4].clone(),
+            self.guess_realizations[g5].clone(),
+            self.guess_realizations[g6].clone(),
         ];
 
         combinations
@@ -69,7 +69,7 @@ impl Realizer {
             .multi_cartesian_product()
             .par_bridge()
             .map(|v| {
-                let [a, g1, g2, g3, g4, g5, g6]: [String; 7] = v.try_into().unwrap();
+                let [a, g1, g2, g3, g4, g5, g6] = v.try_into().unwrap();
                 BadWordleSolution::new(a, [g1, g2, g3, g4, g5, g6])
             })
             .collect()
@@ -87,9 +87,8 @@ impl BadWordleSolution {
     /// Construct a new `BadWordleSolution` from an answer and a list of
     /// guesses.
     #[must_use]
-    pub fn new(answer: String, guesses: [String; 6]) -> Self {
-        let mut guesses = guesses;
-        guesses.sort();
+    pub fn new(answer: String, mut guesses: [String; 6]) -> Self {
+        guesses.sort_unstable();
         Self { answer, guesses }
     }
     /// Returns the answer of the `BadWordleSolution`.
