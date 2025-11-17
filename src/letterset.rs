@@ -1,12 +1,19 @@
+//! Compact bitmask representation of (5-letter) words.
+
 use std::fmt::Debug;
 use std::ops::{BitAnd, BitAndAssign, BitOr, BitOrAssign};
 
 use serde::{Deserialize, Serialize};
 
-/// Represents a set of letters.
+/// Represents a set of letters as a compact bitmask.
 ///
-/// A `LetterSet` is a mask, where setting a bit at position `i` indicates that
-/// the letter `i` is present in the word.
+/// A `LetterSet` uses a 26-bit integer where bit `i` indicates whether the
+/// letter at position `i` in the alphabet is present. For example, the word
+/// "slate" maps to the letterset {s,l,a,t,e}, represented as a bitmask with
+/// bits set at positions 0 (a), 4 (e), 11 (l), 18 (s), and 19 (t).
+///
+/// This representation enables efficient disjointness checking: two lettersets
+/// are disjoint if and only if their bitwise AND equals zero.
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
 pub struct LetterSet(u32);
@@ -22,36 +29,42 @@ impl LetterSet {
         }
         Self(mask)
     }
+
     /// Construct a `LetterSet` from the underlying letter mask.
     #[inline]
     #[must_use]
     pub const fn from_mask(mask: u32) -> Self {
         Self(mask)
     }
+
     /// Checks if two lettersets have no letters in common.
     #[inline]
     #[must_use]
     pub const fn disjoint(self, other: Self) -> bool {
         self.0 & other.0 == 0
     }
+
     /// Returns the union of two lettersets.
     #[inline]
     #[must_use]
     pub const fn union(self, other: Self) -> Self {
         Self(self.0 | other.0)
     }
+
     /// Returns the intersection of two lettersets.
     #[inline]
     #[must_use]
     pub const fn intersection(self, other: Self) -> Self {
         Self(self.0 & other.0)
     }
+
     /// Returns the number of unique letters set in the letterset.
     #[inline]
     #[must_use]
     pub const fn count_letters(self) -> u32 {
         self.0.count_ones()
     }
+
     /// Returns the underlying mask value.
     #[inline]
     #[must_use]

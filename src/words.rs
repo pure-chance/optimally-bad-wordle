@@ -1,3 +1,6 @@
+//! The set of valid answers and guesses in Wordle.
+
+/// The set of valid answers in Wordle.
 pub const ANSWERS: &[&str] = &[
     "aback", "abase", "abate", "abbey", "abbot", "abhor", "abide", "abled", "abode", "abort",
     "about", "above", "abuse", "abyss", "acorn", "acrid", "actor", "acute", "adage", "adapt",
@@ -235,6 +238,7 @@ pub const ANSWERS: &[&str] = &[
     "zonal",
 ];
 
+/// The set of valid guesses in Wordle.
 pub const GUESSES: &[&str] = &[
     "aahed", "aalii", "aargh", "aarti", "abaca", "abaci", "abacs", "abaft", "abaka", "abamp",
     "aband", "abash", "abask", "abaya", "abbas", "abbed", "abbes", "abcee", "abeam", "abear",

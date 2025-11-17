@@ -1,3 +1,5 @@
+//! Filters lettersets to identify all valid disjoint packings.
+
 use std::collections::{HashMap, HashSet};
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -7,6 +9,46 @@ use serde::{Deserialize, Serialize};
 
 use crate::letterset::LetterSet;
 
+/// Filters lettersets to identify all valid disjoint packings.
+///
+/// The `Filterer` solves the core combinatorial problem: finding all
+/// combinations of one answer letterset and six guess lettersets where all
+/// seven are pairwise disjoint (share no letters in common). This ensures the
+/// guesses provide zero information about the answer.
+///
+/// # Algorithm
+///
+/// The filterer employs a three-stage process, executed in parallel for each
+/// answer:
+///
+/// **1. Enumerate Triples**
+///
+/// For each answer a, the algorithm first eliminates all guesses that share any
+/// letters with a, producing Compatible[a]. This reduces the number of
+/// comparisons by orders of magnitude. It then enumerates all valid disjoint
+/// triples (g₁, g₂, g₃) from this reduced set.
+///
+/// **2. Partition Triples**
+///
+/// Each triple is partitioned based on its intersection with the top 10 most
+/// common letters in the guesses vocabulary. For the standard Wordle word list,
+/// this mask is "seaoriltnu" (note: s > e > a > ... > u by frequency). Triples
+/// with identical partition signatures are grouped together, creating O(2¹⁰) =
+/// 1,024 possible bins.
+///
+/// **3. Compare compatible triple pairs**
+///
+/// The algorithm compares pairs of partition bins rather than individual
+/// triples. For each pair of bins, if their partition signatures are disjoint
+/// (bitwise AND equals zero), all cross-bin triple pairs are candidates for
+/// full verification. If the signatures overlap, the entire bin pair is
+/// skipped. This pruning reduces the comparison space from O(T²) to between
+/// 100,000 and 700,000 comparisons for answers with large compatible sets,
+/// where T is the total number of triples.
+///
+/// # Runtime
+///
+/// In practice, the algorithm runs in ~20 seconds.
 pub struct Filterer {
     /// All unique lettersets from answers.
     answer_sets: Vec<LetterSet>,
@@ -25,6 +67,7 @@ impl Filterer {
             guess_sets,
         }
     }
+
     /// Find all possible packings of answer + 6 guesses.
     pub fn find_packings(&self) -> HashSet<Packing> {
         let counter = AtomicUsize::new(0);
@@ -42,6 +85,7 @@ impl Filterer {
                 acc
             })
     }
+
     /// Find all possible packings of this particular answer + 6 guesses.
     #[must_use]
     pub fn find_packings_for_answer(&self, answer: LetterSet) -> HashSet<Packing> {
@@ -52,7 +96,10 @@ impl Filterer {
             .into_iter()
             .collect()
     }
+
     /// Find all triples for this particular answer.
+    ///
+    /// All triples are unique by construction.
     fn find_triples_for_answer(answer: LetterSet, guess_sets: &[LetterSet]) -> Vec<Triple> {
         let guess_sets: Vec<LetterSet> = guess_sets
             .iter()
@@ -65,7 +112,7 @@ impl Filterer {
             for (j, &ls2) in guess_sets.iter().enumerate().skip(i + 1) {
                 if !ls1.disjoint(ls2) {
                     continue;
-                };
+                }
                 for (_, &ls3) in guess_sets.iter().enumerate().skip(j + 1) {
                     if ls1.union(ls2).disjoint(ls3) {
                         let triple = Triple::new(ls1, ls2, ls3);
@@ -77,6 +124,7 @@ impl Filterer {
 
         triples
     }
+
     /// Partition triples by some partition letterset.
     fn partition_triples_by_letterset(
         triples: &[Triple],
@@ -89,6 +137,7 @@ impl Filterer {
         }
         partitions
     }
+
     /// Compare compatible triples in the partition.
     fn compare_compatible_triples(
         partition: &HashMap<LetterSet, Vec<Triple>>,
@@ -131,11 +180,13 @@ impl Packing {
         guesses.sort();
         Self { answer, guesses }
     }
+
     /// Return the answer of the clique.
     #[must_use]
     pub const fn answer(&self) -> LetterSet {
         self.answer
     }
+
     /// Return the guesses of the clique.
     #[must_use]
     pub const fn guesses(&self) -> &[LetterSet; 6] {
@@ -143,6 +194,10 @@ impl Packing {
     }
 }
 
+/// A triple of disjoint lettersets.
+///
+/// The `Triple` has a mask that represents the union of its lettersets. This
+/// allows for fast disjointness checks.
 #[derive(Debug, Clone, Copy)]
 struct Triple {
     lettersets: [LetterSet; 3],
@@ -156,6 +211,7 @@ impl Triple {
         let mask = ls1.union(ls2).union(ls3);
         Self { lettersets, mask }
     }
+
     /// Check if two triples are disjoint.
     const fn disjoint(&self, other: Self) -> bool {
         self.mask.disjoint(other.mask)

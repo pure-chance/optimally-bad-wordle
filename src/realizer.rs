@@ -1,3 +1,5 @@
+//! Realize packings into Wordle solutions (that are optimally bad).
+
 use std::collections::{HashMap, HashSet};
 
 use itertools::Itertools;
@@ -7,7 +9,41 @@ use serde::{Deserialize, Serialize};
 use crate::filterer::Packing;
 use crate::letterset::LetterSet;
 
-/// Realizes letterset solutions back into maximally bad Wordle solutions.
+/// Realizes packings into Wordle solutions (that are optimally bad).
+///
+/// Specifically, the realizer finds all Wordle solutions that map to the
+/// disjoint packings found by the filterer.
+///
+/// # Algorithm
+///
+/// Given a packing (a, g₁, g₂, g₃, g₄, g₅, g₆) where each element is a
+/// letterset, the realizer:
+///
+/// 1. looks up all words that correspond to each letterset using a precomputed
+///    dictionary, and
+///
+/// 2. enumerates the Cartesian product across all seven positions.
+///
+/// # Example
+///
+/// Consider the following (simplified) packing:
+///
+/// ```text
+/// a  = {a,e,l,s,t} → ["least", "slate"]
+/// g₁ = {b,i,k,l,n} → ["blink"]
+/// g₂ = {c,o,r,u,y} → ["corny", "court", "curvy"]
+/// ```
+///
+/// The realizer generates 2 × 1 × 3 = 6 solutions:
+///
+/// ```text
+/// ("least", "blink", "corny"),
+/// ("least", "blink", "court"),
+/// ("least", "blink", "curvy"),
+/// ("slate", "blink", "corny"),
+/// ("slate", "blink", "court"),
+/// ("slate", "blink", "curvy"),
+/// ```
 pub struct Realizer {
     /// A map from answer lettersets to their realizations.
     answer_realizations: HashMap<LetterSet, Vec<String>>,
@@ -34,6 +70,7 @@ impl Realizer {
             guess_realizations,
         }
     }
+
     /// Realizes the set of packings into optimally bad Wordle solutions.
     #[must_use]
     pub fn realize(&self, solutions: &HashSet<Packing>) -> HashSet<BadWordleSolution> {
@@ -42,6 +79,7 @@ impl Realizer {
             .flat_map(|solution| self.realize_solution(solution))
             .collect()
     }
+
     /// Realizes a packing into an optimally bad Wordle solution.
     ///
     /// # Panics
@@ -76,7 +114,7 @@ impl Realizer {
     }
 }
 
-/// A maximally bad Wordle solution.
+/// An optimally bad Wordle solution.
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct BadWordleSolution {
     answer: String,
@@ -91,11 +129,13 @@ impl BadWordleSolution {
         guesses.sort_unstable();
         Self { answer, guesses }
     }
+
     /// Returns the answer of the `BadWordleSolution`.
     #[must_use]
     pub const fn answer(&self) -> &String {
         &self.answer
     }
+
     /// Returns the guesses of the `BadWordleSolution`.
     #[must_use]
     pub const fn guesses(&self) -> &[String; 6] {
