@@ -59,12 +59,10 @@ impl Realizer {
             .iter()
             .map(|&answer| (LetterSet::new(answer), answer.to_string()))
             .into_group_map();
-
         let guess_realizations: HashMap<LetterSet, Vec<String>> = guesses
             .iter()
             .map(|&guess| (LetterSet::new(guess), guess.to_string()))
             .into_group_map();
-
         Self {
             answer_realizations,
             guess_realizations,
@@ -91,7 +89,6 @@ impl Realizer {
     pub fn realize_solution(&self, solution: &Packing) -> HashSet<BadWordleSolution> {
         let a = &solution.answer();
         let [g1, g2, g3, g4, g5, g6] = solution.guesses();
-
         let combinations = [
             self.answer_realizations[a].clone(),
             self.guess_realizations[g1].clone(),
@@ -101,7 +98,6 @@ impl Realizer {
             self.guess_realizations[g5].clone(),
             self.guess_realizations[g6].clone(),
         ];
-
         combinations
             .into_iter()
             .multi_cartesian_product()

@@ -115,7 +115,6 @@ impl Filterer {
             .copied()
             .filter(|&ls| ls.disjoint(answer))
             .collect();
-
         let mut triples = Vec::new();
         for (i, &ls1) in guess_sets.iter().enumerate() {
             for (j, &ls2) in guess_sets.iter().enumerate().skip(i + 1) {
@@ -130,7 +129,6 @@ impl Filterer {
                 }
             }
         }
-
         triples
     }
 
