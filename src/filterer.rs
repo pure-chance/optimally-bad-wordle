@@ -79,6 +79,9 @@ impl Filterer {
     }
 
     /// Find all possible packings of answer + 6 guesses.
+    ///
+    /// Packings are found for each answer in parallel and then merged into a
+    /// single set.
     pub fn find_packings(&self) -> HashSet<Packing> {
         let counter = AtomicUsize::new(0);
         let total = self.answer_sets.len();
@@ -97,6 +100,10 @@ impl Filterer {
     }
 
     /// Find all possible packings of this particular answer + 6 guesses.
+    ///
+    /// This is done by (1) finding all triples for the answer, (2) partitioning
+    /// them by letterset, and (3) scanning and merging the partitions. Look at
+    /// the documentation of `Filterer` for more details.
     #[must_use]
     pub fn find_packings_for_answer(&self, answer: LetterSet) -> HashSet<Packing> {
         let triples = Self::find_triples_for_answer(answer, &self.guess_sets);
@@ -118,6 +125,7 @@ impl Filterer {
         let mut triples = Vec::new();
         for (i, &ls1) in guess_sets.iter().enumerate() {
             for (j, &ls2) in guess_sets.iter().enumerate().skip(i + 1) {
+                // Early continue if the first two guesses are not disjoint.
                 if !ls1.disjoint(ls2) {
                     continue;
                 }

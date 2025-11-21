@@ -21,7 +21,6 @@ use crate::letterset::LetterSet;
 ///
 /// 1. looks up all words that correspond to each letterset using a precomputed
 ///    dictionary, and
-///
 /// 2. enumerates the Cartesian product across all seven positions.
 ///
 /// # Example
