@@ -51,17 +51,27 @@ use crate::letterset::LetterSet;
 /// In practice, the algorithm runs in ~20 seconds.
 pub struct Filterer {
     /// All unique lettersets from answers.
-    answer_sets: Vec<LetterSet>,
+    answer_sets: Box<[LetterSet]>,
     /// All unique lettersets from guesses.
-    guess_sets: Vec<LetterSet>,
+    guess_sets: Box<[LetterSet]>,
 }
 
 impl Filterer {
     /// Construct a new `Filterer` with the given answers and guesses.
     #[must_use]
     pub fn new(answers: &[&str], guesses: &[&str]) -> Self {
-        let answer_sets: Vec<LetterSet> = answers.iter().map(|&w| w.into()).unique().collect();
-        let guess_sets: Vec<LetterSet> = guesses.iter().map(|&w| w.into()).unique().collect();
+        let answer_sets: Box<[LetterSet]> = answers
+            .iter()
+            .map(|&w| w.into())
+            .unique()
+            .sorted()
+            .collect();
+        let guess_sets: Box<[LetterSet]> = guesses
+            .iter()
+            .map(|&w| w.into())
+            .unique()
+            .sorted()
+            .collect();
         Self {
             answer_sets,
             guess_sets,
@@ -99,7 +109,7 @@ impl Filterer {
 
     /// Find all triples for this particular answer.
     ///
-    /// All triples are unique by construction.
+    /// **Correctness**: All triples are unique and sorted by construction.
     fn find_triples_for_answer(answer: LetterSet, guess_sets: &[LetterSet]) -> Vec<Triple> {
         let guess_sets: Vec<LetterSet> = guess_sets
             .iter()
@@ -154,9 +164,8 @@ impl Filterer {
                 if !triple1.disjoint(triple2) {
                     continue;
                 }
-                let [ls1, ls2, ls3] = triple1.lettersets;
-                let [ls4, ls5, ls6] = triple2.lettersets;
-                packings.push(Packing::new(answer, [ls1, ls2, ls3, ls4, ls5, ls6]));
+                let guesses = Packing::sort(triple1.lettersets, triple2.lettersets);
+                packings.push(Packing::new(answer, guesses));
             }
         }
         packings
@@ -173,24 +182,46 @@ pub struct Packing {
 impl Packing {
     /// Construct a new `Packing` with the given answer and guesses.
     ///
-    /// A clique is sorted to ensure that comparisons depend exclusively on
-    /// membership.
+    /// **Correctness**: A packing's guesses must be sorted to ensure that
+    /// comparisons depend exclusively on membership, and not order.
     #[must_use]
-    pub fn new(answer: LetterSet, mut guesses: [LetterSet; 6]) -> Self {
-        guesses.sort();
+    pub const fn new(answer: LetterSet, guesses: [LetterSet; 6]) -> Self {
         Self { answer, guesses }
     }
 
     /// Return the answer of the clique.
     #[must_use]
-    pub const fn answer(&self) -> LetterSet {
-        self.answer
+    pub const fn answer(&self) -> &LetterSet {
+        &self.answer
     }
 
     /// Return the guesses of the clique.
     #[must_use]
     pub const fn guesses(&self) -> &[LetterSet; 6] {
         &self.guesses
+    }
+
+    /// Sort a 6-set of guesses (assuming that the triples are sorted).
+    pub fn sort(t1: [LetterSet; 3], t2: [LetterSet; 3]) -> [LetterSet; 6] {
+        let compare_and_swap = |lettersets: &mut [LetterSet; 6], i: usize, j: usize| {
+            if lettersets[i] > lettersets[j] {
+                lettersets.swap(i, j);
+            }
+        };
+
+        let mut lettersets = [t1[0], t1[1], t1[2], t2[0], t2[1], t2[2]];
+
+        compare_and_swap(&mut lettersets, 0, 3);
+        compare_and_swap(&mut lettersets, 1, 4);
+        compare_and_swap(&mut lettersets, 2, 5);
+        compare_and_swap(&mut lettersets, 1, 3);
+        compare_and_swap(&mut lettersets, 2, 4);
+        compare_and_swap(&mut lettersets, 2, 3);
+        compare_and_swap(&mut lettersets, 1, 2);
+        compare_and_swap(&mut lettersets, 4, 5);
+        compare_and_swap(&mut lettersets, 3, 4);
+
+        lettersets
     }
 }
 
