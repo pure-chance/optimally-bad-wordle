@@ -102,9 +102,8 @@ impl Filterer {
         let triples = Self::find_triples_for_answer(answer, &self.guess_sets);
         let partition = LetterSet::new("seaoriltnu");
         let partitions = Self::partition_triples_by_letterset(&triples, partition);
-        Self::compare_compatible_triples(&partitions, answer)
-            .into_iter()
-            .collect()
+        let packings = Self::scan_and_merge_partitions(&partitions, answer);
+        packings.into_iter().collect()
     }
 
     /// Find all triples for this particular answer.
@@ -136,6 +135,10 @@ impl Filterer {
     }
 
     /// Partition triples by some partition letterset.
+    ///
+    /// Returns a `HashMap` where the keys are the intersection of each triple's
+    /// mask with the partition, and the values are vectors of triples that
+    /// share the same intersection.
     fn partition_triples_by_letterset(
         triples: &[Triple],
         partition: LetterSet,
@@ -148,8 +151,18 @@ impl Filterer {
         partitions
     }
 
-    /// Compare compatible triples in the partition.
-    fn compare_compatible_triples(
+    /// Finds all packings for a given answer by merging disjoint triples using
+    /// a scan-and-merge strategy.
+    ///
+    /// # Algorithm
+    ///
+    /// 1. Iterates over pairs of partitions, skipping those whose keys are not
+    ///    disjoint.
+    /// 2. For compatible partitions, check if each pair of triples, one from
+    ///    each partition, is disjoint.
+    /// 3. If any pair of triples is disjoint, merge them and store the result
+    ///    as a valid packing.
+    fn scan_and_merge_partitions(
         partition: &HashMap<LetterSet, Vec<Triple>>,
         answer: LetterSet,
     ) -> Vec<Packing> {
