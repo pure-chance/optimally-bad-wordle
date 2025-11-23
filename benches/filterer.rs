@@ -7,7 +7,7 @@ use wrong_wordle::words::{ANSWERS, GUESSES};
 fn filterer(c: &mut Criterion) {
     let mut group = c.benchmark_group("filterer");
 
-    const BENCHMARKS_ANSWERS: [&str; 3] = ["heart", "pinch", "zesty"];
+    const BENCHMARKS_ANSWERS: [&str; 3] = ["civic", "pinch", "zesty"];
 
     for answer in BENCHMARKS_ANSWERS {
         group.bench_with_input(BenchmarkId::new("filterer", answer), answer, |b, answer| {
