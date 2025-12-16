@@ -24,7 +24,7 @@ use crate::letterset::LetterSet;
 /// **1. Enumerate Triples**
 ///
 /// For each answer a, the algorithm first eliminates all guesses that share any
-/// letters with a, producing Compatible[a]. This reduces the number of
+/// letters with a, producing Compatible(a). This reduces the number of
 /// comparisons by orders of magnitude. It then enumerates all valid disjoint
 /// triples (g₁, g₂, g₃) from this reduced set.
 ///
