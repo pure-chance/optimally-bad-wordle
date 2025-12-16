@@ -1,14 +1,14 @@
-use wrong_wordle::filterer::Filterer;
+use wrong_wordle::packer::Packer;
 use wrong_wordle::realizer::Realizer;
 use wrong_wordle::words::{ANSWERS, GUESSES};
 
 /// Find all optimally bad Wordle solutions.
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let filterer = Filterer::new(ANSWERS, GUESSES);
-    let packings = filterer.find_packings();
+    let packer = Packer::new(ANSWERS, GUESSES);
+    let packings = packer.pack_with_progress();
 
     let realizer = Realizer::new(ANSWERS, GUESSES);
-    let solutions = realizer.realize(&packings);
+    let solutions = realizer.realize_with_progress(&packings);
 
     println!(
         "There are {} (optimally bad) wordle solutions.",

@@ -2,13 +2,13 @@ use std::collections::HashSet;
 
 use criterion::{Criterion, criterion_group, criterion_main};
 
-use wrong_wordle::filterer::Packing;
 use wrong_wordle::letterset::LetterSet;
+use wrong_wordle::packer::Packing;
 use wrong_wordle::realizer::Realizer;
 use wrong_wordle::words::{ANSWERS, GUESSES};
 
 fn realizer(c: &mut Criterion) {
-    let mut group = c.benchmark_group("filterer");
+    let mut group = c.benchmark_group("realizer");
 
     let packings: HashSet<Packing> = PACKINGS.iter().cloned().collect();
     group.bench_function("realize", |b| {

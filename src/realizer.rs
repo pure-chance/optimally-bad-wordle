@@ -1,20 +1,19 @@
 //! Realize packings into Wordle solutions (that are optimally bad).
 
-use std::collections::{HashMap, HashSet};
-use std::sync::atomic::{AtomicUsize, Ordering};
-
 use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
+use std::collections::{HashMap, HashSet};
+use std::sync::atomic::{AtomicUsize, Ordering};
 
-use crate::filterer::Packing;
 use crate::letterset::LetterSet;
+use crate::packer::Packing;
 
 /// Realizes packings into Wordle solutions (that are optimally bad).
 ///
 /// Specifically, the realizer finds all Wordle solutions that map to the
-/// disjoint packings found by the filterer.
+/// disjoint packings found by the packer.
 ///
 /// # Algorithm
 ///
@@ -71,8 +70,13 @@ impl Realizer {
     }
 
     /// Realizes the set of packings into optimally bad Wordle solutions.
+    ///
+    /// This function shows the progress of the realization process.
     #[must_use]
-    pub fn realize(&self, solutions: &HashSet<Packing>) -> HashSet<BadWordleSolution> {
+    pub fn realize_with_progress(
+        &self,
+        solutions: &HashSet<Packing>,
+    ) -> HashSet<BadWordleSolution> {
         let progress = AtomicUsize::new(0);
 
         let pb = ProgressBar::new(solutions.len() as u64);
@@ -94,6 +98,15 @@ impl Realizer {
 
         pb.finish_and_clear();
         realizations
+    }
+
+    /// Realizes the set of packings into optimally bad Wordle solutions.
+    #[must_use]
+    pub fn realize(&self, solutions: &HashSet<Packing>) -> HashSet<BadWordleSolution> {
+        solutions
+            .par_iter()
+            .flat_map(|solution| self.realize_solution(solution))
+            .collect()
     }
 
     /// Realizes a packing into an optimally bad Wordle solution.

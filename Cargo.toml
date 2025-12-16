@@ -33,7 +33,7 @@ nursery = "warn"
 cargo = "warn"
 
 [[bench]]
-name = "filterer"
+name = "packer"
 harness = false
 
 [[bench]]

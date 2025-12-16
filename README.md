@@ -16,11 +16,11 @@ The approach exploits a computationally efficient method for testing letter disj
 
 Bitset representation provides an additional advantage: it reduces the search space by consolidating words that share identical letter sets. Many distinct words contain the same set of unique letters (e.g., "slate" and "least" both map to {s, l, a, t, e}). Operating directly on these letter sets eliminates redundancy, reducing the effective vocabulary to |l(A)| = 2,037 and |l(G)| = 6,655.
 
-### Filtering
+### Packing
 
 Despite these optimizations, the problem remains computationally intractable without additional pruning strategies. The algorithm proceeds through several stages of progressive refinement:
 
-1. Answer-based filtering: For each answer letterset, the algorithm first eliminates all guess lettersets that share any letters with it, substantially narrowing the candidate pool.
+1. Answer-based packings: For each answer letterset, the algorithm first eliminates all guess lettersets that share any letters with it, substantially narrowing the candidate pool.
 
 2. Triple enumeration: The algorithm then identifies all triples (g₁, g₂, g₃) of guess lettersets that are mutually disjoint with both the answer and each other. This enumeration employs early termination: if g₁ and g₂ share any letters, no valid triple can be formed, and the search branch is abandoned immediately.
 
@@ -30,7 +30,7 @@ The algorithm parallelizes across answer lettersets, completing execution in app
 
 ### Realization
 
-The filtering phase produces solutions in terms of lettersets rather than actual words. To realize concrete word combinations, a dictionary maps each letterset to its corresponding words. For each letterset solution tuple, the Cartesian product of the associated word lists generates all valid word-level solutions. This step is highly parallelizable and executes in under a second.
+The packinging phase produces solutions in terms of lettersets rather than actual words. To realize concrete word combinations, a dictionary maps each letterset to its corresponding words. For each letterset solution tuple, the Cartesian product of the associated word lists generates all valid word-level solutions. This step is highly parallelizable and executes in under a second.
 
 ## Results
 

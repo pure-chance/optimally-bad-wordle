@@ -1,4 +1,4 @@
-//! Filters lettersets to identify all valid disjoint packings.
+//! Identify all valid disjoint packings.
 
 use std::collections::{HashMap, HashSet};
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -10,16 +10,16 @@ use serde::{Deserialize, Serialize};
 
 use crate::letterset::LetterSet;
 
-/// Filters lettersets to identify all valid disjoint packings.
+/// Packs lettersets to identify all valid disjoint packings.
 ///
-/// The `Filterer` solves the core combinatorial problem: finding all
+/// The `Packer` solves the core combinatorial problem: finding all
 /// combinations of one answer letterset and six guess lettersets where all
 /// seven are pairwise disjoint (share no letters in common). This ensures the
 /// guesses provide zero information about the answer.
 ///
 /// # Algorithm
 ///
-/// The filterer employs a three-stage process, executed in parallel for each
+/// The packer employs a three-stage process, executed in parallel for each
 /// answer:
 ///
 /// **1. Enumerate Triples**
@@ -50,15 +50,15 @@ use crate::letterset::LetterSet;
 /// # Runtime
 ///
 /// In practice, the algorithm runs in ~20 seconds.
-pub struct Filterer {
+pub struct Packer {
     /// All unique lettersets from answers.
     answer_sets: Box<[LetterSet]>,
     /// All unique lettersets from guesses.
     guess_sets: Box<[LetterSet]>,
 }
 
-impl Filterer {
-    /// Construct a new `Filterer` with the given answers and guesses.
+impl Packer {
+    /// Construct a new `Packer` with the given answers and guesses.
     #[must_use]
     pub fn new(answers: &[&str], guesses: &[&str]) -> Self {
         let answer_sets: Box<[LetterSet]> = answers
@@ -83,7 +83,9 @@ impl Filterer {
     ///
     /// Packings are found for each answer in parallel and then merged into a
     /// single set.
-    pub fn find_packings(&self) -> HashSet<Packing> {
+    ///
+    /// This function shows the progress of the packing process.
+    pub fn pack_with_progress(&self) -> HashSet<Packing> {
         let progress = AtomicUsize::new(0);
 
         let pb = ProgressBar::new(self.answer_sets.len() as u64);
@@ -92,7 +94,7 @@ impl Filterer {
                 .unwrap()
                 .progress_chars("=> "),
         );
-        pb.set_message("Filtering");
+        pb.set_message("Packing");
 
         let result = self
             .answer_sets
@@ -100,7 +102,7 @@ impl Filterer {
             .map(|answer| {
                 let _ = progress.fetch_add(1, Ordering::Relaxed) + 1;
                 pb.inc(1);
-                self.find_packings_for_answer(*answer)
+                self.pack_for_answer(*answer)
             })
             .reduce(HashSet::new, |mut acc, packings_for_answer| {
                 acc.extend(packings_for_answer);
@@ -111,13 +113,27 @@ impl Filterer {
         result
     }
 
+    /// Find all possible packings of answer + 6 guesses.
+    ///
+    /// Packings are found for each answer in parallel and then merged into a
+    /// single set.
+    pub fn pack(&self) -> HashSet<Packing> {
+        self.answer_sets
+            .par_iter()
+            .map(|answer| self.pack_for_answer(*answer))
+            .reduce(HashSet::new, |mut acc, packings_for_answer| {
+                acc.extend(packings_for_answer);
+                acc
+            })
+    }
+
     /// Find all possible packings of this particular answer + 6 guesses.
     ///
     /// This is done by (1) finding all triples for the answer, (2) partitioning
     /// them by letterset, and (3) scanning and merging the partitions. Look at
-    /// the documentation of `Filterer` for more details.
+    /// the documentation of `Packer` for more details.
     #[must_use]
-    pub fn find_packings_for_answer(&self, answer: LetterSet) -> HashSet<Packing> {
+    pub fn pack_for_answer(&self, answer: LetterSet) -> HashSet<Packing> {
         let triples = Self::find_triples_for_answer(answer, &self.guess_sets);
         let partition = LetterSet::new("seaoriltnu");
         let partitions = Self::partition_triples_by_letterset(&triples, partition);
