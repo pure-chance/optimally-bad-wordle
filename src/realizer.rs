@@ -73,13 +73,8 @@ impl Realizer {
     ///
     /// This function shows the progress of the realization process.
     #[must_use]
-    pub fn realize_with_progress(
-        &self,
-        solutions: &HashSet<Packing>,
-    ) -> HashSet<BadWordleSolution> {
-        let progress = AtomicUsize::new(0);
-
-        let pb = ProgressBar::new(solutions.len() as u64);
+    pub fn realize(&self, packings: &HashSet<Packing>) -> HashSet<BadWordleSolution> {
+        let pb = ProgressBar::new(packings.len() as u64);
         pb.set_style(
             ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} packings")
                 .unwrap()
@@ -87,7 +82,7 @@ impl Realizer {
         );
         pb.set_message("Realizing");
 
-        let realizations = solutions
+        let solutions = packings
             .par_iter()
             .flat_map(|solution| {
                 let _ = progress.fetch_add(1, Ordering::Relaxed);
@@ -97,13 +92,13 @@ impl Realizer {
             .collect();
 
         pb.finish_and_clear();
-        realizations
+        solutions
     }
 
     /// Realizes the set of packings into optimally bad Wordle solutions.
     #[must_use]
-    pub fn realize(&self, solutions: &HashSet<Packing>) -> HashSet<BadWordleSolution> {
-        solutions
+    pub fn realize_packings(&self, packings: &HashSet<Packing>) -> HashSet<BadWordleSolution> {
+        packings
             .par_iter()
             .flat_map(|solution| self.realize_solution(solution))
             .collect()
