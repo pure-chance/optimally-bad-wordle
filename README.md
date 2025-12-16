@@ -20,17 +20,17 @@ Bitset representation provides an additional advantage: it reduces the search sp
 
 Despite these optimizations, the problem remains computationally intractable without additional pruning strategies. The algorithm proceeds through several stages of progressive refinement:
 
-1. Answer-based packings: For each answer letterset, the algorithm first eliminates all guess lettersets that share any letters with it, substantially narrowing the candidate pool.
+1. Answer-based packings: For each answer signature, the algorithm first eliminates all guess signatures that share any letters with it, substantially narrowing the candidate pool.
 
-2. Triple enumeration: The algorithm then identifies all triples (g₁, g₂, g₃) of guess lettersets that are mutually disjoint with both the answer and each other. This enumeration employs early termination: if g₁ and g₂ share any letters, no valid triple can be formed, and the search branch is abandoned immediately.
+2. Triple enumeration: The algorithm then identifies all triples (g₁, g₂, g₃) of guess signatures that are mutually disjoint with both the answer and each other. This enumeration employs early termination: if g₁ and g₂ share any letters, no valid triple can be formed, and the search branch is abandoned immediately.
 
-3. Partition-based comparison: Even after triple enumeration, comparing all pairs of triples remains computationally prohibitive. To address this, the algorithm employs a hashing strategy based on a partition letterset containing the 10 most frequently occurring letters in the dataset. Each triple is assigned a hash key indicating which partition letters it contains. Only triple pairs with disjoint keys—that is, pairs whose combined partition letters do not overlap—are compared for full disjointness. This partitioning typically reduces the comparison space to several hundred thousand candidate pairs.
+3. Partition-based comparison: Even after triple enumeration, comparing all pairs of triples remains computationally prohibitive. To address this, the algorithm employs a hashing strategy based on a partition signature containing the 10 most frequently occurring letters in the dataset. Each triple is assigned a hash key indicating which partition letters it contains. Only triple pairs with disjoint keys—that is, pairs whose combined partition letters do not overlap—are compared for full disjointness. This partitioning typically reduces the comparison space to several hundred thousand candidate pairs.
 
-The algorithm parallelizes across answer lettersets, completing execution in approximately 20 seconds on my laptop.
+The algorithm parallelizes across answer signatures, completing execution in approximately 20 seconds on my laptop.
 
 ### Realization
 
-The packinging phase produces solutions in terms of lettersets rather than actual words. To realize concrete word combinations, a dictionary maps each letterset to its corresponding words. For each letterset solution tuple, the Cartesian product of the associated word lists generates all valid word-level solutions. This step is highly parallelizable and executes in under a second.
+The packing phase produces solutions in terms of signatures rather than actual words. To realize concrete word combinations, a dictionary maps each signature to its corresponding words. For each signature solution tuple, the Cartesian product of the associated word lists generates all valid word-level solutions. This step is highly parallelizable and executes in under a second.
 
 ## Results
 

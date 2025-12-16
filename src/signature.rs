@@ -7,19 +7,19 @@ use serde::{Deserialize, Serialize};
 
 /// Represents a set of letters as a compact bitmask.
 ///
-/// A `LetterSet` uses a 26-bit integer where bit `i` indicates whether the
+/// A `Signature` uses a 26-bit integer where bit `i` indicates whether the
 /// letter at position `i` in the alphabet is present. For example, the word
-/// "slate" maps to the letterset {s,l,a,t,e}, represented as a bitmask with
+/// "slate" maps to the signature {s,l,a,t,e}, represented as a bitmask with
 /// bits set at positions 0 (a), 4 (e), 11 (l), 18 (s), and 19 (t).
 ///
-/// This representation enables efficient disjointness checking: two lettersets
+/// This representation enables efficient disjointness checking: two signatures
 /// are disjoint if and only if their bitwise AND equals zero.
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
-pub struct LetterSet(u32);
+pub struct Signature(u32);
 
-impl LetterSet {
-    /// Construct a new `LetterSet` with no letters set.
+impl Signature {
+    /// Construct a new `Signature` with no letters set.
     #[inline]
     #[must_use]
     pub fn new(word: &str) -> Self {
@@ -30,35 +30,35 @@ impl LetterSet {
         Self(mask)
     }
 
-    /// Construct a `LetterSet` from the underlying letter mask.
+    /// Construct a `Signature` from the underlying letter mask.
     #[inline]
     #[must_use]
     pub const fn from_mask(mask: u32) -> Self {
         Self(mask)
     }
 
-    /// Checks if two lettersets have no letters in common.
+    /// Checks if two signatures have no letters in common.
     #[inline]
     #[must_use]
     pub const fn disjoint(self, other: Self) -> bool {
         self.0 & other.0 == 0
     }
 
-    /// Returns the union of two lettersets.
+    /// Returns the union of two signatures.
     #[inline]
     #[must_use]
     pub const fn union(self, other: Self) -> Self {
         Self(self.0 | other.0)
     }
 
-    /// Returns the intersection of two lettersets.
+    /// Returns the intersection of two signatures.
     #[inline]
     #[must_use]
     pub const fn intersection(self, other: Self) -> Self {
         Self(self.0 & other.0)
     }
 
-    /// Returns the number of unique letters set in the letterset.
+    /// Returns the number of unique letters set in the signature.
     #[inline]
     #[must_use]
     pub const fn count_letters(self) -> u32 {
@@ -73,40 +73,40 @@ impl LetterSet {
     }
 }
 
-impl BitAnd for LetterSet {
+impl BitAnd for Signature {
     type Output = Self;
     fn bitand(self, rhs: Self) -> Self::Output {
         Self(self.0 & rhs.0)
     }
 }
 
-impl BitAndAssign for LetterSet {
+impl BitAndAssign for Signature {
     fn bitand_assign(&mut self, rhs: Self) {
         self.0 &= rhs.0;
     }
 }
 
-impl BitOr for LetterSet {
+impl BitOr for Signature {
     type Output = Self;
     fn bitor(self, rhs: Self) -> Self::Output {
         Self(self.0 | rhs.0)
     }
 }
 
-impl BitOrAssign for LetterSet {
+impl BitOrAssign for Signature {
     fn bitor_assign(&mut self, rhs: Self) {
         self.0 |= rhs.0;
     }
 }
 
-impl From<&str> for LetterSet {
+impl From<&str> for Signature {
     #[inline]
     fn from(word: &str) -> Self {
         Self::new(word)
     }
 }
 
-impl Debug for LetterSet {
+impl Debug for Signature {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{:026b}", self.0)
     }

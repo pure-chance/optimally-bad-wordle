@@ -7,8 +7,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
 use std::sync::atomic::{AtomicUsize, Ordering};
 
-use crate::letterset::LetterSet;
 use crate::packer::Packing;
+use crate::signature::Signature;
 
 /// Realizes packings into Wordle solutions (that are optimally bad).
 ///
@@ -18,9 +18,9 @@ use crate::packer::Packing;
 /// # Algorithm
 ///
 /// Given a packing (a, g₁, g₂, g₃, g₄, g₅, g₆) where each element is a
-/// letterset, the realizer:
+/// signature, the realizer:
 ///
-/// 1. looks up all words that correspond to each letterset using a precomputed
+/// 1. looks up all words that correspond to each signature using a precomputed
 ///    dictionary, and
 /// 2. enumerates the Cartesian product across all seven positions.
 ///
@@ -45,23 +45,23 @@ use crate::packer::Packing;
 /// ("slate", "blink", "curvy"),
 /// ```
 pub struct Realizer {
-    /// A map from answer lettersets to their realizations.
-    answer_realizations: HashMap<LetterSet, Vec<String>>,
-    /// A map from guess lettersets to their realizations.
-    guess_realizations: HashMap<LetterSet, Vec<String>>,
+    /// A map from answer signatures to their realizations.
+    answer_realizations: HashMap<Signature, Vec<String>>,
+    /// A map from guess signatures to their realizations.
+    guess_realizations: HashMap<Signature, Vec<String>>,
 }
 
 impl Realizer {
     /// Construct a new `Realizer` from a list of answers and guesses.
     #[must_use]
     pub fn new(answers: &[&str], guesses: &[&str]) -> Self {
-        let answer_realizations: HashMap<LetterSet, Vec<String>> = answers
+        let answer_realizations: HashMap<Signature, Vec<String>> = answers
             .iter()
-            .map(|&answer| (LetterSet::new(answer), answer.to_string()))
+            .map(|&answer| (Signature::new(answer), answer.to_string()))
             .into_group_map();
-        let guess_realizations: HashMap<LetterSet, Vec<String>> = guesses
+        let guess_realizations: HashMap<Signature, Vec<String>> = guesses
             .iter()
-            .map(|&guess| (LetterSet::new(guess), guess.to_string()))
+            .map(|&guess| (Signature::new(guess), guess.to_string()))
             .into_group_map();
         Self {
             answer_realizations,
@@ -113,9 +113,9 @@ impl Realizer {
     ///
     /// # Panics
     ///
-    /// Panics if any of the lettersets in the packing are not found in either
+    /// Panics if any of the signatures in the packing are not found in either
     /// the `answer_realizations` or `guess_realizations`. This will never
-    /// happen if the lettersets are from the answers and guesses word list.
+    /// happen if the signatures are from the answers and guesses word list.
     #[must_use]
     pub fn realize_solution(&self, solution: &Packing) -> HashSet<BadWordleSolution> {
         let a = &solution.answer();

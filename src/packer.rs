@@ -8,12 +8,12 @@ use itertools::Itertools;
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
 
-use crate::letterset::LetterSet;
+use crate::signature::Signature;
 
-/// Packs lettersets to identify all valid disjoint packings.
+/// Packs signatures to identify all valid disjoint packings.
 ///
 /// The `Packer` solves the core combinatorial problem: finding all
-/// combinations of one answer letterset and six guess lettersets where all
+/// combinations of one answer signature and six guess signatures where all
 /// seven are pairwise disjoint (share no letters in common). This ensures the
 /// guesses provide zero information about the answer.
 ///
@@ -51,23 +51,23 @@ use crate::letterset::LetterSet;
 ///
 /// In practice, the algorithm runs in ~20 seconds.
 pub struct Packer {
-    /// All unique lettersets from answers.
-    answer_sets: Box<[LetterSet]>,
-    /// All unique lettersets from guesses.
-    guess_sets: Box<[LetterSet]>,
+    /// All unique signatures from answers.
+    answer_sets: Box<[Signature]>,
+    /// All unique signatures from guesses.
+    guess_sets: Box<[Signature]>,
 }
 
 impl Packer {
     /// Construct a new `Packer` with the given answers and guesses.
     #[must_use]
     pub fn new(answers: &[&str], guesses: &[&str]) -> Self {
-        let answer_sets: Box<[LetterSet]> = answers
+        let answer_sets: Box<[Signature]> = answers
             .iter()
             .map(|&w| w.into())
             .unique()
             .sorted()
             .collect();
-        let guess_sets: Box<[LetterSet]> = guesses
+        let guess_sets: Box<[Signature]> = guesses
             .iter()
             .map(|&w| w.into())
             .unique()
@@ -130,13 +130,13 @@ impl Packer {
     /// Find all possible packings of this particular answer + 6 guesses.
     ///
     /// This is done by (1) finding all triples for the answer, (2) partitioning
-    /// them by letterset, and (3) scanning and merging the partitions. Look at
+    /// them by signature, and (3) scanning and merging the partitions. Look at
     /// the documentation of `Packer` for more details.
     #[must_use]
-    pub fn pack_for_answer(&self, answer: LetterSet) -> HashSet<Packing> {
+    pub fn pack_for_answer(&self, answer: Signature) -> HashSet<Packing> {
         let triples = Self::find_triples_for_answer(answer, &self.guess_sets);
-        let partition = LetterSet::new("seaoriltnu");
-        let partitions = Self::partition_triples_by_letterset(&triples, partition);
+        let partition = Signature::new("seaoriltnu");
+        let partitions = Self::partition_triples_by_signature(&triples, partition);
         let packings = Self::scan_and_merge_partitions(&partitions, answer);
         packings.into_iter().collect()
     }
@@ -144,8 +144,8 @@ impl Packer {
     /// Find all triples for this particular answer.
     ///
     /// **Correctness**: All triples are unique and sorted by construction.
-    fn find_triples_for_answer(answer: LetterSet, guess_sets: &[LetterSet]) -> Vec<Triple> {
-        let guess_sets: Vec<LetterSet> = guess_sets
+    fn find_triples_for_answer(answer: Signature, guess_sets: &[Signature]) -> Vec<Triple> {
+        let guess_sets: Vec<Signature> = guess_sets
             .iter()
             .copied()
             .filter(|&ls| ls.disjoint(answer))
@@ -153,7 +153,6 @@ impl Packer {
         let mut triples = Vec::new();
         for (i, &ls1) in guess_sets.iter().enumerate() {
             for (j, &ls2) in guess_sets.iter().enumerate().skip(i + 1) {
-                // Early continue if the first two guesses are not disjoint.
                 if !ls1.disjoint(ls2) {
                     continue;
                 }
@@ -168,15 +167,15 @@ impl Packer {
         triples
     }
 
-    /// Partition triples by some partition letterset.
+    /// Partition triples by some partition signature.
     ///
     /// Returns a `HashMap` where the keys are the intersection of each triple's
     /// mask with the partition, and the values are vectors of triples that
     /// share the same intersection.
-    fn partition_triples_by_letterset(
+    fn partition_triples_by_signature(
         triples: &[Triple],
-        partition: LetterSet,
-    ) -> HashMap<LetterSet, Vec<Triple>> {
+        partition: Signature,
+    ) -> HashMap<Signature, Vec<Triple>> {
         let mut partitions = HashMap::new();
         for &triple in triples {
             let key = partition.intersection(triple.mask);
@@ -197,8 +196,8 @@ impl Packer {
     /// 3. If any pair of triples is disjoint, merge them and store the result
     ///    as a valid packing.
     fn scan_and_merge_partitions(
-        partition: &HashMap<LetterSet, Vec<Triple>>,
-        answer: LetterSet,
+        partition: &HashMap<Signature, Vec<Triple>>,
+        answer: Signature,
     ) -> Vec<Packing> {
         let mut packings = Vec::new();
         for keys in partition.iter().combinations_with_replacement(2) {
@@ -211,7 +210,7 @@ impl Packer {
                 if !triple1.disjoint(triple2) {
                     continue;
                 }
-                let guesses = Packing::sort(triple1.lettersets, triple2.lettersets);
+                let guesses = Packing::sort(triple1.signatures, triple2.signatures);
                 packings.push(Packing::new(answer, guesses));
             }
         }
@@ -219,11 +218,11 @@ impl Packer {
     }
 }
 
-/// A solution—a 7-packing of disjoint lettersets (1 answer + 6 guesses).
+/// A solution—a 7-packing of disjoint signatures (1 answer + 6 guesses).
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Packing {
-    answer: LetterSet,
-    guesses: [LetterSet; 6],
+    answer: Signature,
+    guesses: [Signature; 6],
 }
 
 impl Packing {
@@ -232,63 +231,63 @@ impl Packing {
     /// **Correctness**: A packing's guesses must be sorted to ensure that
     /// comparisons depend exclusively on membership, and not order.
     #[must_use]
-    pub const fn new(answer: LetterSet, guesses: [LetterSet; 6]) -> Self {
+    pub const fn new(answer: Signature, guesses: [Signature; 6]) -> Self {
         Self { answer, guesses }
     }
 
     /// Return the answer of the clique.
     #[must_use]
-    pub const fn answer(&self) -> &LetterSet {
+    pub const fn answer(&self) -> &Signature {
         &self.answer
     }
 
     /// Return the guesses of the clique.
     #[must_use]
-    pub const fn guesses(&self) -> &[LetterSet; 6] {
+    pub const fn guesses(&self) -> &[Signature; 6] {
         &self.guesses
     }
 
     /// Sort a 6-set of guesses (assuming that the triples are sorted).
     #[must_use]
-    pub fn sort(t1: [LetterSet; 3], t2: [LetterSet; 3]) -> [LetterSet; 6] {
-        let compare_and_swap = |lettersets: &mut [LetterSet; 6], i: usize, j: usize| {
-            if lettersets[i] > lettersets[j] {
-                lettersets.swap(i, j);
+    pub fn sort(t1: [Signature; 3], t2: [Signature; 3]) -> [Signature; 6] {
+        let compare_and_swap = |signatures: &mut [Signature; 6], i: usize, j: usize| {
+            if signatures[i] > signatures[j] {
+                signatures.swap(i, j);
             }
         };
 
-        let mut lettersets = [t1[0], t1[1], t1[2], t2[0], t2[1], t2[2]];
+        let mut signatures = [t1[0], t1[1], t1[2], t2[0], t2[1], t2[2]];
 
-        compare_and_swap(&mut lettersets, 0, 3);
-        compare_and_swap(&mut lettersets, 1, 4);
-        compare_and_swap(&mut lettersets, 2, 5);
-        compare_and_swap(&mut lettersets, 1, 3);
-        compare_and_swap(&mut lettersets, 2, 4);
-        compare_and_swap(&mut lettersets, 2, 3);
-        compare_and_swap(&mut lettersets, 1, 2);
-        compare_and_swap(&mut lettersets, 4, 5);
-        compare_and_swap(&mut lettersets, 3, 4);
+        compare_and_swap(&mut signatures, 0, 3);
+        compare_and_swap(&mut signatures, 1, 4);
+        compare_and_swap(&mut signatures, 2, 5);
+        compare_and_swap(&mut signatures, 1, 3);
+        compare_and_swap(&mut signatures, 2, 4);
+        compare_and_swap(&mut signatures, 2, 3);
+        compare_and_swap(&mut signatures, 1, 2);
+        compare_and_swap(&mut signatures, 4, 5);
+        compare_and_swap(&mut signatures, 3, 4);
 
-        lettersets
+        signatures
     }
 }
 
-/// A triple of disjoint lettersets.
+/// A triple of disjoint signatures.
 ///
-/// The `Triple` has a mask that represents the union of its lettersets. This
+/// The `Triple` has a mask that represents the union of its signatures. This
 /// allows for fast disjointness checks.
 #[derive(Debug, Clone, Copy)]
 struct Triple {
-    lettersets: [LetterSet; 3],
-    mask: LetterSet,
+    signatures: [Signature; 3],
+    mask: Signature,
 }
 
 impl Triple {
-    /// Construct a new `Triple` with the given lettersets.
-    const fn new(ls1: LetterSet, ls2: LetterSet, ls3: LetterSet) -> Self {
-        let lettersets = [ls1, ls2, ls3];
+    /// Construct a new `Triple` with the given signatures.
+    const fn new(ls1: Signature, ls2: Signature, ls3: Signature) -> Self {
+        let signatures = [ls1, ls2, ls3];
         let mask = ls1.union(ls2).union(ls3);
-        Self { lettersets, mask }
+        Self { signatures, mask }
     }
 
     /// Check if two triples are disjoint.
