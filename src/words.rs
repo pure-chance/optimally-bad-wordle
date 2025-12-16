@@ -1,7 +1,7 @@
 //! The set of valid answers and guesses in Wordle.
 
 /// The set of valid answers in Wordle.
-pub const ANSWERS: &[&str] = &[
+pub const ANSWERS: &[&'static str] = &[
     "aback", "abase", "abate", "abbey", "abbot", "abhor", "abide", "abled", "abode", "abort",
     "about", "above", "abuse", "abyss", "acorn", "acrid", "actor", "acute", "adage", "adapt",
     "adept", "admin", "admit", "adobe", "adopt", "adore", "adorn", "adult", "affix", "afire",
@@ -239,7 +239,7 @@ pub const ANSWERS: &[&str] = &[
 ];
 
 /// The set of valid guesses in Wordle.
-pub const GUESSES: &[&str] = &[
+pub const GUESSES: &[&'static str] = &[
     "aahed", "aalii", "aargh", "aarti", "abaca", "abaci", "abacs", "abaft", "abaka", "abamp",
     "aband", "abash", "abask", "abaya", "abbas", "abbed", "abbes", "abcee", "abeam", "abear",
     "abele", "abers", "abets", "abies", "abler", "ables", "ablet", "ablow", "abmho", "abohm",
