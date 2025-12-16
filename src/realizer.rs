@@ -48,7 +48,7 @@ pub struct Realizer {}
 impl Realizer {
     /// Realizes the set of packings into optimally bad Wordle solutions.
     ///
-    /// This function shows the progress of the realization process.
+    /// While processing, displays the progress of the realization process.
     #[must_use]
     pub fn realize(
         answers: &[&str],
@@ -121,7 +121,7 @@ impl Realizer {
     ///
     /// Panics if any of the signatures in the packing are not found in either
     /// the `answer_realizations` or `guess_realizations`. This will never
-    /// happen if the signatures are from the answers and guesses word list.
+    /// happen if the signatures are from the answers and guesses word lists.
     #[must_use]
     pub fn realize_packing(
         answer_realizations: &HashMap<Signature, Vec<String>>,
