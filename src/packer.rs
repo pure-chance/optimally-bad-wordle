@@ -174,11 +174,11 @@ impl Packer {
     /// share the same intersection.
     fn partition_triples_by_signature(
         triples: &[Triple],
-        partition: Signature,
+        partition_key: Signature,
     ) -> HashMap<Signature, Vec<Triple>> {
         let mut partitions = HashMap::new();
         for &triple in triples {
-            let key = partition.intersection(triple.mask);
+            let key = partition_key.intersection(triple.mask);
             partitions.entry(key).or_insert_with(Vec::new).push(triple);
         }
         partitions
@@ -196,11 +196,11 @@ impl Packer {
     /// 3. If any pair of triples is disjoint, merge them and store the result
     ///    as a valid packing.
     fn scan_and_merge_partitions(
-        partition: &HashMap<Signature, Vec<Triple>>,
+        partitions: &HashMap<Signature, Vec<Triple>>,
         answer: Signature,
     ) -> Vec<Packing> {
         let mut packings = Vec::new();
-        for keys in partition.iter().combinations_with_replacement(2) {
+        for keys in partitions.iter().combinations_with_replacement(2) {
             let (&key1, triples1) = keys[0];
             let (&key2, triples2) = keys[1];
             if !key1.disjoint(key2) {
