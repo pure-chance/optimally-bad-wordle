@@ -43,36 +43,21 @@ use crate::signature::Signature;
 /// ("slate", "blink", "court"),
 /// ("slate", "blink", "curvy"),
 /// ```
-pub struct Realizer {
-    /// A map from answer signatures to their realizations.
-    answer_realizations: HashMap<Signature, Vec<String>>,
-    /// A map from guess signatures to their realizations.
-    guess_realizations: HashMap<Signature, Vec<String>>,
-}
+pub struct Realizer {}
 
 impl Realizer {
-    /// Construct a new `Realizer` from a list of answers and guesses.
-    #[must_use]
-    pub fn new(answers: &[&str], guesses: &[&str]) -> Self {
-        let answer_realizations: HashMap<Signature, Vec<String>> = answers
-            .iter()
-            .map(|&answer| (Signature::new(answer), answer.to_string()))
-            .into_group_map();
-        let guess_realizations: HashMap<Signature, Vec<String>> = guesses
-            .iter()
-            .map(|&guess| (Signature::new(guess), guess.to_string()))
-            .into_group_map();
-        Self {
-            answer_realizations,
-            guess_realizations,
-        }
-    }
-
     /// Realizes the set of packings into optimally bad Wordle solutions.
     ///
     /// This function shows the progress of the realization process.
     #[must_use]
-    pub fn realize(&self, packings: &HashSet<Packing>) -> HashSet<BadWordleSolution> {
+    pub fn realize(
+        answers: &[&str],
+        guesses: &[&str],
+        packings: &HashSet<Packing>,
+    ) -> HashSet<BadWordleSolution> {
+        let (answer_realizations, guess_realizations) =
+            Self::compile_realizations(answers, guesses);
+
         let pb = ProgressBar::new(packings.len() as u64);
         pb.set_style(
             ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} packings")
@@ -83,9 +68,9 @@ impl Realizer {
 
         let solutions = packings
             .par_iter()
-            .flat_map(|solution| {
+            .flat_map(|packing| {
                 pb.inc(1);
-                self.realize_solution(solution)
+                Self::realize_packing(&answer_realizations, &guess_realizations, packing)
             })
             .collect();
 
@@ -95,11 +80,39 @@ impl Realizer {
 
     /// Realizes the set of packings into optimally bad Wordle solutions.
     #[must_use]
-    pub fn realize_packings(&self, packings: &HashSet<Packing>) -> HashSet<BadWordleSolution> {
+    pub fn realize_packings(
+        answers: &[&str],
+        guesses: &[&str],
+        packings: &HashSet<Packing>,
+    ) -> HashSet<BadWordleSolution> {
+        let (answer_realizations, guess_realizations) =
+            Self::compile_realizations(answers, guesses);
         packings
             .par_iter()
-            .flat_map(|solution| self.realize_solution(solution))
+            .flat_map(|packing| {
+                Self::realize_packing(&answer_realizations, &guess_realizations, packing)
+            })
             .collect()
+    }
+
+    /// Compile all the unique answer and guesses realizations.
+    #[must_use]
+    pub fn compile_realizations(
+        answers: &[&str],
+        guesses: &[&str],
+    ) -> (
+        HashMap<Signature, Vec<String>>,
+        HashMap<Signature, Vec<String>>,
+    ) {
+        let answer_realizations: HashMap<Signature, Vec<String>> = answers
+            .iter()
+            .map(|&answer| (answer.into(), answer.to_string()))
+            .into_group_map();
+        let guess_realizations: HashMap<Signature, Vec<String>> = guesses
+            .iter()
+            .map(|&guess| (guess.into(), guess.to_string()))
+            .into_group_map();
+        (answer_realizations, guess_realizations)
     }
 
     /// Realizes a packing into an optimally bad Wordle solution.
@@ -110,17 +123,21 @@ impl Realizer {
     /// the `answer_realizations` or `guess_realizations`. This will never
     /// happen if the signatures are from the answers and guesses word list.
     #[must_use]
-    pub fn realize_solution(&self, solution: &Packing) -> HashSet<BadWordleSolution> {
-        let a = &solution.answer();
-        let [g1, g2, g3, g4, g5, g6] = solution.guesses();
+    pub fn realize_packing(
+        answer_realizations: &HashMap<Signature, Vec<String>>,
+        guess_realizations: &HashMap<Signature, Vec<String>>,
+        packing: &Packing,
+    ) -> HashSet<BadWordleSolution> {
+        let a = &packing.answer();
+        let [g1, g2, g3, g4, g5, g6] = packing.guesses();
         let combinations = [
-            self.answer_realizations[a].clone(),
-            self.guess_realizations[g1].clone(),
-            self.guess_realizations[g2].clone(),
-            self.guess_realizations[g3].clone(),
-            self.guess_realizations[g4].clone(),
-            self.guess_realizations[g5].clone(),
-            self.guess_realizations[g6].clone(),
+            answer_realizations[a].clone(),
+            guess_realizations[g1].clone(),
+            guess_realizations[g2].clone(),
+            guess_realizations[g3].clone(),
+            guess_realizations[g4].clone(),
+            guess_realizations[g5].clone(),
+            guess_realizations[g6].clone(),
         ];
         combinations
             .into_iter()

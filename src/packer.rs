@@ -49,41 +49,17 @@ use crate::signature::Signature;
 /// # Runtime
 ///
 /// In practice, the algorithm runs in ~20 seconds.
-pub struct Packer {
-    /// All unique signatures from answers.
-    answer_sets: Box<[Signature]>,
-    /// All unique signatures from guesses.
-    guess_sets: Box<[Signature]>,
-}
+pub struct Packer {}
 
 impl Packer {
-    /// Construct a new `Packer` with the given answers and guesses.
-    #[must_use]
-    pub fn new(answers: &[&str], guesses: &[&str]) -> Self {
-        let answer_sets: Box<[Signature]> = answers
-            .iter()
-            .map(|&w| w.into())
-            .unique()
-            .sorted()
-            .collect();
-        let guess_sets: Box<[Signature]> = guesses
-            .iter()
-            .map(|&w| w.into())
-            .unique()
-            .sorted()
-            .collect();
-        Self {
-            answer_sets,
-            guess_sets,
-        }
-    }
-
     /// Find all possible packings of answer + 6 guesses.
     ///
     /// While processing, displays the progress of the realization process.
     #[must_use]
-    pub fn pack(&self) -> HashSet<Packing> {
-        let pb = ProgressBar::new(self.answer_sets.len() as u64);
+    pub fn pack(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
+        let (answer_signatures, guess_signatures) = Self::compile_signatures(answers, guesses);
+
+        let pb = ProgressBar::new(answer_signatures.len() as u64);
         pb.set_style(
             ProgressStyle::with_template(
                 "{msg:.cyan} [{bar:25}] {pos}/{len} answer
@@ -94,12 +70,11 @@ s",
         );
         pb.set_message("Packing");
 
-        let packings = self
-            .answer_sets
+        let packings = answer_signatures
             .par_iter()
             .map(|&answer| {
                 pb.inc(1);
-                self.pack_for_answer(answer)
+                Self::pack_for_answer(&guess_signatures, answer)
             })
             .reduce(HashSet::new, |mut acc, packings_for_answer| {
                 acc.extend(packings_for_answer);
@@ -112,14 +87,36 @@ s",
 
     /// Find all possible packings of all answers + 6 guesses.
     #[must_use]
-    pub fn pack_signatures(&self) -> HashSet<Packing> {
-        self.answer_sets
+    pub fn pack_signatures(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
+        let (answer_signatures, guess_signatures) = Self::compile_signatures(answers, guesses);
+        answer_signatures
             .par_iter()
-            .map(|&answer| self.pack_for_answer(answer))
+            .map(|answer| Self::pack_for_answer(&guess_signatures, *answer))
             .reduce(HashSet::new, |mut acc, packings_for_answer| {
                 acc.extend(packings_for_answer);
                 acc
             })
+    }
+
+    /// Compile all the unique answer and guesses signatures.
+    #[must_use]
+    pub fn compile_signatures(
+        answers: &[&str],
+        guesses: &[&str],
+    ) -> (Box<[Signature]>, Box<[Signature]>) {
+        let answer_signatures: Box<[Signature]> = answers
+            .iter()
+            .map(|&w| w.into())
+            .unique()
+            .sorted()
+            .collect();
+        let guess_signatures: Box<[Signature]> = guesses
+            .iter()
+            .map(|&w| w.into())
+            .unique()
+            .sorted()
+            .collect();
+        (answer_signatures, guess_signatures)
     }
 
     /// Find all possible packings of this particular answer + 6 guesses.
@@ -128,10 +125,10 @@ s",
     /// them by signature, and (3) scanning and merging the partitions. Look at
     /// the documentation of `Packer` for more details.
     #[must_use]
-    pub fn pack_for_answer(&self, answer: Signature) -> HashSet<Packing> {
-        let triples = Self::find_triples_for_answer(answer, &self.guess_sets);
-        let partition = Signature::new("seaoriltnu");
-        let partitions = Self::partition_triples_by_signature(&triples, partition);
+    pub fn pack_for_answer(guess_signatures: &[Signature], answer: Signature) -> HashSet<Packing> {
+        let triples = Self::find_triples_for_answer(answer, guess_signatures);
+        let partition_key = Signature::from_mask(0b00000111100110100100010001); // seaoriltnu
+        let partitions = Self::partition_triples_by_signature(&triples, partition_key);
         let packings = Self::scan_and_merge_partitions(&partitions, answer);
         packings.into_iter().collect()
     }

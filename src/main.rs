@@ -4,11 +4,8 @@ use wrong_wordle::words::{ANSWERS, GUESSES};
 
 /// Find all optimally bad Wordle solutions.
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let packer = Packer::new(ANSWERS, GUESSES);
-    let packings = packer.pack();
-
-    let realizer = Realizer::new(ANSWERS, GUESSES);
-    let solutions = realizer.realize(&packings);
+    let packings = Packer::pack(ANSWERS, GUESSES);
+    let solutions = Realizer::realize(ANSWERS, GUESSES, &packings);
 
     println!(
         "There are {} (optimally bad) wordle solutions.",

@@ -13,8 +13,7 @@ fn realizer(c: &mut Criterion) {
     let packings: HashSet<Packing> = PACKINGS.iter().cloned().collect();
     group.bench_function("realize", |b| {
         b.iter(|| {
-            let realizer = Realizer::new(ANSWERS, GUESSES);
-            let _ = realizer.realize(&packings);
+            let _ = Realizer::realize_packings(ANSWERS, GUESSES, &packings);
         });
     });
 
