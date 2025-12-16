@@ -5,7 +5,7 @@ use std::ops::{BitAnd, BitAndAssign, BitOr, BitOrAssign};
 
 use serde::{Deserialize, Serialize};
 
-/// Represents a set of letters as a compact bitmask.
+/// Compact bitmask representation of a word's unique letters.
 ///
 /// A `Signature` uses a 26-bit integer where bit `i` indicates whether the
 /// letter at position `i` in the alphabet is present. For example, the word
@@ -19,13 +19,10 @@ use serde::{Deserialize, Serialize};
 pub struct Signature(u32);
 
 impl Signature {
-    /// Construct a new `Signature`.
+    /// Construct a new `Signature` from a word.
     ///
-    /// # Correctness
-    ///
-    /// The word passed to `new` must be a lowercase 5-letter word (i.e., a
-    /// valid word in Wordle). This is checked by assertions in debug
-    /// builds.
+    /// **Correctness**: The word must be exactly 5 lowercase ASCII letters (a valid Wordle
+    /// answer / guess). This is checked by assertions in debug builds.
     #[inline]
     #[must_use]
     pub fn new(word: &str) -> Self {
@@ -37,10 +34,9 @@ impl Signature {
         Self(mask)
     }
 
-    /// Construct a `Signature` from the underlying letter mask.
+    /// Construct a `Signature` from a raw bitmask.
     ///
-    /// This can be used to construct a `Signature` from a non-wordle word, such
-    /// as when we create a partition signature.
+    /// This allows creating signatures from arbitrary letter combinations.
     #[inline]
     #[must_use]
     pub const fn from_mask(mask: u32) -> Self {

@@ -11,17 +11,14 @@ use crate::signature::Signature;
 
 /// Realizes packings into Wordle solutions (that are optimally bad).
 ///
-/// Specifically, the realizer finds all Wordle solutions that map to the
-/// disjoint packings found by the packer.
+/// The realizer takes disjoint signature packings and generates all possible
+/// word combinations by looking up each signature's corresponding words.
 ///
 /// # Algorithm
 ///
-/// Given a packing (a, g₁, g₂, g₃, g₄, g₅, g₆) where each element is a
-/// signature, the realizer:
-///
-/// 1. looks up all words that correspond to each signature using a precomputed
-///    dictionary, and
-/// 2. enumerates the Cartesian product across all seven positions.
+/// For each packing (a, g₁, g₂, g₃, g₄, g₅, g₆):
+/// 1. Look up all words corresponding to each signature
+/// 2. Generate the Cartesian product of all word combinations
 ///
 /// # Example
 ///
@@ -46,9 +43,8 @@ use crate::signature::Signature;
 pub struct Realizer {}
 
 impl Realizer {
-    /// Realizes the set of packings into optimally bad Wordle solutions.
-    ///
-    /// While processing, displays the progress of the realization process.
+    /// Realizes packings into optimally bad Wordle solutions (with progress
+    /// display).
     #[must_use]
     pub fn realize(
         answers: &[&str],
@@ -78,7 +74,8 @@ impl Realizer {
         solutions
     }
 
-    /// Realizes the set of packings into optimally bad Wordle solutions.
+    /// Realizes packings into optimally bad Wordle solutions (without progress
+    /// display).
     #[must_use]
     pub fn realize_packings(
         answers: &[&str],
@@ -95,7 +92,7 @@ impl Realizer {
             .collect()
     }
 
-    /// Compile all the unique answer and guesses realizations.
+    /// Build signature-to-words lookup tables.
     #[must_use]
     pub fn compile_realizations(
         answers: &[&str],
@@ -115,13 +112,12 @@ impl Realizer {
         (answer_realizations, guess_realizations)
     }
 
-    /// Realizes a packing into an optimally bad Wordle solution.
+    /// Convert a single packing into an (optimally bad) Wordle solutions.
     ///
     /// # Panics
     ///
-    /// Panics if any of the signatures in the packing are not found in either
-    /// the `answer_realizations` or `guess_realizations`. This will never
-    /// happen if the signatures are from the answers and guesses word lists.
+    /// Panics if any signature in the packing is not found in the lookup
+    /// tables.
     #[must_use]
     pub fn realize_packing(
         answer_realizations: &HashMap<Signature, Vec<String>>,
@@ -159,21 +155,20 @@ pub struct BadWordleSolution {
 }
 
 impl BadWordleSolution {
-    /// Construct a new `BadWordleSolution` from an answer and a list of
-    /// guesses.
+    /// Construct a new `BadWordleSolution`.
     #[must_use]
     pub fn new(answer: String, mut guesses: [String; 6]) -> Self {
         guesses.sort_unstable();
         Self { answer, guesses }
     }
 
-    /// Returns the answer of the `BadWordleSolution`.
+    /// Returns the answer word.
     #[must_use]
     pub const fn answer(&self) -> &String {
         &self.answer
     }
 
-    /// Returns the guesses of the `BadWordleSolution`.
+    /// Returns the guess words.
     #[must_use]
     pub const fn guesses(&self) -> &[String; 6] {
         &self.guesses

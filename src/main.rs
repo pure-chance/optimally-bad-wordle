@@ -2,7 +2,7 @@ use wrong_wordle::packer::Packer;
 use wrong_wordle::realizer::Realizer;
 use wrong_wordle::words::{ANSWERS, GUESSES};
 
-/// Find all optimally bad Wordle solutions.
+/// Find all optimally bad Wordle solutions and save results.
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let packings = Packer::pack(ANSWERS, GUESSES);
     let solutions = Realizer::realize(ANSWERS, GUESSES, &packings);
@@ -19,7 +19,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-/// Write serializable data to a JSON file with pretty formatting.
+/// Write data to a JSON file with pretty formatting.
 fn write<T>(data: &T, filename: &str) -> Result<(), Box<dyn std::error::Error>>
 where
     T: serde::Serialize,

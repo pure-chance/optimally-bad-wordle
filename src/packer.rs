@@ -1,4 +1,4 @@
-//! Identify all valid disjoint packings.
+//! Find all disjoint packings of signatures.
 
 use std::collections::{HashMap, HashSet};
 
@@ -9,42 +9,36 @@ use serde::{Deserialize, Serialize};
 
 use crate::signature::Signature;
 
-/// Packs signatures to identify all valid disjoint packings.
+/// Packs all disjoint packings of signatures.
 ///
 /// The `Packer` solves the core combinatorial problem: finding all
 /// combinations of one answer signature and six guess signatures where all
-/// seven are pairwise disjoint (share no letters in common). This ensures the
+/// seven are pairwise disjoint (share no letters in common). This ensures
 /// guesses provide zero information about the answer.
 ///
 /// # Algorithm
 ///
-/// The packer employs a three-stage process, executed in parallel for each
+/// The algorithm employs a three-stage process, executed in parallel for each
 /// answer:
 ///
 /// **1. Enumerate Triples**
 ///
-/// For each answer a, the algorithm first eliminates all guesses that share any
-/// letters with a, producing Compatible(a). This reduces the number of
-/// comparisons by orders of magnitude. It then enumerates all valid disjoint
-/// triples (g₁, g₂, g₃) from this reduced set.
+/// For each answer, the algorithm eliminates all guesses that share letters
+/// with it, then enumerates all valid disjoint triples (g₁, g₂, g₃) from
+/// the remaining candidates.
 ///
 /// **2. Partition Triples**
 ///
-/// Each triple is partitioned based on its intersection with the top 10 most
-/// common letters in the guesses vocabulary. For the standard Wordle word list,
-/// this mask is "seaoriltnu" (note: s > e > a > ... > u by frequency). Triples
-/// with identical partition signatures are grouped together, creating O(2¹⁰) =
-/// 1,024 possible bins.
+/// Each triple is partitioned based on its intersection with the 10 most
+/// common letters. Triples with identical partition signatures are grouped
+/// together, creating up to 1,024 possible bins.
 ///
-/// **3. Compare compatible triple pairs**
+/// **3. Compare Triple Pairs**
 ///
 /// The algorithm compares pairs of partition bins rather than individual
-/// triples. For each pair of bins, if their partition signatures are disjoint
-/// (bitwise AND equals zero), all cross-bin triple pairs are candidates for
-/// full verification. If the signatures overlap, the entire bin pair is
-/// skipped. This pruning reduces the comparison space from O(T²) to between
-/// 100,000 and 700,000 comparisons for answers with large compatible sets,
-/// where T is the total number of triples.
+/// triples. If bin signatures are disjoint, all cross-bin triple pairs
+/// are verified for full disjointness. This reduces the comparison space
+/// from O(T²) to hundreds of thousands of operations.
 ///
 /// # Runtime
 ///
@@ -52,9 +46,7 @@ use crate::signature::Signature;
 pub struct Packer {}
 
 impl Packer {
-    /// Find all possible packings of answer + 6 guesses.
-    ///
-    /// While processing, displays the progress of the realization process.
+    /// Find all possible packings (with progress display).
     #[must_use]
     pub fn pack(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
         let (answer_signatures, guess_signatures) = Self::compile_signatures(answers, guesses);
@@ -82,7 +74,7 @@ impl Packer {
         packings
     }
 
-    /// Find all possible packings of all answers + 6 guesses.
+    /// Find all possible packings (without progress display).
     #[must_use]
     pub fn pack_signatures(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
         let (answer_signatures, guess_signatures) = Self::compile_signatures(answers, guesses);
@@ -95,7 +87,7 @@ impl Packer {
             })
     }
 
-    /// Compile all the unique answer and guesses signatures.
+    /// Convert word lists to unique, sorted signatures.
     #[must_use]
     pub fn compile_signatures(
         answers: &[&str],
@@ -116,7 +108,7 @@ impl Packer {
         (answer_signatures, guess_signatures)
     }
 
-    /// Find all possible packings of this particular answer + 6 guesses.
+    /// Find all packings for a specific answer signature.
     ///
     /// This is done by (1) finding all triples for the answer, (2) partitioning
     /// them by signature, and (3) scanning and merging the partitions. Look at
@@ -124,13 +116,13 @@ impl Packer {
     #[must_use]
     pub fn pack_for_answer(guess_signatures: &[Signature], answer: Signature) -> HashSet<Packing> {
         let triples = Self::find_triples_for_answer(answer, guess_signatures);
-        let partition_key = Signature::from_mask(0b00000111100110100100010001); // seaoriltnu
+        let partition_key = Signature::from_mask(0b00000111100110100100010001); // "seaoriltnu"
         let partitions = Self::partition_triples_by_signature(&triples, partition_key);
         let packings = Self::scan_and_merge_partitions(&partitions, answer);
         packings.into_iter().collect()
     }
 
-    /// Find all triples for this particular answer.
+    /// Find all disjoint triples compatible with the given answer.
     ///
     /// **Correctness**: All triples are unique and sorted by construction.
     fn find_triples_for_answer(answer: Signature, guess_sets: &[Signature]) -> Vec<Triple> {
@@ -156,11 +148,10 @@ impl Packer {
         triples
     }
 
-    /// Partition triples by some partition signature.
+    /// Partition triples using a partition key.
     ///
-    /// Returns a `HashMap` where the keys are the intersection of each triple's
-    /// mask with the partition, and the values are vectors of triples that
-    /// share the same intersection.
+    /// Groups triples by their intersection with the partition key, enabling
+    /// efficient pruning during the merge phase.
     fn partition_triples_by_signature(
         triples: &[Triple],
         partition_key: Signature,
@@ -173,17 +164,10 @@ impl Packer {
         partitions
     }
 
-    /// Finds all packings for a given answer by merging disjoint triples using
-    /// a scan-and-merge strategy.
+    /// Merge disjoint triples into packings using partition-based pruning.
     ///
-    /// # Algorithm
-    ///
-    /// 1. Iterates over pairs of partitions, skipping those whose keys are not
-    ///    disjoint.
-    /// 2. For compatible partitions, check if each pair of triples, one from
-    ///    each partition, is disjoint.
-    /// 3. If any pair of triples is disjoint, merge them and store the result
-    ///    as a valid packing.
+    /// Only compares triples from partitions with disjoint keys, then
+    /// verifies full disjointness before creating packings.
     fn scan_and_merge_partitions(
         partitions: &HashMap<Signature, Vec<Triple>>,
         answer: Signature,
@@ -207,7 +191,7 @@ impl Packer {
     }
 }
 
-/// A solution—a 7-packing of disjoint signatures (1 answer + 6 guesses).
+/// A disjoint packing of one answer and six guess signatures.
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Packing {
     answer: Signature,
@@ -215,28 +199,28 @@ pub struct Packing {
 }
 
 impl Packing {
-    /// Construct a new `Packing` with the given answer and guesses.
+    /// Construct a new `Packing`.
     ///
-    /// **Correctness**: A packing's guesses must be sorted to ensure that
-    /// comparisons depend exclusively on membership, and not order.
+    /// **Correctness**: A packing's guesses must be sorted to ensure
+    /// membership-based comparisons.
     #[must_use]
     pub const fn new(answer: Signature, guesses: [Signature; 6]) -> Self {
         Self { answer, guesses }
     }
 
-    /// Return the answer of the clique.
+    /// Return the answer signature.
     #[must_use]
     pub const fn answer(&self) -> &Signature {
         &self.answer
     }
 
-    /// Return the guesses of the clique.
+    /// Return the guess signatures.
     #[must_use]
     pub const fn guesses(&self) -> &[Signature; 6] {
         &self.guesses
     }
 
-    /// Sort a 6-set of guesses (assuming that the triples are sorted).
+    /// Sort six signatures from two triples into canonical order.
     #[must_use]
     pub fn sort(t1: [Signature; 3], t2: [Signature; 3]) -> [Signature; 6] {
         let compare_and_swap = |signatures: &mut [Signature; 6], i: usize, j: usize| {
