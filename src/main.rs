@@ -14,8 +14,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "There are {} (optimally bad) wordle solutions.",
         solutions.len()
     );
-    write(&packings, "packings.json")?;
-    write(&solutions, "solutions.json")?;
+
+    std::fs::create_dir_all("results")?;
+    write(&packings, "results/packings.json")?;
+    write(&solutions, "results/solutions.json")?;
 
     Ok(())
 }
