@@ -1,7 +1,6 @@
 //! Identify all valid disjoint packings.
 
 use std::collections::{HashMap, HashSet};
-use std::sync::atomic::{AtomicUsize, Ordering};
 
 use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
@@ -81,28 +80,26 @@ impl Packer {
 
     /// Find all possible packings of answer + 6 guesses.
     ///
-    /// Packings are found for each answer in parallel and then merged into a
-    /// single set.
-    ///
-    /// This function shows the progress of the packing process.
-    pub fn pack_with_progress(&self) -> HashSet<Packing> {
-        let progress = AtomicUsize::new(0);
-
+    /// While processing, displays the progress of the realization process.
+    #[must_use]
+    pub fn pack(&self) -> HashSet<Packing> {
         let pb = ProgressBar::new(self.answer_sets.len() as u64);
         pb.set_style(
-            ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} answers")
-                .unwrap()
-                .progress_chars("=> "),
+            ProgressStyle::with_template(
+                "{msg:.cyan} [{bar:25}] {pos}/{len} answer
+s",
+            )
+            .unwrap()
+            .progress_chars("=> "),
         );
         pb.set_message("Packing");
 
-        let result = self
+        let packings = self
             .answer_sets
             .par_iter()
-            .map(|answer| {
-                let _ = progress.fetch_add(1, Ordering::Relaxed) + 1;
+            .map(|&answer| {
                 pb.inc(1);
-                self.pack_for_answer(*answer)
+                self.pack_for_answer(answer)
             })
             .reduce(HashSet::new, |mut acc, packings_for_answer| {
                 acc.extend(packings_for_answer);
@@ -110,17 +107,15 @@ impl Packer {
             });
 
         pb.finish_and_clear();
-        result
+        packings
     }
 
-    /// Find all possible packings of answer + 6 guesses.
-    ///
-    /// Packings are found for each answer in parallel and then merged into a
-    /// single set.
-    pub fn pack(&self) -> HashSet<Packing> {
+    /// Find all possible packings of all answers + 6 guesses.
+    #[must_use]
+    pub fn pack_signatures(&self) -> HashSet<Packing> {
         self.answer_sets
             .par_iter()
-            .map(|answer| self.pack_for_answer(*answer))
+            .map(|&answer| self.pack_for_answer(answer))
             .reduce(HashSet::new, |mut acc, packings_for_answer| {
                 acc.extend(packings_for_answer);
                 acc

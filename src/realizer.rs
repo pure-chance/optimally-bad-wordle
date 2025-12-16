@@ -5,7 +5,6 @@ use itertools::Itertools;
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
-use std::sync::atomic::{AtomicUsize, Ordering};
 
 use crate::packer::Packing;
 use crate::signature::Signature;
@@ -85,7 +84,6 @@ impl Realizer {
         let solutions = packings
             .par_iter()
             .flat_map(|solution| {
-                let _ = progress.fetch_add(1, Ordering::Relaxed);
                 pb.inc(1);
                 self.realize_solution(solution)
             })

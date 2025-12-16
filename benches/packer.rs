@@ -13,8 +13,7 @@ fn packer(c: &mut Criterion) {
     for answer in BENCHMARK_ANSWERS {
         group.bench_with_input(BenchmarkId::new("pack", answer), answer, |b, answer| {
             b.iter(|| {
-                let _ =
-                    Packer::new(ANSWERS, GUESSES).find_packings_for_answer(Signature::new(answer));
+                let _ = Packer::new(ANSWERS, GUESSES).pack_for_answer(Signature::new(answer));
             });
         });
     }
