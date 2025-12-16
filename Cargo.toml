@@ -26,6 +26,12 @@ codegen-units = 1
 debug = false
 panic = "abort"
 
+[lints.clippy]
+all = "warn"
+pedantic = "warn"
+nursery = "warn"
+cargo = "warn"
+
 [[bench]]
 name = "filterer"
 harness = false

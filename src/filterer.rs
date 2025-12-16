@@ -233,6 +233,7 @@ impl Packing {
     }
 
     /// Sort a 6-set of guesses (assuming that the triples are sorted).
+    #[must_use]
     pub fn sort(t1: [LetterSet; 3], t2: [LetterSet; 3]) -> [LetterSet; 6] {
         let compare_and_swap = |lettersets: &mut [LetterSet; 6], i: usize, j: usize| {
             if lettersets[i] > lettersets[j] {
