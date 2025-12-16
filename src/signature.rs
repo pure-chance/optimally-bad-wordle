@@ -19,10 +19,17 @@ use serde::{Deserialize, Serialize};
 pub struct Signature(u32);
 
 impl Signature {
-    /// Construct a new `Signature` with no letters set.
+    /// Construct a new `Signature`.
+    ///
+    /// # Correctness
+    ///
+    /// The word passed to `new` must be a lowercase 5-letter word (i.e., a
+    /// valid word in Wordle). This is checked by assertions in debug
+    /// builds.
     #[inline]
     #[must_use]
     pub fn new(word: &str) -> Self {
+        debug_assert!(word.len() == 5 && word.chars().all(|c| c.is_ascii_lowercase()));
         let mut mask = 0u32;
         for byte in word.as_bytes() {
             mask |= 1u32 << (byte - b'a');
@@ -31,6 +38,9 @@ impl Signature {
     }
 
     /// Construct a `Signature` from the underlying letter mask.
+    ///
+    /// This can be used to construct a `Signature` from a non-wordle word, such
+    /// as when we create a partition signature.
     #[inline]
     #[must_use]
     pub const fn from_mask(mask: u32) -> Self {

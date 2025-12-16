@@ -61,12 +61,9 @@ impl Packer {
 
         let pb = ProgressBar::new(answer_signatures.len() as u64);
         pb.set_style(
-            ProgressStyle::with_template(
-                "{msg:.cyan} [{bar:25}] {pos}/{len} answer
-s",
-            )
-            .unwrap()
-            .progress_chars("=> "),
+            ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} answers")
+                .unwrap()
+                .progress_chars("=> "),
         );
         pb.set_message("Packing");
 
