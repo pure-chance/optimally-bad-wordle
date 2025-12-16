@@ -3,6 +3,7 @@
 use std::collections::{HashMap, HashSet};
 use std::sync::atomic::{AtomicUsize, Ordering};
 
+use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
@@ -83,20 +84,31 @@ impl Filterer {
     /// Packings are found for each answer in parallel and then merged into a
     /// single set.
     pub fn find_packings(&self) -> HashSet<Packing> {
-        let counter = AtomicUsize::new(0);
-        let total = self.answer_sets.len();
+        let progress = AtomicUsize::new(0);
 
-        self.answer_sets
+        let pb = ProgressBar::new(self.answer_sets.len() as u64);
+        pb.set_style(
+            ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} answers")
+                .unwrap()
+                .progress_chars("=> "),
+        );
+        pb.set_message("Filtering");
+
+        let result = self
+            .answer_sets
             .par_iter()
             .map(|answer| {
-                let progress = counter.fetch_add(1, Ordering::Relaxed) + 1;
-                println!("Processing answer: {answer:?} ({progress}/{total})");
+                let _ = progress.fetch_add(1, Ordering::Relaxed) + 1;
+                pb.inc(1);
                 self.find_packings_for_answer(*answer)
             })
             .reduce(HashSet::new, |mut acc, packings_for_answer| {
                 acc.extend(packings_for_answer);
                 acc
-            })
+            });
+
+        pb.finish_and_clear();
+        result
     }
 
     /// Find all possible packings of this particular answer + 6 guesses.

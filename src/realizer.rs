@@ -1,7 +1,9 @@
 //! Realize packings into Wordle solutions (that are optimally bad).
 
 use std::collections::{HashMap, HashSet};
+use std::sync::atomic::{AtomicUsize, Ordering};
 
+use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
@@ -71,10 +73,27 @@ impl Realizer {
     /// Realizes the set of packings into optimally bad Wordle solutions.
     #[must_use]
     pub fn realize(&self, solutions: &HashSet<Packing>) -> HashSet<BadWordleSolution> {
-        solutions
+        let progress = AtomicUsize::new(0);
+
+        let pb = ProgressBar::new(solutions.len() as u64);
+        pb.set_style(
+            ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} packings")
+                .unwrap()
+                .progress_chars("=> "),
+        );
+        pb.set_message("Realizing");
+
+        let realizations = solutions
             .par_iter()
-            .flat_map(|solution| self.realize_solution(solution))
-            .collect()
+            .flat_map(|solution| {
+                let _ = progress.fetch_add(1, Ordering::Relaxed);
+                pb.inc(1);
+                self.realize_solution(solution)
+            })
+            .collect();
+
+        pb.finish_and_clear();
+        realizations
     }
 
     /// Realizes a packing into an optimally bad Wordle solution.
