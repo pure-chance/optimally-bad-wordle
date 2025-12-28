@@ -180,7 +180,7 @@ impl Packer {
                 continue;
             }
             for (&triple1, &triple2) in triples1.iter().cartesian_product(triples2.iter()) {
-                if !triple1.disjoint(triple2) {
+                if !triple1.disjoint(&triple2) {
                     continue;
                 }
                 let guesses = Packing::sort(triple1.signatures, triple2.signatures);
@@ -264,7 +264,7 @@ impl Triple {
     }
 
     /// Check if two triples are disjoint.
-    const fn disjoint(&self, other: Self) -> bool {
+    const fn disjoint(self, other: Self) -> bool {
         self.mask.disjoint(other.mask)
     }
 }
