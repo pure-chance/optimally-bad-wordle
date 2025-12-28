@@ -158,7 +158,7 @@ impl Packer {
     ) -> HashMap<Signature, Vec<Triple>> {
         let mut partitions = HashMap::new();
         for &triple in triples {
-            let key = partition_key.intersection(triple.mask);
+            let key = partition_key.intersection(triple.union);
             partitions.entry(key).or_insert_with(Vec::new).push(triple);
         }
         partitions
@@ -252,19 +252,19 @@ impl Packing {
 #[derive(Debug, Clone, Copy)]
 struct Triple {
     signatures: [Signature; 3],
-    mask: Signature,
+    union: Signature,
 }
 
 impl Triple {
     /// Construct a new `Triple` with the given signatures.
     const fn new(ls1: Signature, ls2: Signature, ls3: Signature) -> Self {
         let signatures = [ls1, ls2, ls3];
-        let mask = ls1.union(ls2).union(ls3);
-        Self { signatures, mask }
+        let union = ls1.union(ls2).union(ls3);
+        Self { signatures, union }
     }
 
     /// Check if two triples are disjoint.
     const fn disjoint(self, other: Self) -> bool {
-        self.mask.disjoint(other.mask)
+        self.union.disjoint(other.union)
     }
 }
