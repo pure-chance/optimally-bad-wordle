@@ -26,6 +26,10 @@ codegen-units = 1
 debug = false
 panic = "abort"
 
+[profile.profiling]
+inherits = "release"
+debug = true
+
 [lints.clippy]
 all = "warn"
 pedantic = "warn"
