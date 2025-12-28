@@ -125,19 +125,19 @@ impl Packer {
     /// Find all disjoint triples compatible with the given answer.
     ///
     /// **Correctness**: All triples are unique and sorted by construction.
-    fn find_triples_for_answer(answer: Signature, guess_sets: &[Signature]) -> Vec<Triple> {
-        let guess_sets: Vec<Signature> = guess_sets
+    fn find_triples_for_answer(answer: Signature, guess_signatures: &[Signature]) -> Vec<Triple> {
+        let candidates: Vec<Signature> = guess_signatures
             .iter()
             .copied()
             .filter(|&ls| ls.disjoint(answer))
             .collect();
         let mut triples = Vec::new();
-        for (i, &ls1) in guess_sets.iter().enumerate() {
-            for (j, &ls2) in guess_sets.iter().enumerate().skip(i + 1) {
+        for (i, &ls1) in candidates.iter().enumerate() {
+            for (j, &ls2) in candidates.iter().enumerate().skip(i + 1) {
                 if !ls1.disjoint(ls2) {
                     continue;
                 }
-                for (_, &ls3) in guess_sets.iter().enumerate().skip(j + 1) {
+                for (_, &ls3) in candidates.iter().enumerate().skip(j + 1) {
                     if ls1.union(ls2).disjoint(ls3) {
                         let triple = Triple::new(ls1, ls2, ls3);
                         triples.push(triple);
@@ -180,7 +180,7 @@ impl Packer {
                 continue;
             }
             for (&triple1, &triple2) in triples1.iter().cartesian_product(triples2.iter()) {
-                if !triple1.disjoint(&triple2) {
+                if !triple1.disjoint(triple2) {
                     continue;
                 }
                 let guesses = Packing::sort(triple1.signatures, triple2.signatures);
