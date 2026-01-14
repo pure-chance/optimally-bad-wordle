@@ -1,6 +1,6 @@
 //! Compact bitmask representation of (5-letter) words.
 
-use std::fmt::Debug;
+use std::fmt::{Debug, Display};
 use std::ops::{BitAnd, BitAndAssign, BitOr, BitOrAssign};
 
 use serde::{Deserialize, Serialize};
@@ -113,6 +113,12 @@ impl From<&str> for Signature {
 }
 
 impl Debug for Signature {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:026b}", self.0)
+    }
+}
+
+impl Display for Signature {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{:026b}", self.0)
     }
