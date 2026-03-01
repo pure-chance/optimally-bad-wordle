@@ -120,6 +120,14 @@ impl Debug for Signature {
 
 impl Display for Signature {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:026b}", self.0)
+        for i in (0..26).rev() {
+            let char = if self.0 & (1 << i) != 0 {
+                (b'a' + i) as char
+            } else {
+                '0'
+            };
+            write!(f, "{char}")?;
+        }
+        Ok(())
     }
 }
