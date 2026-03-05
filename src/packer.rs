@@ -77,7 +77,8 @@ impl Packer {
     /// Find all possible packings (without progress display).
     #[must_use]
     pub fn pack_signatures(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
-        let (answer_signatures, guess_signatures) = Self::compile_signatures(answers, guesses);
+        let answer_signatures = Self::signify_words(answers);
+        let guess_signatures = Self::signify_words(guesses);
         answer_signatures
             .par_iter()
             .map(|answer| Self::pack_for_answer(&guess_signatures, *answer))
@@ -89,23 +90,8 @@ impl Packer {
 
     /// Convert word lists to unique, sorted signatures.
     #[must_use]
-    pub fn compile_signatures(
-        answers: &[&str],
-        guesses: &[&str],
-    ) -> (Box<[Signature]>, Box<[Signature]>) {
-        let answer_signatures: Box<[Signature]> = answers
-            .iter()
-            .map(|&w| w.into())
-            .unique()
-            .sorted()
-            .collect();
-        let guess_signatures: Box<[Signature]> = guesses
-            .iter()
-            .map(|&w| w.into())
-            .unique()
-            .sorted()
-            .collect();
-        (answer_signatures, guess_signatures)
+    pub fn signify_words(words: &[&str]) -> Box<[Signature]> {
+        words.iter().map(|&w| w.into()).unique().sorted().collect()
     }
 
     /// Find all packings for a specific answer signature.
@@ -129,19 +115,20 @@ impl Packer {
         let candidates: Vec<Signature> = guess_signatures
             .iter()
             .copied()
-            .filter(|&ls| ls.disjoint(answer))
+            .filter(|&sig| sig.disjoint(answer))
             .collect();
         let mut triples = Vec::new();
-        for (i, &ls1) in candidates.iter().enumerate() {
-            for (j, &ls2) in candidates.iter().enumerate().skip(i + 1) {
-                if !ls1.disjoint(ls2) {
+        for (i, &sig_a) in candidates.iter().enumerate() {
+            for (j, &sig_b) in candidates.iter().enumerate().skip(i + 1) {
+                if !sig_a.disjoint(sig_b) {
                     continue;
                 }
-                for (_, &ls3) in candidates.iter().enumerate().skip(j + 1) {
-                    if ls1.union(ls2).disjoint(ls3) {
-                        let triple = Triple::new(ls1, ls2, ls3);
-                        triples.push(triple);
+                for (_, &sig_c) in candidates.iter().enumerate().skip(j + 1) {
+                    if !sig_a.union(sig_b).disjoint(sig_c) {
+                        continue;
                     }
+                    let triple = Triple::new(sig_a, sig_b, sig_c);
+                    triples.push(triple);
                 }
             }
         }
@@ -173,17 +160,17 @@ impl Packer {
         answer: Signature,
     ) -> Vec<Packing> {
         let mut packings = Vec::new();
-        for keys in partitions.iter().combinations_with_replacement(2) {
-            let (&key1, triples1) = keys[0];
-            let (&key2, triples2) = keys[1];
-            if !key1.disjoint(key2) {
+        for part in partitions.iter().combinations_with_replacement(2) {
+            let (&key_a, triples_a) = part[0];
+            let (&key_b, triples_b) = part[1];
+            if !key_a.disjoint(key_b) {
                 continue;
             }
-            for (&triple1, &triple2) in triples1.iter().cartesian_product(triples2.iter()) {
-                if !triple1.disjoint(triple2) {
+            for (&a, &b) in triples_a.iter().cartesian_product(triples_b.iter()) {
+                if !a.disjoint(b) {
                     continue;
                 }
-                let guesses = Packing::sort(triple1.signatures, triple2.signatures);
+                let guesses = Packing::sort(a.signatures, b.signatures);
                 packings.push(Packing::new(answer, guesses));
             }
         }
