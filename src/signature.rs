@@ -21,8 +21,9 @@ pub struct Signature(u32);
 impl Signature {
     /// Construct a new `Signature` from a word.
     ///
-    /// **Correctness**: The word must be exactly 5 lowercase ASCII letters (a valid Wordle
-    /// answer / guess). This is checked by assertions in debug builds.
+    /// **Correctness**: The word must be exactly 5 lowercase ASCII letters (a
+    /// valid Wordle answer / guess). This is checked by assertions in debug
+    /// builds.
     #[inline]
     #[must_use]
     pub fn new(word: &str) -> Self {

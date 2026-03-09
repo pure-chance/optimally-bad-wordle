@@ -1,12 +1,13 @@
-use wrong_wordle::packer::Packer;
-use wrong_wordle::realizer::Realizer;
+use wrong_wordle::packer;
+use wrong_wordle::realizer;
 use wrong_wordle::words::{ANSWERS, GUESSES};
 
 /// Find all optimally bad Wordle solutions and save results.
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let packings = Packer::pack(ANSWERS, GUESSES);
-    let solutions = Realizer::realize(ANSWERS, GUESSES, &packings);
+    let packings = packer::pack(ANSWERS, GUESSES);
+    let solutions = realizer::realize(ANSWERS, GUESSES, &packings);
 
+    println!("There are {} packings", packings.len());
     println!(
         "There are {} (optimally bad) wordle solutions.",
         solutions.len()

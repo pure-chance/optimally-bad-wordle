@@ -11,10 +11,10 @@ use crate::signature::Signature;
 
 /// Packs all disjoint packings of signatures.
 ///
-/// The `Packer` solves the core combinatorial problem: finding all
-/// combinations of one answer signature and six guess signatures where all
-/// seven are pairwise disjoint (share no letters in common). This ensures
-/// guesses provide zero information about the answer.
+/// Packing solves the core combinatorial problem: finding all combinations of
+/// one answer signature and six guess signatures where all seven are pairwise
+/// disjoint (share no letters in common). This ensures guesses provide zero
+/// information about the answer.
 ///
 /// # Algorithm
 ///
@@ -43,139 +43,122 @@ use crate::signature::Signature;
 /// # Runtime
 ///
 /// In practice, the algorithm runs in ~20 seconds.
-pub struct Packer {}
+#[must_use]
+pub fn pack(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
+    let answer_signatures = signify_words(answers);
+    let guess_signatures = signify_words(guesses);
 
-impl Packer {
-    /// Find all possible packings (with progress display).
-    #[must_use]
-    pub fn pack(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
-        let (answer_signatures, guess_signatures) = Self::compile_signatures(answers, guesses);
+    let pb = ProgressBar::new(answer_signatures.len() as u64);
+    pb.set_style(
+        ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} answers")
+            .unwrap()
+            .progress_chars("=> "),
+    );
+    pb.set_message("Packing");
 
-        let pb = ProgressBar::new(answer_signatures.len() as u64);
-        pb.set_style(
-            ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} answers")
-                .unwrap()
-                .progress_chars("=> "),
-        );
-        pb.set_message("Packing");
+    let packings = answer_signatures
+        .par_iter()
+        .map(|&answer| {
+            pb.inc(1);
+            pack_for_answer(&guess_signatures, answer)
+        })
+        .reduce(HashSet::new, |mut acc, packings_for_answer| {
+            acc.extend(packings_for_answer);
+            acc
+        });
 
-        let packings = answer_signatures
-            .par_iter()
-            .map(|&answer| {
-                pb.inc(1);
-                Self::pack_for_answer(&guess_signatures, answer)
-            })
-            .reduce(HashSet::new, |mut acc, packings_for_answer| {
-                acc.extend(packings_for_answer);
-                acc
-            });
+    pb.finish_and_clear();
+    packings
+}
 
-        pb.finish_and_clear();
-        packings
-    }
+/// Convert word lists to unique, sorted signatures.
+#[must_use]
+pub fn signify_words(words: &[&str]) -> Box<[Signature]> {
+    words.iter().map(|&w| w.into()).unique().sorted().collect()
+}
 
-    /// Find all possible packings (without progress display).
-    #[must_use]
-    pub fn pack_signatures(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
-        let answer_signatures = Self::signify_words(answers);
-        let guess_signatures = Self::signify_words(guesses);
-        answer_signatures
-            .par_iter()
-            .map(|answer| Self::pack_for_answer(&guess_signatures, *answer))
-            .reduce(HashSet::new, |mut acc, packings_for_answer| {
-                acc.extend(packings_for_answer);
-                acc
-            })
-    }
+/// Find all packings for a specific answer signature.
+///
+/// This is done by (1) finding all triples for the answer, (2) partitioning
+/// them by signature, and (3) scanning and merging the partitions. Look at
+/// the documentation of `pack` for more details.
+#[must_use]
+pub fn pack_for_answer(guess_signatures: &[Signature], answer: Signature) -> HashSet<Packing> {
+    // `0b00...` = "seaoriltnu" = top 10 most common letters in the guesses dictionary.
+    const PARTITION_KEY: Signature = Signature::from_mask(0b00000111100110100100010001);
+    let triples = find_triples_for_answer(answer, guess_signatures);
+    let partitions = partition_triples_by_signature(&triples, PARTITION_KEY);
+    let packings = scan_and_merge_partitions(&partitions, answer);
+    packings.into_iter().collect()
+}
 
-    /// Convert word lists to unique, sorted signatures.
-    #[must_use]
-    pub fn signify_words(words: &[&str]) -> Box<[Signature]> {
-        words.iter().map(|&w| w.into()).unique().sorted().collect()
-    }
-
-    /// Find all packings for a specific answer signature.
-    ///
-    /// This is done by (1) finding all triples for the answer, (2) partitioning
-    /// them by signature, and (3) scanning and merging the partitions. Look at
-    /// the documentation of `Packer` for more details.
-    #[must_use]
-    pub fn pack_for_answer(guess_signatures: &[Signature], answer: Signature) -> HashSet<Packing> {
-        let triples = Self::find_triples_for_answer(answer, guess_signatures);
-        let partition_key = Signature::from_mask(0b00000111100110100100010001); // "seaoriltnu"
-        let partitions = Self::partition_triples_by_signature(&triples, partition_key);
-        let packings = Self::scan_and_merge_partitions(&partitions, answer);
-        packings.into_iter().collect()
-    }
-
-    /// Find all disjoint triples compatible with the given answer.
-    ///
-    /// **Correctness**: All triples are unique and sorted by construction.
-    fn find_triples_for_answer(answer: Signature, guess_signatures: &[Signature]) -> Vec<Triple> {
-        let candidates: Vec<Signature> = guess_signatures
-            .iter()
-            .copied()
-            .filter(|&sig| sig.disjoint(answer))
-            .collect();
-        let mut triples = Vec::new();
-        for (i, &sig_a) in candidates.iter().enumerate() {
-            for (j, &sig_b) in candidates.iter().enumerate().skip(i + 1) {
-                if !sig_a.disjoint(sig_b) {
-                    continue;
-                }
-                for (_, &sig_c) in candidates.iter().enumerate().skip(j + 1) {
-                    if !sig_a.union(sig_b).disjoint(sig_c) {
-                        continue;
-                    }
-                    let triple = Triple::new(sig_a, sig_b, sig_c);
-                    triples.push(triple);
-                }
-            }
-        }
-        triples
-    }
-
-    /// Partition triples using a partition key.
-    ///
-    /// Groups triples by their intersection with the partition key, enabling
-    /// efficient pruning during the merge phase.
-    fn partition_triples_by_signature(
-        triples: &[Triple],
-        partition_key: Signature,
-    ) -> HashMap<Signature, Vec<Triple>> {
-        let mut partitions = HashMap::new();
-        for &triple in triples {
-            let key = partition_key.intersection(triple.union);
-            partitions.entry(key).or_insert_with(Vec::new).push(triple);
-        }
-        partitions
-    }
-
-    /// Merge disjoint triples into packings using partition-based pruning.
-    ///
-    /// Only compares triples from partitions with disjoint keys, then
-    /// verifies full disjointness before creating packings.
-    fn scan_and_merge_partitions(
-        partitions: &HashMap<Signature, Vec<Triple>>,
-        answer: Signature,
-    ) -> Vec<Packing> {
-        let mut packings = Vec::new();
-        for part in partitions.iter().combinations_with_replacement(2) {
-            let (&key_a, triples_a) = part[0];
-            let (&key_b, triples_b) = part[1];
-            if !key_a.disjoint(key_b) {
+/// Find all disjoint triples compatible with the given answer.
+///
+/// **Correctness**: All triples are unique and sorted by construction.
+fn find_triples_for_answer(answer: Signature, guess_signatures: &[Signature]) -> Vec<Triple> {
+    let candidates: Vec<Signature> = guess_signatures
+        .iter()
+        .copied()
+        .filter(|&sig| sig.disjoint(answer))
+        .collect();
+    let mut triples = Vec::new();
+    for (i, &sig_a) in candidates.iter().enumerate() {
+        for (j, &sig_b) in candidates.iter().enumerate().skip(i + 1) {
+            if !sig_a.disjoint(sig_b) {
                 continue;
             }
-            for (&a, &b) in triples_a.iter().cartesian_product(triples_b.iter()) {
-                if !a.disjoint(b) {
+            for (_, &sig_c) in candidates.iter().enumerate().skip(j + 1) {
+                if !sig_a.union(sig_b).disjoint(sig_c) {
                     continue;
                 }
-                let guesses = Packing::sort(a.signatures, b.signatures);
-                packings.push(Packing::new(answer, guesses));
+                let triple = Triple::new(sig_a, sig_b, sig_c);
+                triples.push(triple);
             }
         }
-        packings
     }
+    triples
+}
+
+/// Partition triples using a partition key.
+///
+/// Groups triples by their intersection with the partition key, enabling
+/// efficient pruning during the merge phase.
+fn partition_triples_by_signature(
+    triples: &[Triple],
+    partition_key: Signature,
+) -> HashMap<Signature, Vec<Triple>> {
+    let mut partitions = HashMap::new();
+    for &triple in triples {
+        let key = partition_key.intersection(triple.union);
+        partitions.entry(key).or_insert_with(Vec::new).push(triple);
+    }
+    partitions
+}
+
+/// Merge disjoint triples into packings using partition-based pruning.
+///
+/// Only compares triples from partitions with disjoint keys, then
+/// verifies full disjointness before creating packings.
+fn scan_and_merge_partitions(
+    partitions: &HashMap<Signature, Vec<Triple>>,
+    answer: Signature,
+) -> Vec<Packing> {
+    let mut packings = Vec::new();
+    for part in partitions.iter().combinations_with_replacement(2) {
+        let (&key_a, triples_a) = part[0];
+        let (&key_b, triples_b) = part[1];
+        if !key_a.disjoint(key_b) {
+            continue;
+        }
+        for (&a, &b) in triples_a.iter().cartesian_product(triples_b.iter()) {
+            if !a.disjoint(b) {
+                continue;
+            }
+            let guesses = Packing::sort(a.signatures, b.signatures);
+            packings.push(Packing::new(answer, guesses));
+        }
+    }
+    packings
 }
 
 /// A disjoint packing of one answer and six guess signatures.

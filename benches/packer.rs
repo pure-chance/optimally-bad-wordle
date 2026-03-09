@@ -1,20 +1,20 @@
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 
-use wrong_wordle::packer::Packer;
+use wrong_wordle::packer;
 use wrong_wordle::signature::Signature;
-use wrong_wordle::words::{ANSWERS, GUESSES};
+use wrong_wordle::words::GUESSES;
 
 fn packer(c: &mut Criterion) {
     let mut group = c.benchmark_group("packer");
 
-    // "civic" = many packings, "pinch" = some packings, "zesty" = few packings
-    const BENCHMARK_ANSWERS: [&str; 3] = ["civic", "pinch", "zesty"];
+    // "civil" = many packings, "pinch" = some packings, "zesty" = few packings
+    const BENCHMARK_ANSWERS: [&str; 3] = ["civil", "pinch", "zesty"];
 
     for answer in BENCHMARK_ANSWERS {
         group.bench_with_input(BenchmarkId::new("pack", answer), answer, |b, answer| {
             b.iter(|| {
-                let (_, guess_signatures) = Packer::compile_signatures(ANSWERS, GUESSES);
-                let _ = Packer::pack_for_answer(&guess_signatures, Signature::new(answer));
+                let guess_signatures = packer::signify_words(GUESSES);
+                let _ = packer::pack_for_answer(&guess_signatures, Signature::new(answer));
             });
         });
     }

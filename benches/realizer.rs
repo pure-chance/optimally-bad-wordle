@@ -3,7 +3,7 @@ use std::collections::HashSet;
 use criterion::{Criterion, criterion_group, criterion_main};
 
 use wrong_wordle::packer::Packing;
-use wrong_wordle::realizer::Realizer;
+use wrong_wordle::realizer;
 use wrong_wordle::signature::Signature;
 use wrong_wordle::words::{ANSWERS, GUESSES};
 
@@ -13,7 +13,12 @@ fn realizer(c: &mut Criterion) {
     let packings: HashSet<Packing> = PACKINGS.iter().cloned().collect();
     group.bench_function("realize", |b| {
         b.iter(|| {
-            let _ = Realizer::realize_packings(ANSWERS, GUESSES, &packings);
+            let answer_realizations = realizer::compile_realizations(ANSWERS);
+            let guess_realizations = realizer::compile_realizations(GUESSES);
+            for packing in packings.iter() {
+                let _ =
+                    realizer::realize_packing(&answer_realizations, &guess_realizations, packing);
+            }
         });
     });
 

@@ -11,7 +11,7 @@ use crate::signature::Signature;
 
 /// Realizes packings into Wordle solutions (that are optimally bad).
 ///
-/// The realizer takes disjoint signature packings and generates all possible
+/// Realization takes disjoint signature packings and generates all possible
 /// word combinations by looking up each signature's corresponding words.
 ///
 /// # Algorithm
@@ -40,111 +40,76 @@ use crate::signature::Signature;
 /// ("slate", "blink", "court"),
 /// ("slate", "blink", "curvy"),
 /// ```
-pub struct Realizer {}
+#[must_use]
+pub fn realize(
+    answers: &[&str],
+    guesses: &[&str],
+    packings: &HashSet<Packing>,
+) -> HashSet<BadWordleSolution> {
+    let answer_realizations = compile_realizations(answers);
+    let guess_realizations = compile_realizations(guesses);
 
-impl Realizer {
-    /// Realizes packings into optimally bad Wordle solutions (with progress
-    /// display).
-    #[must_use]
-    pub fn realize(
-        answers: &[&str],
-        guesses: &[&str],
-        packings: &HashSet<Packing>,
-    ) -> HashSet<BadWordleSolution> {
-        let (answer_realizations, guess_realizations) =
-            Self::compile_realizations(answers, guesses);
+    let pb = ProgressBar::new(packings.len() as u64);
+    pb.set_style(
+        ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} packings")
+            .unwrap()
+            .progress_chars("=> "),
+    );
+    pb.set_message("Realizing");
 
-        let pb = ProgressBar::new(packings.len() as u64);
-        pb.set_style(
-            ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} packings")
-                .unwrap()
-                .progress_chars("=> "),
-        );
-        pb.set_message("Realizing");
+    let solutions = packings
+        .par_iter()
+        .flat_map(|packing| {
+            pb.inc(1);
+            realize_packing(&answer_realizations, &guess_realizations, packing)
+        })
+        .collect();
 
-        let solutions = packings
-            .par_iter()
-            .flat_map(|packing| {
-                pb.inc(1);
-                Self::realize_packing(&answer_realizations, &guess_realizations, packing)
-            })
-            .collect();
+    pb.finish_and_clear();
+    solutions
+}
 
-        pb.finish_and_clear();
-        solutions
-    }
+/// Build signature-to-words lookup tables.
+#[must_use]
+pub fn compile_realizations(words: &[&str]) -> HashMap<Signature, Vec<String>> {
+    words
+        .iter()
+        .map(|&word| (word.into(), word.to_string()))
+        .into_group_map()
+}
 
-    /// Realizes packings into optimally bad Wordle solutions (without progress
-    /// display).
-    #[must_use]
-    pub fn realize_packings(
-        answers: &[&str],
-        guesses: &[&str],
-        packings: &HashSet<Packing>,
-    ) -> HashSet<BadWordleSolution> {
-        let (answer_realizations, guess_realizations) =
-            Self::compile_realizations(answers, guesses);
-        packings
-            .par_iter()
-            .flat_map(|packing| {
-                Self::realize_packing(&answer_realizations, &guess_realizations, packing)
-            })
-            .collect()
-    }
-
-    /// Build signature-to-words lookup tables.
-    #[must_use]
-    pub fn compile_realizations(
-        answers: &[&str],
-        guesses: &[&str],
-    ) -> (
-        HashMap<Signature, Vec<String>>,
-        HashMap<Signature, Vec<String>>,
-    ) {
-        let answer_realizations: HashMap<Signature, Vec<String>> = answers
-            .iter()
-            .map(|&answer| (answer.into(), answer.to_string()))
-            .into_group_map();
-        let guess_realizations: HashMap<Signature, Vec<String>> = guesses
-            .iter()
-            .map(|&guess| (guess.into(), guess.to_string()))
-            .into_group_map();
-        (answer_realizations, guess_realizations)
-    }
-
-    /// Convert a single packing into an (optimally bad) Wordle solutions.
-    ///
-    /// # Panics
-    ///
-    /// Panics if any signature in the packing is not found in the lookup
-    /// tables.
-    #[must_use]
-    pub fn realize_packing(
-        answer_realizations: &HashMap<Signature, Vec<String>>,
-        guess_realizations: &HashMap<Signature, Vec<String>>,
-        packing: &Packing,
-    ) -> HashSet<BadWordleSolution> {
-        let a = &packing.answer();
-        let [g1, g2, g3, g4, g5, g6] = packing.guesses();
-        let combinations = [
-            answer_realizations[a].clone(),
-            guess_realizations[g1].clone(),
-            guess_realizations[g2].clone(),
-            guess_realizations[g3].clone(),
-            guess_realizations[g4].clone(),
-            guess_realizations[g5].clone(),
-            guess_realizations[g6].clone(),
-        ];
-        combinations
-            .into_iter()
-            .multi_cartesian_product()
-            .par_bridge()
-            .map(|v| {
-                let [a, g1, g2, g3, g4, g5, g6] = v.try_into().unwrap();
-                BadWordleSolution::new(a, [g1, g2, g3, g4, g5, g6])
-            })
-            .collect()
-    }
+/// Convert a single packing into an (optimally bad) Wordle solutions.
+///
+/// # Panics
+///
+/// Panics if any signature in the packing is not found in the lookup
+/// tables.
+#[must_use]
+pub fn realize_packing(
+    answer_realizations: &HashMap<Signature, Vec<String>>,
+    guess_realizations: &HashMap<Signature, Vec<String>>,
+    packing: &Packing,
+) -> HashSet<BadWordleSolution> {
+    let a = &packing.answer();
+    let [g1, g2, g3, g4, g5, g6] = packing.guesses();
+    let combinations = [
+        answer_realizations[a].clone(),
+        guess_realizations[g1].clone(),
+        guess_realizations[g2].clone(),
+        guess_realizations[g3].clone(),
+        guess_realizations[g4].clone(),
+        guess_realizations[g5].clone(),
+        guess_realizations[g6].clone(),
+    ];
+    combinations
+        .into_iter()
+        .multi_cartesian_product()
+        .par_bridge()
+        .map(|v| {
+            let [a, g1, g2, g3, g4, g5, g6] = v.try_into().unwrap();
+            BadWordleSolution::new(a, [g1, g2, g3, g4, g5, g6])
+        })
+        .collect()
 }
 
 /// An optimally bad Wordle solution.
