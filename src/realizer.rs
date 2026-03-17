@@ -3,8 +3,8 @@
 use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
 use rayon::prelude::*;
+use rustc_hash::{FxHashMap as HashMap, FxHashSet as HashSet};
 use serde::{Deserialize, Serialize};
-use std::collections::{HashMap, HashSet};
 
 use crate::packer::Packing;
 use crate::signature::Signature;
@@ -72,10 +72,13 @@ pub fn realize(
 /// Build signature-to-words lookup tables.
 #[must_use]
 pub fn compile_realizations(words: &[&str]) -> HashMap<Signature, Vec<String>> {
-    words
-        .iter()
-        .map(|&word| (word.into(), word.to_string()))
-        .into_group_map()
+    let mut map = HashMap::default();
+    for &word in words {
+        map.entry(Signature::from(word))
+            .or_insert_with(Vec::new)
+            .push(word.to_string());
+    }
+    map
 }
 
 /// Convert a single packing into an (optimally bad) Wordle solutions.

@@ -1,10 +1,9 @@
 //! Find all disjoint packings of signatures.
 
-use std::collections::{HashMap, HashSet};
-
 use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
 use rayon::prelude::*;
+use rustc_hash::{FxHashMap as HashMap, FxHashSet as HashSet};
 use serde::{Deserialize, Serialize};
 
 use crate::signature::Signature;
@@ -62,7 +61,7 @@ pub fn pack(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
             pb.inc(1);
             pack_for_answer(&guess_signatures, answer)
         })
-        .reduce(HashSet::new, |mut acc, packings_for_answer| {
+        .reduce(HashSet::default, |mut acc, packings_for_answer| {
             acc.extend(packings_for_answer);
             acc
         });
@@ -84,7 +83,7 @@ pub fn signify_words(words: &[&str]) -> Box<[Signature]> {
 /// the documentation of `pack` for more details.
 #[must_use]
 pub fn pack_for_answer(guess_signatures: &[Signature], answer: Signature) -> HashSet<Packing> {
-    // `0b00...` = "seaoriltnu" = top 10 most common letters in the guesses dictionary.
+    // "seaoriltnu" = the 10 most frequently occurring letters across all guesses.
     const PARTITION_KEY: Signature = Signature::from_mask(0b00000111100110100100010001);
     let triples = find_triples_for_answer(answer, guess_signatures);
     let partitions = partition_triples_by_signature(&triples, PARTITION_KEY);
@@ -101,7 +100,10 @@ fn find_triples_for_answer(answer: Signature, guess_signatures: &[Signature]) ->
         .copied()
         .filter(|&sig| sig.disjoint(answer))
         .collect();
-    let mut triples = Vec::new();
+
+    let mut triples =
+        Vec::with_capacity(candidates.len() * (candidates.len() - 1) * (candidates.len() - 2) / 6);
+
     for (i, &sig_a) in candidates.iter().enumerate() {
         for (j, &sig_b) in candidates.iter().enumerate().skip(i + 1) {
             if !sig_a.disjoint(sig_b) {
@@ -127,7 +129,7 @@ fn partition_triples_by_signature(
     triples: &[Triple],
     partition_key: Signature,
 ) -> HashMap<Signature, Vec<Triple>> {
-    let mut partitions = HashMap::new();
+    let mut partitions = HashMap::default();
     for &triple in triples {
         let key = partition_key.intersection(triple.union);
         partitions.entry(key).or_insert_with(Vec::new).push(triple);
@@ -137,8 +139,8 @@ fn partition_triples_by_signature(
 
 /// Merge disjoint triples into packings using partition-based pruning.
 ///
-/// Only compares triples from partitions with disjoint keys, then
-/// verifies full disjointness before creating packings.
+/// Because of the partitions, only triples with disjoint keys need to be
+/// compared. Any pair of triples from disjoint partitions is compared directly.
 fn scan_and_merge_partitions(
     partitions: &HashMap<Signature, Vec<Triple>>,
     answer: Signature,
@@ -190,28 +192,27 @@ impl Packing {
         &self.guesses
     }
 
-    /// Sort six signatures from two triples into canonical order.
+    /// Merge two sorted triples into a single sorted array of six signatures.
+    ///
+    /// Uses Batcher's odd-even merge network, which sorts two sorted 3-sequences
+    /// in exactly 5 comparisons, with each element written to its final position
+    /// exactly once.
     #[must_use]
     pub fn sort(t1: [Signature; 3], t2: [Signature; 3]) -> [Signature; 6] {
-        let compare_and_swap = |signatures: &mut [Signature; 6], i: usize, j: usize| {
-            if signatures[i] > signatures[j] {
-                signatures.swap(i, j);
-            }
+        let cas = |a: Signature, b: Signature| -> (Signature, Signature) {
+            if a <= b { (a, b) } else { (b, a) }
         };
 
-        let mut signatures = [t1[0], t1[1], t1[2], t2[0], t2[1], t2[2]];
+        // Step 1: compare-and-swap across the boundary
+        let (a0, b0) = cas(t1[0], t2[0]);
+        let (a1, b1) = cas(t1[1], t2[1]);
+        let (a2, b2) = cas(t1[2], t2[2]);
 
-        compare_and_swap(&mut signatures, 0, 3);
-        compare_and_swap(&mut signatures, 1, 4);
-        compare_and_swap(&mut signatures, 2, 5);
-        compare_and_swap(&mut signatures, 1, 3);
-        compare_and_swap(&mut signatures, 2, 4);
-        compare_and_swap(&mut signatures, 2, 3);
-        compare_and_swap(&mut signatures, 1, 2);
-        compare_and_swap(&mut signatures, 4, 5);
-        compare_and_swap(&mut signatures, 3, 4);
+        // Step 2: resolve the interleaved sequences
+        let (s1, s2) = cas(a1, b0);
+        let (s3, s4) = cas(a2, b1);
 
-        signatures
+        [a0, s1, s3, s2, s4, b2]
     }
 }
 
