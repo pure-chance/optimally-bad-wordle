@@ -14,7 +14,7 @@ fn packer(c: &mut Criterion) {
         group.bench_with_input(BenchmarkId::new("pack", answer), answer, |b, answer| {
             b.iter(|| {
                 let guess_signatures = packer::signify_words(GUESSES);
-                let _ = packer::pack_for_answer(&guess_signatures, Signature::new(answer));
+                let _packings = packer::pack_for_answer(&guess_signatures, Signature::new(answer));
             });
         });
     }

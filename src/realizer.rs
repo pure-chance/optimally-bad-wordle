@@ -107,7 +107,6 @@ pub fn realize_packing(
     combinations
         .into_iter()
         .multi_cartesian_product()
-        .par_bridge()
         .map(|v| {
             let [a, g1, g2, g3, g4, g5, g6] = v.try_into().unwrap();
             BadWordleSolution::new(a, [g1, g2, g3, g4, g5, g6])

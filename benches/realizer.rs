@@ -1,3 +1,4 @@
+use rayon::prelude::*;
 use rustc_hash::FxHashSet as HashSet;
 
 use criterion::{Criterion, criterion_group, criterion_main};
@@ -15,10 +16,12 @@ fn realizer(c: &mut Criterion) {
         b.iter(|| {
             let answer_realizations = realizer::compile_realizations(ANSWERS);
             let guess_realizations = realizer::compile_realizations(GUESSES);
-            for packing in packings.iter() {
-                let _ =
-                    realizer::realize_packing(&answer_realizations, &guess_realizations, packing);
-            }
+            let _solutions: Vec<_> = packings
+                .par_iter()
+                .flat_map(|packing| {
+                    realizer::realize_packing(&answer_realizations, &guess_realizations, packing)
+                })
+                .collect();
         });
     });
 

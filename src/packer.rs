@@ -194,9 +194,9 @@ impl Packing {
 
     /// Merge two sorted triples into a single sorted array of six signatures.
     ///
-    /// Uses Batcher's odd-even merge network, which sorts two sorted 3-sequences
-    /// in exactly 5 comparisons, with each element written to its final position
-    /// exactly once.
+    /// Uses Batcher's odd-even merge network, which sorts two sorted
+    /// 3-sequences in exactly 5 comparisons, with each element written to
+    /// its final position exactly once.
     #[must_use]
     pub fn sort(t1: [Signature; 3], t2: [Signature; 3]) -> [Signature; 6] {
         let cas = |a: Signature, b: Signature| -> (Signature, Signature) {
