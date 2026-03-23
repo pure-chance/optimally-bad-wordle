@@ -121,14 +121,15 @@ impl Debug for Signature {
 
 impl Display for Signature {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        for i in (0..26).rev() {
-            let char = if self.0 & (1 << i) != 0 {
-                (b'a' + i) as char
-            } else {
-                '0'
-            };
-            write!(f, "{char}")?;
+        let mut mask = self.0;
+        let mut buf = String::with_capacity(5 + 2);
+        buf.push('{');
+        while mask != 0 {
+            let i = mask.trailing_zeros();
+            buf.push((b'a' + i as u8) as char);
+            mask &= mask - 1;
         }
-        Ok(())
+        buf.push('}');
+        f.write_str(&buf)
     }
 }
