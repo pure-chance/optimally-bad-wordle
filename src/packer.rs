@@ -50,7 +50,7 @@ pub fn pack(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
     let pb = ProgressBar::new(answer_signatures.len() as u64);
     pb.set_style(
         ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} answers")
-            .unwrap()
+            .expect("Progress bar template is invalid")
             .progress_chars("=> "),
     );
     pb.set_message("Packing");
@@ -101,11 +101,14 @@ fn find_triples_for_answer(answer: Signature, guess_signatures: &[Signature]) ->
         .filter(|&sig| sig.disjoint(answer))
         .collect();
 
-    let mut triples =
-        Vec::with_capacity(candidates.len() * (candidates.len() - 1) * (candidates.len() - 2) / 6);
+    // Pre-allocate 1/2 the maximum possible number of triples (which is C(n, 3))
+    let num_candidates = candidates.len();
+    let triples_capacity_initial = num_candidates * (num_candidates - 1) * (num_candidates - 2) / 6;
+    let mut triples = Vec::with_capacity(triples_capacity_initial);
 
     for (i, &sig_a) in candidates.iter().enumerate() {
         for (j, &sig_b) in candidates.iter().enumerate().skip(i + 1) {
+            // Early exit: if sig_a and sig_b are not disjoint, sig_c cannot be disjoint
             if !sig_a.disjoint(sig_b) {
                 continue;
             }

@@ -52,7 +52,7 @@ pub fn realize(
     let pb = ProgressBar::new(packings.len() as u64);
     pb.set_style(
         ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} packings")
-            .unwrap()
+            .expect("Progress bar template is invalid")
             .progress_chars("=> "),
     );
     pb.set_message("Realizing");
