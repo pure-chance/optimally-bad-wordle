@@ -2,14 +2,14 @@ use wrong_wordle::packer;
 use wrong_wordle::realizer;
 use wrong_wordle::words::{ANSWERS, GUESSES};
 
-/// Find all optimally bad Wordle solutions and save results.
+/// Find all optimally wrong Wordle solutions and save results.
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let packings = packer::pack(ANSWERS, GUESSES);
     let solutions = realizer::realize(ANSWERS, GUESSES, &packings);
 
     println!("There are {} packings", packings.len());
     println!(
-        "There are {} (optimally bad) wordle solutions.",
+        "There are {} (optimally wrong) wordle solutions.",
         solutions.len()
     );
 

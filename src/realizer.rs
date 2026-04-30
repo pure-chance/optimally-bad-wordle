@@ -1,4 +1,4 @@
-//! Realize packings into Wordle solutions (that are optimally bad).
+//! Realize packings into Wordle solutions (that are optimally wrong).
 
 use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 use crate::packer::Packing;
 use crate::signature::Signature;
 
-/// Realizes packings into Wordle solutions (that are optimally bad).
+/// Realizes packings into Wordle solutions (that are optimally wrong).
 ///
 /// Realization takes disjoint signature packings and generates all possible
 /// word combinations by looking up each signature's corresponding words.
@@ -45,7 +45,7 @@ pub fn realize(
     answers: &[&str],
     guesses: &[&str],
     packings: &HashSet<Packing>,
-) -> HashSet<BadWordleSolution> {
+) -> HashSet<WrongWordleSolution> {
     let answer_realizations = compile_realizations(answers);
     let guess_realizations = compile_realizations(guesses);
 
@@ -81,7 +81,7 @@ pub fn compile_realizations(words: &[&str]) -> HashMap<Signature, Vec<String>> {
     map
 }
 
-/// Convert a single packing into an (optimally bad) Wordle solutions.
+/// Convert a single packing into an (optimally wrong) Wordle solutions.
 ///
 /// # Panics
 ///
@@ -92,7 +92,7 @@ pub fn realize_packing(
     answer_realizations: &HashMap<Signature, Vec<String>>,
     guess_realizations: &HashMap<Signature, Vec<String>>,
     packing: &Packing,
-) -> HashSet<BadWordleSolution> {
+) -> HashSet<WrongWordleSolution> {
     let a = &packing.answer();
     let [g1, g2, g3, g4, g5, g6] = packing.guesses();
     let combinations = [
@@ -109,20 +109,20 @@ pub fn realize_packing(
         .multi_cartesian_product()
         .map(|v| {
             let [a, g1, g2, g3, g4, g5, g6] = v.try_into().unwrap();
-            BadWordleSolution::new(a, [g1, g2, g3, g4, g5, g6])
+            WrongWordleSolution::new(a, [g1, g2, g3, g4, g5, g6])
         })
         .collect()
 }
 
-/// An optimally bad Wordle solution.
+/// An optimally wrong Wordle solution.
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct BadWordleSolution {
+pub struct WrongWordleSolution {
     answer: String,
     guesses: [String; 6],
 }
 
-impl BadWordleSolution {
-    /// Construct a new `BadWordleSolution`.
+impl WrongWordleSolution {
+    /// Construct a new `WrongWordleSolution`.
     #[must_use]
     pub fn new(answer: String, mut guesses: [String; 6]) -> Self {
         guesses.sort_unstable();
