@@ -34,4 +34,4 @@ The packing phase produces solutions in terms of signatures rather than actual w
 
 ## Results
 
-The complete solution set contains 1,122,348 optimally wrong Wordle combinations, computed using Wordle's official answer list and extended guess vocabulary.
+The complete solution set contains 1,122,348 optimally wrong Wordle combinations, computed using Wordle's official answer list and extended guess vocabulary. These solutions are realized from a set of 1,131,566 packings.
