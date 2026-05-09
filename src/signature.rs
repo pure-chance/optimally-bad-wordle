@@ -3,7 +3,7 @@
 use std::fmt::{Debug, Display};
 use std::ops::{BitAnd, BitAndAssign, BitOr, BitOrAssign};
 
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 
 /// Compact bitmask representation of a word's unique letters.
 ///
@@ -15,7 +15,7 @@ use serde::{Deserialize, Serialize};
 /// This representation enables efficient disjointness checking: two signatures
 /// are disjoint if and only if their bitwise AND equals zero.
 #[repr(transparent)]
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 pub struct Signature(u32);
 
 impl Signature {

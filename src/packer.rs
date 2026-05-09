@@ -4,7 +4,7 @@ use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
 use rayon::prelude::*;
 use rustc_hash::{FxHashMap as HashMap, FxHashSet as HashSet};
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 
 use crate::signature::Signature;
 
@@ -84,7 +84,7 @@ pub fn signify_words(words: &[&str]) -> Box<[Signature]> {
 #[must_use]
 pub fn pack_for_answer(guess_signatures: &[Signature], answer: Signature) -> HashSet<Packing> {
     // "seaoriltnu" = the 10 most frequently occurring letters across all guesses.
-    const PARTITION_KEY: Signature = Signature::from_mask(0b00000111100110100100010001);
+    const PARTITION_KEY: Signature = Signature::from_mask(0b00_0001_1110_0110_1001_0001_0001);
     let triples = find_triples_for_answer(answer, guess_signatures);
     let partitions = partition_triples_by_signature(&triples, PARTITION_KEY);
     let packings = scan_and_merge_partitions(&partitions, answer);
@@ -167,7 +167,7 @@ fn scan_and_merge_partitions(
 }
 
 /// A disjoint packing of one answer and six guess signatures.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize)]
 pub struct Packing {
     answer: Signature,
     guesses: [Signature; 6],

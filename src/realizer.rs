@@ -4,7 +4,7 @@ use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
 use rayon::prelude::*;
 use rustc_hash::{FxHashMap as HashMap, FxHashSet as HashSet};
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 
 use crate::packer::Packing;
 use crate::signature::Signature;
@@ -42,8 +42,8 @@ use crate::signature::Signature;
 /// ```
 #[must_use]
 pub fn realize(
-    answers: &[&str],
-    guesses: &[&str],
+    answers: &[&'static str],
+    guesses: &[&'static str],
     packings: &HashSet<Packing>,
 ) -> HashSet<WrongWordleSolution> {
     let answer_realizations = compile_realizations(answers);
@@ -71,12 +71,12 @@ pub fn realize(
 
 /// Build signature-to-words lookup tables.
 #[must_use]
-pub fn compile_realizations(words: &[&str]) -> HashMap<Signature, Vec<String>> {
+pub fn compile_realizations(words: &[&'static str]) -> HashMap<Signature, Vec<&'static str>> {
     let mut map = HashMap::default();
     for &word in words {
         map.entry(Signature::from(word))
             .or_insert_with(Vec::new)
-            .push(word.to_string());
+            .push(word);
     }
     map
 }
@@ -89,20 +89,20 @@ pub fn compile_realizations(words: &[&str]) -> HashMap<Signature, Vec<String>> {
 /// tables.
 #[must_use]
 pub fn realize_packing(
-    answer_realizations: &HashMap<Signature, Vec<String>>,
-    guess_realizations: &HashMap<Signature, Vec<String>>,
+    answer_realizations: &HashMap<Signature, Vec<&'static str>>,
+    guess_realizations: &HashMap<Signature, Vec<&'static str>>,
     packing: &Packing,
 ) -> HashSet<WrongWordleSolution> {
     let a = &packing.answer();
     let [g1, g2, g3, g4, g5, g6] = packing.guesses();
     let combinations = [
-        answer_realizations[a].clone(),
-        guess_realizations[g1].clone(),
-        guess_realizations[g2].clone(),
-        guess_realizations[g3].clone(),
-        guess_realizations[g4].clone(),
-        guess_realizations[g5].clone(),
-        guess_realizations[g6].clone(),
+        answer_realizations[a].as_slice(),
+        guess_realizations[g1].as_slice(),
+        guess_realizations[g2].as_slice(),
+        guess_realizations[g3].as_slice(),
+        guess_realizations[g4].as_slice(),
+        guess_realizations[g5].as_slice(),
+        guess_realizations[g6].as_slice(),
     ];
     combinations
         .into_iter()
@@ -115,29 +115,29 @@ pub fn realize_packing(
 }
 
 /// An optimally wrong Wordle solution.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize)]
 pub struct WrongWordleSolution {
-    answer: String,
-    guesses: [String; 6],
+    answer: &'static str,
+    guesses: [&'static str; 6],
 }
 
 impl WrongWordleSolution {
     /// Construct a new `WrongWordleSolution`.
     #[must_use]
-    pub fn new(answer: String, mut guesses: [String; 6]) -> Self {
+    pub fn new(answer: &'static str, mut guesses: [&'static str; 6]) -> Self {
         guesses.sort_unstable();
         Self { answer, guesses }
     }
 
     /// Returns the answer word.
     #[must_use]
-    pub const fn answer(&self) -> &String {
-        &self.answer
+    pub const fn answer(&self) -> &'static str {
+        self.answer
     }
 
     /// Returns the guess words.
     #[must_use]
-    pub const fn guesses(&self) -> &[String; 6] {
+    pub const fn guesses(&self) -> &[&'static str; 6] {
         &self.guesses
     }
 }
