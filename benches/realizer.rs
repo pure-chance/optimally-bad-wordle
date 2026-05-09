@@ -16,7 +16,7 @@ fn realizer(c: &mut Criterion) {
         b.iter(|| {
             let answer_realizations = realizer::compile_realizations(ANSWERS);
             let guess_realizations = realizer::compile_realizations(GUESSES);
-            let _solutions: Vec<_> = packings
+            let _solutions: HashSet<realizer::WrongWordleSolution> = packings
                 .par_iter()
                 .flat_map(|packing| {
                     realizer::realize_packing(&answer_realizations, &guess_realizations, packing)
