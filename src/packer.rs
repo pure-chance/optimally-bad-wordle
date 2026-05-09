@@ -101,14 +101,14 @@ fn find_triples_for_answer(answer: Signature, guess_signatures: &[Signature]) ->
         .filter(|&sig| sig.disjoint(answer))
         .collect();
 
-    // Pre-allocate 1/2 the maximum possible number of triples (which is C(n, 3))
+    // Pre-allocate 1/2 the maximum possible number of triples (which is C(n, 3)).
     let num_candidates = candidates.len();
     let triples_capacity_initial = num_candidates * (num_candidates - 1) * (num_candidates - 2) / 6;
     let mut triples = Vec::with_capacity(triples_capacity_initial);
 
     for (i, &sig_a) in candidates.iter().enumerate() {
         for (j, &sig_b) in candidates.iter().enumerate().skip(i + 1) {
-            // Early exit: if sig_a and sig_b are not disjoint, sig_c cannot be disjoint
+            // If sig_a and sig_b are not disjoint, sig_c cannot be disjoint.
             if !sig_a.disjoint(sig_b) {
                 continue;
             }
@@ -159,8 +159,8 @@ fn scan_and_merge_partitions(
             if !a.disjoint(b) {
                 continue;
             }
-            let guesses = Packing::sort(a.signatures, b.signatures);
-            packings.push(Packing::new(answer, guesses));
+            let packing = Packing::from_sorted_triples(answer, a.signatures, b.signatures);
+            packings.push(packing);
         }
     }
     packings
@@ -183,6 +183,31 @@ impl Packing {
         Self { answer, guesses }
     }
 
+    /// Construct a new `Packing` from an answer and 2 sorted triples.
+    ///
+    /// The packing's guesses are sorted using Batcher's odd-even merge network,
+    /// which sorts two sorted 3-sequences in exactly 5 comparisons, with each
+    /// element written to its final position exactly once.
+    pub fn from_sorted_triples(answer: Signature, t1: [Signature; 3], t2: [Signature; 3]) -> Self {
+        let guesses = {
+            let cas = |a: Signature, b: Signature| -> (Signature, Signature) {
+                if a <= b { (a, b) } else { (b, a) }
+            };
+
+            // Step 1: compare-and-swap across the boundary
+            let (a0, b0) = cas(t1[0], t2[0]);
+            let (a1, b1) = cas(t1[1], t2[1]);
+            let (a2, b2) = cas(t1[2], t2[2]);
+
+            // Step 2: resolve the interleaved sequences
+            let (s1, s2) = cas(a1, b0);
+            let (s3, s4) = cas(a2, b1);
+
+            [a0, s1, s3, s2, s4, b2]
+        };
+        Self::new(answer, guesses)
+    }
+
     /// Return the answer signature.
     #[must_use]
     pub const fn answer(&self) -> &Signature {
@@ -193,29 +218,6 @@ impl Packing {
     #[must_use]
     pub const fn guesses(&self) -> &[Signature; 6] {
         &self.guesses
-    }
-
-    /// Merge two sorted triples into a single sorted array of six signatures.
-    ///
-    /// Uses Batcher's odd-even merge network, which sorts two sorted
-    /// 3-sequences in exactly 5 comparisons, with each element written to
-    /// its final position exactly once.
-    #[must_use]
-    pub fn sort(t1: [Signature; 3], t2: [Signature; 3]) -> [Signature; 6] {
-        let cas = |a: Signature, b: Signature| -> (Signature, Signature) {
-            if a <= b { (a, b) } else { (b, a) }
-        };
-
-        // Step 1: compare-and-swap across the boundary
-        let (a0, b0) = cas(t1[0], t2[0]);
-        let (a1, b1) = cas(t1[1], t2[1]);
-        let (a2, b2) = cas(t1[2], t2[2]);
-
-        // Step 2: resolve the interleaved sequences
-        let (s1, s2) = cas(a1, b0);
-        let (s3, s4) = cas(a2, b1);
-
-        [a0, s1, s3, s2, s4, b2]
     }
 }
 
