@@ -164,7 +164,7 @@ fn scan_and_merge_partitions(
             if !a.disjoint(b) {
                 continue;
             }
-            let packing = Packing::from_sorted_triples(answer, a.signatures, b.signatures);
+            let packing = Packing::from_triples(answer, a, b);
             packings.push(packing);
         }
     }
@@ -172,6 +172,11 @@ fn scan_and_merge_partitions(
 }
 
 /// A disjoint packing of one answer and six guess signatures.
+///
+/// Guesses are stored in a sorted array. This ensures that comparisons between
+/// packings are based on membership, and not order. This is important for
+/// deduplication, as two packings with the same answer and guesses are equal,
+/// regardless of permutation.
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize)]
 pub struct Packing {
     answer: Signature,
@@ -180,36 +185,21 @@ pub struct Packing {
 
 impl Packing {
     /// Construct a new `Packing`.
-    ///
-    /// **Correctness**: A packing's guesses must be sorted to ensure
-    /// membership-based comparisons.
-    #[must_use]
-    pub const fn new(answer: Signature, guesses: [Signature; 6]) -> Self {
+    pub fn new(answer: Signature, mut guesses: [Signature; 6]) -> Self {
+        guesses.sort();
         Self { answer, guesses }
     }
 
-    /// Construct a new `Packing` from an answer and 2 sorted triples.
-    ///
-    /// The packing's guesses are sorted using Batcher's odd-even merge network,
-    /// which sorts two sorted 3-sequences in exactly 5 comparisons, with each
-    /// element written to its final position exactly once.
-    pub fn from_sorted_triples(answer: Signature, t1: [Signature; 3], t2: [Signature; 3]) -> Self {
-        let guesses = {
-            let cas = |a: Signature, b: Signature| -> (Signature, Signature) {
-                if a <= b { (a, b) } else { (b, a) }
-            };
-
-            // Step 1: compare-and-swap across the boundary
-            let (a0, b0) = cas(t1[0], t2[0]);
-            let (a1, b1) = cas(t1[1], t2[1]);
-            let (a2, b2) = cas(t1[2], t2[2]);
-
-            // Step 2: resolve the interleaved sequences
-            let (s1, s2) = cas(a1, b0);
-            let (s3, s4) = cas(a2, b1);
-
-            [a0, s1, s3, s2, s4, b2]
-        };
+    /// Construct a new `Packing` from and answer and two triples.
+    fn from_triples(answer: Signature, a: Triple, b: Triple) -> Self {
+        let guesses = [
+            a.signatures[0],
+            a.signatures[1],
+            a.signatures[2],
+            b.signatures[0],
+            b.signatures[1],
+            b.signatures[2],
+        ];
         Self::new(answer, guesses)
     }
 
