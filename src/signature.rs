@@ -1,7 +1,6 @@
 //! Compact bitmask representation of (5-letter) words.
 
 use std::fmt::{Debug, Display};
-use std::ops::{BitAnd, BitAndAssign, BitOr, BitOrAssign};
 
 use serde::Serialize;
 
@@ -44,6 +43,13 @@ impl Signature {
         Self(mask)
     }
 
+    /// Returns the underlying mask value.
+    #[inline]
+    #[must_use]
+    pub const fn mask(self) -> u32 {
+        self.0
+    }
+
     /// Checks if two signatures have no letters in common.
     #[inline]
     #[must_use]
@@ -63,53 +69,6 @@ impl Signature {
     #[must_use]
     pub const fn intersection(self, other: Self) -> Self {
         Self(self.0 & other.0)
-    }
-
-    /// Returns the number of unique letters set in the signature.
-    #[inline]
-    #[must_use]
-    pub const fn count_letters(self) -> u32 {
-        self.0.count_ones()
-    }
-
-    /// Returns the underlying mask value.
-    #[inline]
-    #[must_use]
-    pub const fn mask(self) -> u32 {
-        self.0
-    }
-}
-
-impl BitAnd for Signature {
-    type Output = Self;
-    fn bitand(self, rhs: Self) -> Self::Output {
-        Self(self.0 & rhs.0)
-    }
-}
-
-impl BitAndAssign for Signature {
-    fn bitand_assign(&mut self, rhs: Self) {
-        self.0 &= rhs.0;
-    }
-}
-
-impl BitOr for Signature {
-    type Output = Self;
-    fn bitor(self, rhs: Self) -> Self::Output {
-        Self(self.0 | rhs.0)
-    }
-}
-
-impl BitOrAssign for Signature {
-    fn bitor_assign(&mut self, rhs: Self) {
-        self.0 |= rhs.0;
-    }
-}
-
-impl From<&str> for Signature {
-    #[inline]
-    fn from(word: &str) -> Self {
-        Self::new(word)
     }
 }
 

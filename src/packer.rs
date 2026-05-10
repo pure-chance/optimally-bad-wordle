@@ -73,7 +73,12 @@ pub fn pack(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
 /// Convert word lists to unique, sorted signatures.
 #[must_use]
 pub fn signify_words(words: &[&str]) -> Box<[Signature]> {
-    words.iter().map(|&w| w.into()).unique().sorted().collect()
+    words
+        .iter()
+        .map(|&w| Signature::new(w))
+        .unique()
+        .sorted()
+        .collect()
 }
 
 /// Find all packings for a specific answer signature.

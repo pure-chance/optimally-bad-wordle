@@ -74,7 +74,7 @@ pub fn realize(
 pub fn compile_realizations(words: &[&'static str]) -> HashMap<Signature, Vec<&'static str>> {
     let mut map = HashMap::default();
     for &word in words {
-        map.entry(Signature::from(word))
+        map.entry(Signature::new(word))
             .or_insert_with(Vec::new)
             .push(word);
     }
