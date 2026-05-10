@@ -74,7 +74,7 @@ impl Signature {
 
 impl Debug for Signature {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:026b}", self.0)
+        write!(f, "Signature({:026b})", self.0)
     }
 }
 
