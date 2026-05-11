@@ -185,14 +185,18 @@ pub struct Packing {
 
 impl Packing {
     /// Construct a new `Packing`.
-    pub fn new(answer: Signature, mut guesses: [Signature; 6]) -> Self {
-        guesses.sort();
+    ///
+    /// # Correctness
+    ///
+    /// Guesses must be sorted, otherwise equality comparisons will not
+    /// deduplicate properly.
+    pub const fn new(answer: Signature, guesses: [Signature; 6]) -> Self {
         Self { answer, guesses }
     }
 
     /// Construct a new `Packing` from and answer and two triples.
     fn from_triples(answer: Signature, a: Triple, b: Triple) -> Self {
-        let guesses = [
+        let mut guesses = [
             a.signatures[0],
             a.signatures[1],
             a.signatures[2],
@@ -200,6 +204,7 @@ impl Packing {
             b.signatures[1],
             b.signatures[2],
         ];
+        guesses.sort();
         Self::new(answer, guesses)
     }
 
