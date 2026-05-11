@@ -6,7 +6,7 @@ In standard Wordle, players attempt to identify a hidden five-letter word within
 
 Formally, the problem can be stated as follows: Find all 7-tuples S = (a, g₁, g₂, g₃, g₄, g₅, g₆), where a ∈ A and gᵢ ∈ G for i ∈ {1, 2, 3, 4, 5, 6}, such that all words w ∈ S are pairwise disjoint with respect to their constituent letters.
 
-## Implementation
+## Methods
 
 This problem represents an instance of the set-packing problem, which is NP-hard. Let 𝐴 denote the set of answers and G denote the set of guesses. With |A| = 2,331 and |G| = 10,657, computational efficiency is essential for obtaining solutions within reasonable time constraints.
 
