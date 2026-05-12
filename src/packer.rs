@@ -186,10 +186,8 @@ pub struct Packing {
 impl Packing {
     /// Construct a new `Packing`.
     ///
-    /// # Correctness
-    ///
-    /// Guesses must be sorted, otherwise equality comparisons will not
-    /// deduplicate properly.
+    /// **Correctness**: Guesses must be sorted, otherwise equality comparisons
+    /// will not deduplicate properly.
     pub const fn new(answer: Signature, guesses: [Signature; 6]) -> Self {
         Self { answer, guesses }
     }
