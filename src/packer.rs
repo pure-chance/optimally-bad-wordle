@@ -141,10 +141,10 @@ fn find_triples_for_answer(guess_signatures: &[Signature], answer: Signature) ->
         .filter(|&sig| sig.disjoint(answer))
         .collect();
 
-    // Pre-allocate 1/2 the maximum possible number of triples (which is C(n, 3)).
-    let num_candidates = candidates.len();
-    let triples_capacity_initial = num_candidates * (num_candidates - 1) * (num_candidates - 2) / 6;
-    let mut triples = Vec::with_capacity(triples_capacity_initial);
+    // Pre-allocate the maximum possible number of triples C(n, 3).
+    let cand_len = candidates.len();
+    let triples_capacity = cand_len * (cand_len - 1) * (cand_len - 2) / 6;
+    let mut triples = Vec::with_capacity(triples_capacity);
 
     for (i, &sig_a) in candidates.iter().enumerate() {
         for (j, &sig_b) in candidates.iter().enumerate().skip(i + 1) {
