@@ -275,7 +275,7 @@ fn merge_ordered_triples(
 
         for &upper in &upper_triples[upper_start..] {
             if lower.disjoint(upper) {
-                packings.push(Packing::from_triples(answer, lower, upper));
+                packings.push(Packing::from_ordered_triples(answer, lower, upper));
             }
         }
     }
@@ -302,9 +302,11 @@ impl Packing {
         Self { answer, guesses }
     }
 
-    /// Construct a new `Packing` from and answer and two triples.
-    fn from_triples(answer: Signature, a: Triple, b: Triple) -> Self {
-        let mut guesses = [
+    /// Construct a new `Packing` from and answer and two sorted triples.
+    ///
+    /// Sorted triples means that a[0] < a[1] < a[2] < b[0] < b[1] < b[2].
+    fn from_ordered_triples(answer: Signature, a: Triple, b: Triple) -> Self {
+        let guesses = [
             a.signatures[0],
             a.signatures[1],
             a.signatures[2],
@@ -312,7 +314,6 @@ impl Packing {
             b.signatures[1],
             b.signatures[2],
         ];
-        guesses.sort();
         Self::new(answer, guesses)
     }
 
