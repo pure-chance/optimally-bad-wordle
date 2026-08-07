@@ -23,25 +23,24 @@ use crate::signature::Signature;
 /// **1. Enumerate Triples**
 ///
 /// For each answer, the algorithm eliminates all guesses that share letters
-/// with it, then enumerates all valid disjoint triples (g₁, g₂, g₃) from
-/// the remaining candidates.
+/// with it, then enumerates all valid disjoint triples (g₁, g₂, g₃) from the
+/// remaining candidates.
 ///
 /// **2. Partition Triples**
 ///
-/// Each triple is partitioned based on its intersection with the 10 most
-/// common letters. Triples with identical partition signatures are grouped
-/// together, creating up to 1,024 possible bins.
+/// Each triple is partitioned based on its intersection with the 10 most common
+/// letters. Triples with identical partition signatures are grouped together,
+/// creating up to 1,024 possible bins.
 ///
 /// **3. Compare Triple Pairs**
 ///
 /// The algorithm compares pairs of partition bins rather than individual
-/// triples. If bin signatures are disjoint, all cross-bin triple pairs
-/// are verified for full disjointness. This reduces the comparison space
-/// from O(T²) to hundreds of thousands of operations.
+/// triples. If bin signatures are disjoint, all cross-bin triple pairs are
+/// verified for full disjointness.
 ///
 /// # Runtime
 ///
-/// In practice, the algorithm runs in ~20 seconds.
+/// In practice, the algorithm runs in ~15 seconds.
 #[must_use]
 pub fn pack(answers: &[&str], guesses: &[&str]) -> Vec<Packing> {
     let answer_signatures = signify_words(answers);
@@ -83,7 +82,8 @@ pub fn signify_words(words: &[&str]) -> Box<[Signature]> {
         .collect()
 }
 
-/// Create a partition key by taking the 10 most common letters across all signatures.
+/// Create a partition key by taking the 10 most common letters across all
+/// signatures.
 pub fn create_partition_key(signatures: &[Signature]) -> Signature {
     let mut frequencies = [0; 26];
     for signature in signatures {
@@ -117,8 +117,8 @@ pub fn create_partition_key(signatures: &[Signature]) -> Signature {
 /// Find all packings for a specific answer signature.
 ///
 /// This is done by (1) finding all triples for the answer, (2) partitioning
-/// them by signature, and (3) scanning and merging the partitions. Look at
-/// the documentation of `pack` for more details.
+/// them by signature, and (3) scanning and merging the partitions. Look at the
+/// documentation of `pack` for more details.
 #[must_use]
 pub fn pack_for_answer(
     answer: Signature,
@@ -168,6 +168,8 @@ fn find_triples_for_answer(guess_signatures: &[Signature], answer: Signature) ->
 ///
 /// Groups triples by their intersection with the partition key, enabling
 /// efficient pruning during the merge phase.
+///
+/// Triples with the same key are ordered.
 fn partition_triples_by_signature(
     triples: &[Triple],
     partition_key: Signature,
