@@ -1,9 +1,12 @@
+use anyhow::Context;
 use wrong_wordle::packer;
 use wrong_wordle::realizer;
 use wrong_wordle::words::{ANSWERS, GUESSES};
 
+use anyhow::Result;
+
 /// Find all optimally wrong Wordle solutions and save results.
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn main() -> Result<()> {
     let packings = packer::pack(ANSWERS, GUESSES);
     let solutions = realizer::realize(ANSWERS, GUESSES, &packings);
 
@@ -13,15 +16,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         solutions.len()
     );
 
-    std::fs::create_dir_all("results")?;
-    write(&packings, "results/packings.json")?;
-    write(&solutions, "results/solutions.json")?;
+    std::fs::create_dir_all("results").context("Failed to create results directory")?;
+    write(&packings, "results/packings.json")
+        .context("Failed to write packings to packings.json")?;
+    write(&solutions, "results/solutions.json")
+        .context("Failed to write solutions to solutions.json")?;
 
     Ok(())
 }
 
 /// Write data to a JSON file with pretty formatting.
-fn write<T>(data: &T, filename: &str) -> Result<(), Box<dyn std::error::Error>>
+fn write<T>(data: &T, filename: &str) -> Result<()>
 where
     T: serde::Serialize,
 {
