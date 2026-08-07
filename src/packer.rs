@@ -133,7 +133,7 @@ pub fn pack_for_answer(
 
 /// Find all disjoint triples compatible with the given answer.
 ///
-/// **Correctness**: All triples are unique and sorted by construction.
+/// **Correctness**: The returned triples are unique and sorted by construction.
 fn find_triples_for_answer(guess_signatures: &[Signature], answer: Signature) -> Vec<Triple> {
     let candidates: Vec<Signature> = guess_signatures
         .iter()
@@ -164,10 +164,11 @@ fn find_triples_for_answer(guess_signatures: &[Signature], answer: Signature) ->
     triples
 }
 
-/// Partition triples using a partition key.
+/// Partition triples by their intersection with the partition key.
 ///
-/// Groups triples by their intersection with the partition key, enabling
-/// efficient pruning during the merge phase.
+/// This creates a map from where each triple in a partition has the same
+/// intersection with the partition key. Therefore, any triples in partitions
+/// which have keys that overlap cannot be disjoint.
 ///
 /// Triples with the same key are ordered.
 fn partition_triples_by_signature(

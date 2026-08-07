@@ -85,8 +85,7 @@ pub fn compile_realizations(words: &[&'static str]) -> HashMap<Signature, Vec<&'
 ///
 /// # Panics
 ///
-/// Panics if any signature in the packing is not found in the lookup
-/// tables.
+/// Panics if any signature in the packing is not found in the lookup tables.
 #[must_use]
 pub fn realize_packing(
     answer_realizations: &HashMap<Signature, Vec<&'static str>>,
