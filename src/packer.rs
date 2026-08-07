@@ -3,7 +3,7 @@
 use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
 use rayon::prelude::*;
-use rustc_hash::{FxHashMap as HashMap, FxHashSet as HashSet};
+use rustc_hash::FxHashMap as HashMap;
 use serde::Serialize;
 
 use crate::signature::Signature;
@@ -43,7 +43,7 @@ use crate::signature::Signature;
 ///
 /// In practice, the algorithm runs in ~20 seconds.
 #[must_use]
-pub fn pack(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
+pub fn pack(answers: &[&str], guesses: &[&str]) -> Vec<Packing> {
     let answer_signatures = signify_words(answers);
     let guess_signatures = signify_words(guesses);
 
@@ -63,7 +63,7 @@ pub fn pack(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
             pb.inc(1);
             pack_for_answer(answer, &guess_signatures, partition_key)
         })
-        .reduce(HashSet::default, |mut acc, packings_for_answer| {
+        .reduce(Vec::default, |mut acc, packings_for_answer| {
             acc.extend(packings_for_answer);
             acc
         });
@@ -124,11 +124,11 @@ pub fn pack_for_answer(
     answer: Signature,
     guess_signatures: &[Signature],
     partition_key: Signature,
-) -> HashSet<Packing> {
+) -> Vec<Packing> {
     let triples = find_triples_for_answer(&guess_signatures, answer);
     let partitions = partition_triples_by_signature(&triples, partition_key);
     let packings = scan_and_merge_partitions(&partitions, answer);
-    packings.into_iter().collect()
+    packings
 }
 
 /// Find all disjoint triples compatible with the given answer.
@@ -182,28 +182,101 @@ fn partition_triples_by_signature(
 
 /// Merge disjoint triples into packings using partition-based pruning.
 ///
-/// Because of the partitions, only triples with disjoint keys need to be
-/// compared. Any pair of triples from disjoint partitions is compared directly.
+/// Partition keys provide the first level of pruning: if two keys overlap,
+/// every triple in one partition overlaps every triple in the other on at least
+/// one partition-key letter. Only pairs of partitions with disjoint keys can
+/// therefore contain compatible triples.
+///
+/// # Completeness
+///
+/// Let the six sorted guess signatures of any valid packing be
+/// `x0 < x1 < x2 < x3 < x4 < x5`. Triple enumeration produces every sorted
+/// three-element combination, so it necessarily contains both `[x0, x1, x2]`
+/// and `[x3, x4, x5]`. These triples are disjoint, their partition keys are
+/// disjoint, and [`merge_ordered_triples`] accepts them because every signature
+/// in the first triple sorts before every signature in the second. Interleaved
+/// decompositions of the same packing may be rejected, but this canonical
+/// lower-three/upper-three decomposition is always present and accepted.
+///
+/// The hash map does not provide a meaningful order between two distinct
+/// partitions, so each distinct partition pair is merged in both directions.
+/// This ensures the partition containing the canonical lower triple is examined
+/// as `lower_triples`. A partition paired with itself needs only one direction.
+///
+/// # Uniqueness
+///
+/// A pair is emitted only when all three signatures in its lower triple sort
+/// before all three signatures in its upper triple. For any set of six distinct
+/// signatures, exactly one of its ten unordered splits into two triples has
+/// this property: the split between its third- and fourth-smallest signatures.
+/// Consequently, every valid packing is emitted exactly once, without a final
+/// deduplication pass.
 fn scan_and_merge_partitions(
     partitions: &HashMap<Signature, Vec<Triple>>,
     answer: Signature,
 ) -> Vec<Packing> {
     let mut packings = Vec::new();
+
     for part in partitions.iter().combinations_with_replacement(2) {
         let (&key_a, triples_a) = part[0];
         let (&key_b, triples_b) = part[1];
+
         if !key_a.disjoint(key_b) {
             continue;
         }
-        for (&a, &b) in triples_a.iter().cartesian_product(triples_b.iter()) {
-            if !a.disjoint(b) {
-                continue;
-            }
-            let packing = Packing::from_triples(answer, a, b);
-            packings.push(packing);
+
+        // Treat A as the lower triple and B as the upper triple.
+        merge_ordered_triples(triples_a, triples_b, answer, &mut packings);
+
+        // Between partitions order is arbitrary, so for distinct partitions
+        // the canonical lower triple might be in B instead. For the same partition, the
+        // first merge already found all canonical pairs.
+        if key_a != key_b {
+            merge_ordered_triples(triples_b, triples_a, answer, &mut packings);
         }
     }
+
     packings
+}
+
+/// Merge one directed pair of triple partitions in canonical signature order.
+///
+/// Triple enumeration is lexicographic, and placing triples into partitions
+/// preserves their relative order. In particular, `upper_triples` is sorted by
+/// each triple's smallest signature. For a given `lower`, `partition_point`
+/// skips directly to triples satisfying
+/// `lower.signatures[2] < upper.signatures[0]`. Since each triple is internally
+/// sorted, this is equivalent to requiring every lower signature to sort before
+/// every upper signature.
+///
+/// This ordering rule is what removes duplicate decompositions. Two disjoint
+/// triples may be interleaved and are deliberately ignored here; if they belong
+/// to a valid six-signature packing, that packing's independently enumerated
+/// lower-three and upper-three triples will be accepted instead.
+///
+/// When both slices are the same partition, an accepted pair is still emitted
+/// only once. It is found when the lower of the two triples is visited; when
+/// the upper triple is later visited as `lower`, the other triple lies before
+/// the `partition_point` and is not reconsidered.
+fn merge_ordered_triples(
+    lower_triples: &[Triple],
+    upper_triples: &[Triple],
+    answer: Signature,
+    packings: &mut Vec<Packing>,
+) {
+    for &lower in lower_triples {
+        // Triples are generated lexicographically, and partitioning preserves
+        // that order. Find the first triple whose smallest signature sorts
+        // after the largest signature in `lower`.
+        let upper_start =
+            upper_triples.partition_point(|upper| upper.signatures[0] <= lower.signatures[2]);
+
+        for &upper in &upper_triples[upper_start..] {
+            if lower.disjoint(upper) {
+                packings.push(Packing::from_triples(answer, lower, upper));
+            }
+        }
+    }
 }
 
 /// A disjoint packing of one answer and six guess signatures.

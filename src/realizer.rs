@@ -44,7 +44,7 @@ use crate::signature::Signature;
 pub fn realize(
     answers: &[&'static str],
     guesses: &[&'static str],
-    packings: &HashSet<Packing>,
+    packings: &[Packing],
 ) -> HashSet<WrongWordleSolution> {
     let answer_realizations = compile_realizations(answers);
     let guess_realizations = compile_realizations(guesses);
