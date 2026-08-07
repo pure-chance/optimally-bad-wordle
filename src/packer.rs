@@ -47,6 +47,8 @@ pub fn pack(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
     let answer_signatures = signify_words(answers);
     let guess_signatures = signify_words(guesses);
 
+    let partition_key = create_partition_key(&guess_signatures);
+
     let pb = ProgressBar::new(answer_signatures.len() as u64);
     pb.set_style(
         ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} answers")
@@ -59,7 +61,7 @@ pub fn pack(answers: &[&str], guesses: &[&str]) -> HashSet<Packing> {
         .par_iter()
         .map(|&answer| {
             pb.inc(1);
-            pack_for_answer(&guess_signatures, answer)
+            pack_for_answer(answer, &guess_signatures, partition_key)
         })
         .reduce(HashSet::default, |mut acc, packings_for_answer| {
             acc.extend(packings_for_answer);
@@ -81,17 +83,50 @@ pub fn signify_words(words: &[&str]) -> Box<[Signature]> {
         .collect()
 }
 
+/// Create a partition key by taking the 10 most common letters across all signatures.
+pub fn create_partition_key(signatures: &[Signature]) -> Signature {
+    let mut frequencies = [0; 26];
+    for signature in signatures {
+        for i in 0..26 {
+            frequencies[i] += ((signature.mask() >> i) & 1) as u32;
+        }
+    }
+
+    let mut most_common: [usize; 10] = [0; 10];
+    for i in 0..10 {
+        let mut max_freq = 0;
+        let mut max_index = 0;
+        for (i, &freq) in frequencies.iter().enumerate() {
+            if freq > max_freq {
+                max_freq = freq;
+                max_index = i;
+            }
+        }
+        most_common[i] = max_index;
+        frequencies[max_index] = 0;
+    }
+
+    let mut signature: u32 = 0;
+    for &letter in &most_common {
+        signature |= 1 << letter;
+    }
+
+    Signature::from_mask(signature)
+}
+
 /// Find all packings for a specific answer signature.
 ///
 /// This is done by (1) finding all triples for the answer, (2) partitioning
 /// them by signature, and (3) scanning and merging the partitions. Look at
 /// the documentation of `pack` for more details.
 #[must_use]
-pub fn pack_for_answer(guess_signatures: &[Signature], answer: Signature) -> HashSet<Packing> {
-    // "seaoriltnu" = the 10 most frequently occurring letters across all guesses.
-    const PARTITION_KEY: Signature = Signature::from_mask(0b00_0001_1110_0110_1001_0001_0001);
-    let triples = find_triples_for_answer(answer, guess_signatures);
-    let partitions = partition_triples_by_signature(&triples, PARTITION_KEY);
+pub fn pack_for_answer(
+    answer: Signature,
+    guess_signatures: &[Signature],
+    partition_key: Signature,
+) -> HashSet<Packing> {
+    let triples = find_triples_for_answer(&guess_signatures, answer);
+    let partitions = partition_triples_by_signature(&triples, partition_key);
     let packings = scan_and_merge_partitions(&partitions, answer);
     packings.into_iter().collect()
 }
@@ -99,7 +134,7 @@ pub fn pack_for_answer(guess_signatures: &[Signature], answer: Signature) -> Has
 /// Find all disjoint triples compatible with the given answer.
 ///
 /// **Correctness**: All triples are unique and sorted by construction.
-fn find_triples_for_answer(answer: Signature, guess_signatures: &[Signature]) -> Vec<Triple> {
+fn find_triples_for_answer(guess_signatures: &[Signature], answer: Signature) -> Vec<Triple> {
     let candidates: Vec<Signature> = guess_signatures
         .iter()
         .copied()

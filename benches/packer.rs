@@ -10,11 +10,18 @@ fn packer(c: &mut Criterion) {
     // "civil" = many packings, "pinch" = some packings, "zesty" = few packings
     const BENCHMARK_ANSWERS: [&str; 3] = ["civil", "pinch", "zesty"];
 
+    let guess_signatures = packer::signify_words(GUESSES);
+    let partition_key = packer::create_partition_key(&guess_signatures);
+
     for answer in BENCHMARK_ANSWERS {
         group.bench_with_input(BenchmarkId::new("pack", answer), answer, |b, answer| {
             b.iter(|| {
                 let guess_signatures = packer::signify_words(GUESSES);
-                let _packings = packer::pack_for_answer(&guess_signatures, Signature::new(answer));
+                let _packings = packer::pack_for_answer(
+                    Signature::new(answer),
+                    &guess_signatures,
+                    partition_key,
+                );
             });
         });
     }

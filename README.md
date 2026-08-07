@@ -8,7 +8,7 @@ Formally, the problem can be stated as follows: Find all 7-tuples S = (a, g₁, 
 
 ## Methods
 
-This problem represents an instance of the set-packing problem, which is NP-hard. Let 𝐴 denote the set of answers and G denote the set of guesses. With |A| = 2,331 and |G| = 10,657, computational efficiency is essential for obtaining solutions within reasonable time constraints.
+This problem represents an instance of the set-packing problem, which is NP-hard. Let A denote the set of answers and G denote the set of guesses. With |A| = 2,331 and |G| = 10,657, computational efficiency is essential for obtaining solutions within reasonable time constraints.
 
 ### Bitset Representation
 
