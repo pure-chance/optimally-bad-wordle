@@ -45,7 +45,7 @@ pub fn realize(
     answers: &[&'static str],
     guesses: &[&'static str],
     packings: &[Packing],
-) -> HashSet<WrongWordleSolution> {
+) -> Vec<WrongWordleSolution> {
     let answer_realizations = compile_realizations(answers);
     let guess_realizations = compile_realizations(guesses);
 
