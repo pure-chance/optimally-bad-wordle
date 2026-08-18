@@ -32,7 +32,7 @@ criterion_group!(benches, realizer);
 criterion_main!(benches);
 
 const PACKINGS: &[Packing] = &[
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -43,7 +43,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000000000001011000),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -54,7 +54,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100100000000010),
@@ -65,7 +65,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000001000001),
@@ -76,7 +76,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000100000000000000100000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -87,7 +87,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010001000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -98,7 +98,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000100000000001000001),
@@ -109,7 +109,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -120,7 +120,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00110000000100000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001100000000001),
@@ -131,7 +131,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00110010000000000100000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -142,7 +142,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000010000001000001),
@@ -153,7 +153,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000100000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -164,7 +164,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000010000001000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000001000001000011),
@@ -175,7 +175,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -186,7 +186,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100000010000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -197,7 +197,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000010100),
         [
             Signature::from_mask(0b00000000000000000001001001),
@@ -208,7 +208,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -219,7 +219,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000101000000000110),
@@ -230,7 +230,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000000100101010),
@@ -241,7 +241,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -252,7 +252,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100001000000000100000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -263,7 +263,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -274,7 +274,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100100000000100),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -285,7 +285,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000001000000010000000001),
@@ -296,7 +296,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -307,7 +307,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -318,7 +318,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -329,7 +329,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000011000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000100000000000010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -340,7 +340,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000000000000000010100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000001100000100001000000),
@@ -351,7 +351,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -362,7 +362,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100100000000001100000),
         [
             Signature::from_mask(0b00000000000010000000011000),
@@ -373,7 +373,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -384,7 +384,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000100000111000),
@@ -395,7 +395,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000001000001000001),
@@ -406,7 +406,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000100000000000010),
         [
             Signature::from_mask(0b00000000000010000100100100),
@@ -417,7 +417,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00110000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -428,7 +428,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000100000000000000100000),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -439,7 +439,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010010000000000010000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -450,7 +450,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000100000010100000000),
@@ -461,7 +461,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -472,7 +472,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000010010000000101),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -483,7 +483,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -494,7 +494,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000010000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -505,7 +505,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -516,7 +516,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -527,7 +527,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000010010000000101),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -538,7 +538,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000100000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000010000001000100001000),
         [
             Signature::from_mask(0b00000000000010000000000101),
@@ -549,7 +549,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000110000000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -560,7 +560,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000001000010000000001),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -571,7 +571,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000001011000),
@@ -582,7 +582,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000101000001000010),
@@ -593,7 +593,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000100000000000110000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -604,7 +604,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -615,7 +615,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -626,7 +626,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000001000000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -637,7 +637,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -648,7 +648,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000001000000001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -659,7 +659,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00101001000000000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -670,7 +670,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -681,7 +681,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00000100000011000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100000010000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -692,7 +692,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -703,7 +703,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -714,7 +714,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -725,7 +725,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010000100001010),
@@ -736,7 +736,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100011000000100),
@@ -747,7 +747,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000010010000100000),
         [
             Signature::from_mask(0b00000000001000000000010000),
@@ -758,7 +758,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -769,7 +769,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00001000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -780,7 +780,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100100000000010),
@@ -791,7 +791,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000010000000000010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -802,7 +802,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001000000011),
@@ -813,7 +813,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000010000000100000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -824,7 +824,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -835,7 +835,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000010100100000010),
@@ -846,7 +846,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -857,7 +857,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000000001001001),
@@ -868,7 +868,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000000000000000100100000),
         [
             Signature::from_mask(0b00000000000010000000011000),
@@ -879,7 +879,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000111001000000000),
@@ -890,7 +890,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000000000100011),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000001000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -901,7 +901,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000100000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000001000000000101),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -912,7 +912,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00110010000000000100000000),
         [
             Signature::from_mask(0b00000000000011000000000001),
@@ -923,7 +923,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -934,7 +934,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000100100000000001010),
@@ -945,7 +945,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010010000100001),
@@ -956,7 +956,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000001010000),
@@ -967,7 +967,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000110000001000100),
@@ -978,7 +978,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -989,7 +989,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -1000,7 +1000,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -1011,7 +1011,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -1022,7 +1022,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001000000011),
@@ -1033,7 +1033,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000001000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000001001000000000001),
@@ -1044,7 +1044,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -1055,7 +1055,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000001000101010000000100),
         [
             Signature::from_mask(0b00000010001000000010000000),
@@ -1066,7 +1066,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -1077,7 +1077,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -1088,7 +1088,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -1099,7 +1099,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -1110,7 +1110,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000100100000001100000),
@@ -1121,7 +1121,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000010001000000010000000),
@@ -1132,7 +1132,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000001000100000000100100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -1143,7 +1143,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -1154,7 +1154,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -1165,7 +1165,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000000110),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000010010000011000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -1176,7 +1176,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100100100000000010),
@@ -1187,7 +1187,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -1198,7 +1198,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000001000101000000100000),
@@ -1209,7 +1209,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -1220,7 +1220,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000110010000001000),
@@ -1231,7 +1231,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001000000011),
@@ -1242,7 +1242,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001000001000001),
@@ -1253,7 +1253,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000101000000000100),
@@ -1264,7 +1264,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000001001000),
@@ -1275,7 +1275,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -1286,7 +1286,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -1297,7 +1297,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000001000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -1308,7 +1308,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -1319,7 +1319,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000001000000010000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -1330,7 +1330,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000101000000000000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -1341,7 +1341,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -1352,7 +1352,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -1363,7 +1363,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010001011000),
@@ -1374,7 +1374,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000000000000000100100000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -1385,7 +1385,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010000000000000000011010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000010000100000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -1396,7 +1396,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00110000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -1407,7 +1407,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000010000000010000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -1418,7 +1418,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000100100000101000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -1429,7 +1429,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -1440,7 +1440,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000001000000000010000),
@@ -1451,7 +1451,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000110000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100010000000010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -1462,7 +1462,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -1473,7 +1473,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000010000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00110010000000000100000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -1484,7 +1484,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -1495,7 +1495,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100011000000100),
@@ -1506,7 +1506,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100100001000),
         [
             Signature::from_mask(0b00000000000001000001000001),
@@ -1517,7 +1517,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100000010000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -1528,7 +1528,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11010000000100000000000000),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -1539,7 +1539,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00001000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -1550,7 +1550,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -1561,7 +1561,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100010000000010),
         [
             Signature::from_mask(0b00000000000000100100100000),
@@ -1572,7 +1572,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000001000000000000),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -1583,7 +1583,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000001000100000000001000),
@@ -1594,7 +1594,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000001001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -1605,7 +1605,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -1616,7 +1616,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -1627,7 +1627,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000100000100000001000),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -1638,7 +1638,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -1649,7 +1649,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -1660,7 +1660,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000001001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -1671,7 +1671,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -1682,7 +1682,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010010000000000000010000),
         [
             Signature::from_mask(0b00000000000010000000000101),
@@ -1693,7 +1693,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110000000001100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -1704,7 +1704,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000100100100000),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -1715,7 +1715,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000000000100001010),
         [
             Signature::from_mask(0b00000000000101000000000100),
@@ -1726,7 +1726,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000100100100000),
@@ -1737,7 +1737,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -1748,7 +1748,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -1759,7 +1759,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000010001100001000),
@@ -1770,7 +1770,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000000000000101),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -1781,7 +1781,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000011010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -1792,7 +1792,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000110000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110010000000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -1803,7 +1803,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000110000),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -1814,7 +1814,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000110010000000000),
         [
             Signature::from_mask(0b00000000000000000000011100),
@@ -1825,7 +1825,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000001011000),
@@ -1836,7 +1836,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100000000001010),
         [
             Signature::from_mask(0b00000000000000100100100000),
@@ -1847,7 +1847,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -1858,7 +1858,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -1869,7 +1869,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -1880,7 +1880,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -1891,7 +1891,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -1902,7 +1902,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000001000010000100100000),
         [
             Signature::from_mask(0b00000000000101000000000100),
@@ -1913,7 +1913,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -1924,7 +1924,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -1935,7 +1935,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -1946,7 +1946,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -1957,7 +1957,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110010000000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -1968,7 +1968,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100101000001000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -1979,7 +1979,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000001001000),
@@ -1990,7 +1990,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100010),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -2001,7 +2001,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100100000100000000010),
         [
             Signature::from_mask(0b00000001000100000000001000),
@@ -2012,7 +2012,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010001000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -2023,7 +2023,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000001000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -2034,7 +2034,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -2045,7 +2045,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00110000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00110010000000000100000000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -2056,7 +2056,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2067,7 +2067,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2078,7 +2078,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -2089,7 +2089,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000110000),
         [
             Signature::from_mask(0b00000000000101000000000100),
@@ -2100,7 +2100,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -2111,7 +2111,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100000000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000001001),
         [
             Signature::from_mask(0b00000000000010000000010010),
@@ -2122,7 +2122,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -2133,7 +2133,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -2144,7 +2144,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100100001000000),
@@ -2155,7 +2155,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01010001000010000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000101000010010000000000),
         [
             Signature::from_mask(0b00000000000000000100101010),
@@ -2166,7 +2166,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000010010000000101),
         [
             Signature::from_mask(0b00000000000100000001001000),
@@ -2177,7 +2177,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000100000010100000010),
@@ -2188,7 +2188,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000001000001),
         [
             Signature::from_mask(0b00000000000000000100101010),
@@ -2199,7 +2199,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000000100101010),
@@ -2210,7 +2210,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001100000010000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -2221,7 +2221,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000001000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -2232,7 +2232,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2243,7 +2243,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010001000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000001001000010010),
@@ -2254,7 +2254,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010010000100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -2265,7 +2265,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000101000000000110),
@@ -2276,7 +2276,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -2287,7 +2287,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000110000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2298,7 +2298,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000001001000001000000),
         [
             Signature::from_mask(0b00000000000000100100001000),
@@ -2309,7 +2309,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000001100000100001000000),
@@ -2320,7 +2320,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -2331,7 +2331,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2342,7 +2342,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000101000000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2353,7 +2353,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -2364,7 +2364,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100000010000),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -2375,7 +2375,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000110000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -2386,7 +2386,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2397,7 +2397,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010100100010000001000000),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -2408,7 +2408,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000001000001),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -2419,7 +2419,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000110000001000010),
@@ -2430,7 +2430,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100101000001000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2441,7 +2441,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001000000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -2452,7 +2452,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -2463,7 +2463,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000011010),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -2474,7 +2474,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2485,7 +2485,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000011000000010000),
@@ -2496,7 +2496,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -2507,7 +2507,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100000001001000),
@@ -2518,7 +2518,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -2529,7 +2529,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100001000),
@@ -2540,7 +2540,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2551,7 +2551,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000000000001011000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2562,7 +2562,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100000010000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -2573,7 +2573,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000010000101000000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2584,7 +2584,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -2595,7 +2595,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001000000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -2606,7 +2606,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000000000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000010110000010000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -2617,7 +2617,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2628,7 +2628,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000000000000000010100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000000000001011000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -2639,7 +2639,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -2650,7 +2650,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000110000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -2661,7 +2661,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000010000101000000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2672,7 +2672,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000110010000000000),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -2683,7 +2683,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000000000000000010100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000110000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -2694,7 +2694,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2705,7 +2705,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000001100001),
@@ -2716,7 +2716,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -2727,7 +2727,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000010000000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2738,7 +2738,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100100000000001100000),
         [
             Signature::from_mask(0b00000000000010010000010010),
@@ -2749,7 +2749,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2760,7 +2760,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -2771,7 +2771,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100100000000001100000),
         [
             Signature::from_mask(0b00000000000010001100001000),
@@ -2782,7 +2782,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000000000000000010100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100101000001000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2793,7 +2793,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2804,7 +2804,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2815,7 +2815,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01010001000010000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000100000011000),
@@ -2826,7 +2826,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000010000000000001),
         [
             Signature::from_mask(0b00000000000000000100101010),
@@ -2837,7 +2837,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2848,7 +2848,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01010000000000010100000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000000000001001001),
@@ -2859,7 +2859,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000100000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -2870,7 +2870,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -2881,7 +2881,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000000000000000100100000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -2892,7 +2892,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00110000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000001100000010000),
@@ -2903,7 +2903,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000001000000010000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2914,7 +2914,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -2925,7 +2925,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000110100000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2936,7 +2936,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -2947,7 +2947,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000010100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -2958,7 +2958,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000010010),
@@ -2969,7 +2969,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -2980,7 +2980,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000100000000000110000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -2991,7 +2991,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -3002,7 +3002,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000000010000000111),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -3013,7 +3013,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000110000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -3024,7 +3024,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000001000001000100000000),
@@ -3035,7 +3035,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100101000000000010),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -3046,7 +3046,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000100000010100000000),
@@ -3057,7 +3057,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -3068,7 +3068,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -3079,7 +3079,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000101000010000000100000),
         [
             Signature::from_mask(0b00000000000000000001011000),
@@ -3090,7 +3090,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -3101,7 +3101,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000101100000000010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -3112,7 +3112,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000100000000001001001),
@@ -3123,7 +3123,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -3134,7 +3134,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -3145,7 +3145,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -3156,7 +3156,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010001000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -3167,7 +3167,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -3178,7 +3178,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000001000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -3189,7 +3189,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000101100000000100000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -3200,7 +3200,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000000000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000000100000000001000),
         [
             Signature::from_mask(0b00000000000010010000010010),
@@ -3211,7 +3211,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -3222,7 +3222,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -3233,7 +3233,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -3244,7 +3244,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000100100100000),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -3255,7 +3255,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000100000000000000100000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -3266,7 +3266,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000100000000000001001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -3277,7 +3277,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -3288,7 +3288,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -3299,7 +3299,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -3310,7 +3310,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000110000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -3321,7 +3321,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000110000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -3332,7 +3332,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000100000010100000000),
@@ -3343,7 +3343,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -3354,7 +3354,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000110000),
         [
             Signature::from_mask(0b00000000000110000001000100),
@@ -3365,7 +3365,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000101000001000010),
@@ -3376,7 +3376,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010001000000100000010000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -3387,7 +3387,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001000001000001),
@@ -3398,7 +3398,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -3409,7 +3409,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000001000010000000011000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -3420,7 +3420,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -3431,7 +3431,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -3442,7 +3442,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000100100000001010),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -3453,7 +3453,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -3464,7 +3464,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000100000000000001001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -3475,7 +3475,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110000001000010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -3486,7 +3486,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100100000001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -3497,7 +3497,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -3508,7 +3508,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -3519,7 +3519,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110010000000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -3530,7 +3530,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -3541,7 +3541,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000101000000000000),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -3552,7 +3552,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000000000000000010100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100101000000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -3563,7 +3563,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000001000000010000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -3574,7 +3574,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000001000001000000000101),
@@ -3585,7 +3585,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000000000000111),
@@ -3596,7 +3596,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -3607,7 +3607,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -3618,7 +3618,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -3629,7 +3629,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -3640,7 +3640,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000101000000000100),
@@ -3651,7 +3651,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000000100101010),
@@ -3662,7 +3662,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000000000101),
@@ -3673,7 +3673,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -3684,7 +3684,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -3695,7 +3695,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000100000000000001001),
         [
             Signature::from_mask(0b00000010001000000010000000),
@@ -3706,7 +3706,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100000010000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -3717,7 +3717,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -3728,7 +3728,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000010000000000101),
@@ -3739,7 +3739,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -3750,7 +3750,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000100010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -3761,7 +3761,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100001000),
@@ -3772,7 +3772,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -3783,7 +3783,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -3794,7 +3794,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -3805,7 +3805,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000100000010100000000),
@@ -3816,7 +3816,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000100000000000000100000),
         [
             Signature::from_mask(0b00000000001010000000000001),
@@ -3827,7 +3827,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -3838,7 +3838,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100100000000010),
@@ -3849,7 +3849,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100100010010000001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -3860,7 +3860,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100000001001000),
@@ -3871,7 +3871,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000001000000010100100000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -3882,7 +3882,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000000000000000111),
@@ -3893,7 +3893,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -3904,7 +3904,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -3915,7 +3915,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000100000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -3926,7 +3926,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100000000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -3937,7 +3937,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -3948,7 +3948,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100010000000100),
         [
             Signature::from_mask(0b00000000000000100100100000),
@@ -3959,7 +3959,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -3970,7 +3970,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000110000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -3981,7 +3981,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000001000010000000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -3992,7 +3992,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -4003,7 +4003,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -4014,7 +4014,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -4025,7 +4025,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000001000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000010000001000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -4036,7 +4036,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4047,7 +4047,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100100000000001100000),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -4058,7 +4058,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001000000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000000101000100001),
@@ -4069,7 +4069,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -4080,7 +4080,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00110010000000000100000000),
         [
             Signature::from_mask(0b00000000000011000000000011),
@@ -4091,7 +4091,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000000000011),
@@ -4102,7 +4102,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000110010000000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -4113,7 +4113,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000001000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11010000000100000000000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -4124,7 +4124,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00001000000000010000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001001000010010),
@@ -4135,7 +4135,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4146,7 +4146,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -4157,7 +4157,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110000001000010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -4168,7 +4168,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -4179,7 +4179,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000100010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000000000001),
@@ -4190,7 +4190,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4201,7 +4201,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000001000000000000),
         [
             Signature::from_mask(0b00000000000000000000011100),
@@ -4212,7 +4212,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000000001011000),
@@ -4223,7 +4223,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4234,7 +4234,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000100100000101000),
         [
             Signature::from_mask(0b00000000000000000000000111),
@@ -4245,7 +4245,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100101000000000010),
         [
             Signature::from_mask(0b00000000000000000001001001),
@@ -4256,7 +4256,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -4267,7 +4267,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010010000100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010010000000000000010000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -4278,7 +4278,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000000010000),
@@ -4289,7 +4289,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -4300,7 +4300,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -4311,7 +4311,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000101000000000100),
@@ -4322,7 +4322,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000010010000000101),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -4333,7 +4333,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000000000100000000000010),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -4344,7 +4344,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000000000000001010),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -4355,7 +4355,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000001000011000000000001),
@@ -4366,7 +4366,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000001000000000101),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -4377,7 +4377,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000101000010010000000000),
         [
             Signature::from_mask(0b00000000000101000001000010),
@@ -4388,7 +4388,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000000101000010000),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -4399,7 +4399,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000000000000001000000001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -4410,7 +4410,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -4421,7 +4421,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4432,7 +4432,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -4443,7 +4443,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -4454,7 +4454,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100010000000100),
         [
             Signature::from_mask(0b00000000000011000100000010),
@@ -4465,7 +4465,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -4476,7 +4476,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000100010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000001000000010100100000),
@@ -4487,7 +4487,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -4498,7 +4498,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010001000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100000000001010),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -4509,7 +4509,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4520,7 +4520,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -4531,7 +4531,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000101100000000100000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -4542,7 +4542,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -4553,7 +4553,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100000000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -4564,7 +4564,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -4575,7 +4575,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000000001100100000),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -4586,7 +4586,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000001110000001000000),
@@ -4597,7 +4597,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -4608,7 +4608,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -4619,7 +4619,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -4630,7 +4630,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010000000011000),
@@ -4641,7 +4641,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -4652,7 +4652,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -4663,7 +4663,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4674,7 +4674,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000000001001001),
@@ -4685,7 +4685,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -4696,7 +4696,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110000000001100),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -4707,7 +4707,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4718,7 +4718,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -4729,7 +4729,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000010100000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -4740,7 +4740,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4751,7 +4751,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00110010000000000100000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -4762,7 +4762,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000101000000000100),
@@ -4773,7 +4773,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000010000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4784,7 +4784,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -4795,7 +4795,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -4806,7 +4806,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -4817,7 +4817,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000001001000),
@@ -4828,7 +4828,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000001000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -4839,7 +4839,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000101100000000010),
         [
             Signature::from_mask(0b00000000001000010000000001),
@@ -4850,7 +4850,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4861,7 +4861,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000010000000000010),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4872,7 +4872,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010000000001000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4883,7 +4883,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -4894,7 +4894,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -4905,7 +4905,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -4916,7 +4916,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000100000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000010000010110),
@@ -4927,7 +4927,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000000010001001),
@@ -4938,7 +4938,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4949,7 +4949,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100010000000100),
         [
             Signature::from_mask(0b00000000000000000100101010),
@@ -4960,7 +4960,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4971,7 +4971,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -4982,7 +4982,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000000000100000000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -4993,7 +4993,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000010000000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -5004,7 +5004,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000001000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -5015,7 +5015,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100110000100000),
@@ -5026,7 +5026,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -5037,7 +5037,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -5048,7 +5048,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000000000000111),
@@ -5059,7 +5059,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -5070,7 +5070,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000100011000000100),
@@ -5081,7 +5081,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010001000000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000101000000000000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -5092,7 +5092,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100100000000001100000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -5103,7 +5103,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -5114,7 +5114,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000001001),
         [
             Signature::from_mask(0b00000000000000100100100000),
@@ -5125,7 +5125,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000100000000000000100000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -5136,7 +5136,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001100000000001),
         [
             Signature::from_mask(0b00000000100000010100000000),
@@ -5147,7 +5147,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -5158,7 +5158,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -5169,7 +5169,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000011000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000010010000000101),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -5180,7 +5180,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000010100),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -5191,7 +5191,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -5202,7 +5202,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010001000000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000001100110000000000),
@@ -5213,7 +5213,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -5224,7 +5224,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -5235,7 +5235,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -5246,7 +5246,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000000010000),
@@ -5257,7 +5257,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010010000000000010000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -5268,7 +5268,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010001000000011),
@@ -5279,7 +5279,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000101001000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -5290,7 +5290,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -5301,7 +5301,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000000000011),
@@ -5312,7 +5312,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000101000001000000000100),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -5323,7 +5323,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000110000),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -5334,7 +5334,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100011000000100),
@@ -5345,7 +5345,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000100000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -5356,7 +5356,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -5367,7 +5367,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000000000000000010100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -5378,7 +5378,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000000001011000),
@@ -5389,7 +5389,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -5400,7 +5400,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100110000100000),
@@ -5411,7 +5411,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -5422,7 +5422,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -5433,7 +5433,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000010110),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100011000000100),
@@ -5444,7 +5444,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100001001000010000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -5455,7 +5455,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100011000000000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110010000000100),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -5466,7 +5466,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -5477,7 +5477,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000110000),
         [
             Signature::from_mask(0b00000000000100011000000100),
@@ -5488,7 +5488,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100100000100000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -5499,7 +5499,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -5510,7 +5510,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000001000000000000),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -5521,7 +5521,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -5532,7 +5532,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010001000000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -5543,7 +5543,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -5554,7 +5554,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100001000001010000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -5565,7 +5565,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100001000000000100000),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -5576,7 +5576,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -5587,7 +5587,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100000000001010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -5598,7 +5598,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000000010000000001),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -5609,7 +5609,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000010000101000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -5620,7 +5620,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000100010000101000000),
@@ -5631,7 +5631,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -5642,7 +5642,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000001011000),
@@ -5653,7 +5653,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000001000001000001),
@@ -5664,7 +5664,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00101000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000001001001),
@@ -5675,7 +5675,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -5686,7 +5686,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100000000001010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -5697,7 +5697,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000010110),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -5708,7 +5708,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -5719,7 +5719,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -5730,7 +5730,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -5741,7 +5741,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000001000000000101),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -5752,7 +5752,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -5763,7 +5763,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010000000000000110000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000001000000010100100000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -5774,7 +5774,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000100000100000001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -5785,7 +5785,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -5796,7 +5796,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000010000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -5807,7 +5807,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000000000000001001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -5818,7 +5818,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -5829,7 +5829,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000010000001000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000010100),
         [
             Signature::from_mask(0b00000000000000100000100001),
@@ -5840,7 +5840,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000100000000000000100000),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -5851,7 +5851,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00000010001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -5862,7 +5862,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -5873,7 +5873,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000000100101010),
@@ -5884,7 +5884,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000110010000000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -5895,7 +5895,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100100000000010),
@@ -5906,7 +5906,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100011000000100),
@@ -5917,7 +5917,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -5928,7 +5928,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000000000000011100),
@@ -5939,7 +5939,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100000010000),
         [
             Signature::from_mask(0b00000000000000000000000111),
@@ -5950,7 +5950,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000110010000000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -5961,7 +5961,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000100000001011),
@@ -5972,7 +5972,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -5983,7 +5983,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000001000000000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -5994,7 +5994,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -6005,7 +6005,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -6016,7 +6016,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000110000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -6027,7 +6027,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -6038,7 +6038,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010001000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100000001001000),
@@ -6049,7 +6049,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000000100101010),
@@ -6060,7 +6060,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -6071,7 +6071,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010010000100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -6082,7 +6082,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000010000000000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -6093,7 +6093,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100000000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -6104,7 +6104,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000100100100000),
         [
             Signature::from_mask(0b00000000000101000000000100),
@@ -6115,7 +6115,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000100100100000),
@@ -6126,7 +6126,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -6137,7 +6137,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000100000000000100001),
@@ -6148,7 +6148,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100100000100),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -6159,7 +6159,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -6170,7 +6170,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000100000010010),
@@ -6181,7 +6181,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000110000001000100),
@@ -6192,7 +6192,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -6203,7 +6203,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -6214,7 +6214,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -6225,7 +6225,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -6236,7 +6236,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -6247,7 +6247,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000001010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -6258,7 +6258,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -6269,7 +6269,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000001000000000000),
         [
             Signature::from_mask(0b00000000000110010000001000),
@@ -6280,7 +6280,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000001001000001000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -6291,7 +6291,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000010010),
@@ -6302,7 +6302,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -6313,7 +6313,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -6324,7 +6324,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -6335,7 +6335,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -6346,7 +6346,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000010000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -6357,7 +6357,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -6368,7 +6368,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -6379,7 +6379,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100010000000010),
         [
             Signature::from_mask(0b00000101000000000000100000),
@@ -6390,7 +6390,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000000101000010000),
         [
             Signature::from_mask(0b00000001000000010100100000),
@@ -6401,7 +6401,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -6412,7 +6412,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -6423,7 +6423,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000100100100000),
         [
             Signature::from_mask(0b00000000000001001000010010),
@@ -6434,7 +6434,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010000000011000),
@@ -6445,7 +6445,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -6456,7 +6456,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000000000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000010000101000100),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -6467,7 +6467,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000100100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -6478,7 +6478,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -6489,7 +6489,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -6500,7 +6500,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -6511,7 +6511,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -6522,7 +6522,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000010000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -6533,7 +6533,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000001010000001000001),
@@ -6544,7 +6544,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -6555,7 +6555,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -6566,7 +6566,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -6577,7 +6577,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -6588,7 +6588,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -6599,7 +6599,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000001000000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -6610,7 +6610,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010001000000000000100001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -6621,7 +6621,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -6632,7 +6632,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000001001000001000000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -6643,7 +6643,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -6654,7 +6654,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001100000000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -6665,7 +6665,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -6676,7 +6676,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00110010000000000100000000),
         [
             Signature::from_mask(0b00000000000101000000000110),
@@ -6687,7 +6687,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -6698,7 +6698,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000100000100000001000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -6709,7 +6709,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00001000000010000001010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000001000000010100100000),
@@ -6720,7 +6720,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -6731,7 +6731,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000101000010010000000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -6742,7 +6742,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000001000100000001000000),
@@ -6753,7 +6753,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000000000000000100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -6764,7 +6764,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00110000000100000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110110000000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -6775,7 +6775,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000001000010000000001),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -6786,7 +6786,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000010010000100000),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -6797,7 +6797,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -6808,7 +6808,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -6819,7 +6819,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000010000100001010),
@@ -6830,7 +6830,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -6841,7 +6841,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000001001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -6852,7 +6852,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -6863,7 +6863,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010001000000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100011000000100),
@@ -6874,7 +6874,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000100000100000001000),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -6885,7 +6885,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000000000000000010100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000001000000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -6896,7 +6896,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -6907,7 +6907,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100000000001010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000001000010000000001),
         [
             Signature::from_mask(0b00000100100000000000000010),
@@ -6918,7 +6918,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000010100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -6929,7 +6929,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100101000000000010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -6940,7 +6940,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000001001),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -6951,7 +6951,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000100000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -6962,7 +6962,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000111000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -6973,7 +6973,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100001000101000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -6984,7 +6984,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001000000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000101000010000000100000),
         [
             Signature::from_mask(0b00000000000100011000000100),
@@ -6995,7 +6995,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010000000011000),
@@ -7006,7 +7006,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -7017,7 +7017,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000100000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110010000000100),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -7028,7 +7028,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00110010000000000100000000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -7039,7 +7039,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000001000100010000000100),
@@ -7050,7 +7050,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100100000100000000010),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -7061,7 +7061,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000001000000010000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110000001000010),
         [
             Signature::from_mask(0b00000000001001000000000001),
@@ -7072,7 +7072,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000100000100001),
@@ -7083,7 +7083,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000010010000000011),
@@ -7094,7 +7094,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -7105,7 +7105,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -7116,7 +7116,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001000000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100000001100000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -7127,7 +7127,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -7138,7 +7138,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000010000001000001),
@@ -7149,7 +7149,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -7160,7 +7160,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -7171,7 +7171,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -7182,7 +7182,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000101000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000000000001011000),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -7193,7 +7193,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000010100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7204,7 +7204,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000110010000000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7215,7 +7215,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000000110),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -7226,7 +7226,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110000000001100),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -7237,7 +7237,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -7248,7 +7248,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -7259,7 +7259,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7270,7 +7270,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000101000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100000010000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -7281,7 +7281,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00110010000000000100000000),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -7292,7 +7292,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000000110000000001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -7303,7 +7303,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000010110),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001100000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -7314,7 +7314,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -7325,7 +7325,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000000000000111),
@@ -7336,7 +7336,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000111001000000000),
@@ -7347,7 +7347,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -7358,7 +7358,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000001000000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -7369,7 +7369,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -7380,7 +7380,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000010000100000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -7391,7 +7391,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000001000001),
@@ -7402,7 +7402,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000110000),
         [
             Signature::from_mask(0b00000000000000000000000111),
@@ -7413,7 +7413,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -7424,7 +7424,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -7435,7 +7435,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -7446,7 +7446,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7457,7 +7457,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000101000001000000000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7468,7 +7468,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -7479,7 +7479,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000001000100100001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -7490,7 +7490,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -7501,7 +7501,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110010000000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -7512,7 +7512,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000100000001000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100100000100000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -7523,7 +7523,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7534,7 +7534,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010001000000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000010100000100),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -7545,7 +7545,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000010100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -7556,7 +7556,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -7567,7 +7567,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000101000010010000000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -7578,7 +7578,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000001000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -7589,7 +7589,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -7600,7 +7600,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000010001011000),
@@ -7611,7 +7611,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -7622,7 +7622,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -7633,7 +7633,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000001100000000000000),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -7644,7 +7644,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010010000000000010000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000111000000001000),
@@ -7655,7 +7655,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7666,7 +7666,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000010000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -7677,7 +7677,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000001011000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -7688,7 +7688,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000100000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -7699,7 +7699,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000000000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -7710,7 +7710,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -7721,7 +7721,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -7732,7 +7732,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000100000001000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100001000),
@@ -7743,7 +7743,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000001010000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -7754,7 +7754,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000001100000000000000),
         [
             Signature::from_mask(0b00000000000000000100101010),
@@ -7765,7 +7765,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010010000000000010000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7776,7 +7776,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000100010000000010000),
@@ -7787,7 +7787,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -7798,7 +7798,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -7809,7 +7809,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100010000000010),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7820,7 +7820,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000010100000110),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -7831,7 +7831,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000110000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000101001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -7842,7 +7842,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -7853,7 +7853,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -7864,7 +7864,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000000100100100100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -7875,7 +7875,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7886,7 +7886,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -7897,7 +7897,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7908,7 +7908,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -7919,7 +7919,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000000000000001010),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -7930,7 +7930,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -7941,7 +7941,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000001000000001000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -7952,7 +7952,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -7963,7 +7963,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -7974,7 +7974,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000001001),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -7985,7 +7985,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -7996,7 +7996,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000010000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -8007,7 +8007,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000000000000000011000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -8018,7 +8018,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00000101000000000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -8029,7 +8029,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000110000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -8040,7 +8040,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -8051,7 +8051,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000100000010010),
@@ -8062,7 +8062,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000101000010010000000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -8073,7 +8073,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000000100100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -8084,7 +8084,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -8095,7 +8095,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000100010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -8106,7 +8106,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001100000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -8117,7 +8117,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -8128,7 +8128,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -8139,7 +8139,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -8150,7 +8150,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -8161,7 +8161,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000000000001),
@@ -8172,7 +8172,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000100100100000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -8183,7 +8183,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000001100100000000010),
@@ -8194,7 +8194,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -8205,7 +8205,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -8216,7 +8216,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -8227,7 +8227,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000001000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100100000000001100000),
         [
             Signature::from_mask(0b00000000000010000100001010),
@@ -8238,7 +8238,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000101000000000110),
@@ -8249,7 +8249,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -8260,7 +8260,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100000000000110),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000000000100000000000010),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -8271,7 +8271,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -8282,7 +8282,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00101000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000010100000100),
         [
             Signature::from_mask(0b00000000000010000001000001),
@@ -8293,7 +8293,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -8304,7 +8304,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -8315,7 +8315,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -8326,7 +8326,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -8337,7 +8337,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -8348,7 +8348,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000101000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -8359,7 +8359,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -8370,7 +8370,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -8381,7 +8381,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -8392,7 +8392,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000100000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000001000000011),
@@ -8403,7 +8403,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000000000000111),
@@ -8414,7 +8414,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -8425,7 +8425,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -8436,7 +8436,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -8447,7 +8447,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000001000001000011),
@@ -8458,7 +8458,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000101000001000000000100),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -8469,7 +8469,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000010000000010000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -8480,7 +8480,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000001001),
         [
             Signature::from_mask(0b00000000000000100100100000),
@@ -8491,7 +8491,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -8502,7 +8502,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -8513,7 +8513,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -8524,7 +8524,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -8535,7 +8535,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -8546,7 +8546,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -8557,7 +8557,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -8568,7 +8568,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000000010000010110),
@@ -8579,7 +8579,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010010000100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100000001100000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -8590,7 +8590,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100100010010000001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -8601,7 +8601,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000001000000010100100000),
         [
             Signature::from_mask(0b00000000000001100000000001),
@@ -8612,7 +8612,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -8623,7 +8623,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -8634,7 +8634,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000001000000000101),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -8645,7 +8645,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -8656,7 +8656,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010010001000001),
@@ -8667,7 +8667,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -8678,7 +8678,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000100000001000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -8689,7 +8689,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100000000101000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -8700,7 +8700,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000100000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000000000001011000),
         [
             Signature::from_mask(0b00000000000011000000000001),
@@ -8711,7 +8711,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -8722,7 +8722,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000001100000010000),
@@ -8733,7 +8733,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000010100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -8744,7 +8744,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -8755,7 +8755,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000001000001),
@@ -8766,7 +8766,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000100000100000001000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -8777,7 +8777,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -8788,7 +8788,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -8799,7 +8799,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000000000000001001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -8810,7 +8810,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000000001011000),
@@ -8821,7 +8821,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000001000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -8832,7 +8832,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000100110000001000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -8843,7 +8843,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000000010000),
@@ -8854,7 +8854,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000000000011),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -8865,7 +8865,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -8876,7 +8876,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000100000000000100001),
@@ -8887,7 +8887,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -8898,7 +8898,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -8909,7 +8909,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000110000),
         [
             Signature::from_mask(0b00000000000000000001001001),
@@ -8920,7 +8920,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000110000001100000),
@@ -8931,7 +8931,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -8942,7 +8942,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000110000000001100),
@@ -8953,7 +8953,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -8964,7 +8964,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000000001001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -8975,7 +8975,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000100000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -8986,7 +8986,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -8997,7 +8997,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000001010000),
@@ -9008,7 +9008,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000101100000000001000),
         [
             Signature::from_mask(0b00000000000001100100000010),
@@ -9019,7 +9019,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -9030,7 +9030,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -9041,7 +9041,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100010000000010000),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -9052,7 +9052,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000100000000000010),
         [
             Signature::from_mask(0b00000000001000000000010000),
@@ -9063,7 +9063,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -9074,7 +9074,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -9085,7 +9085,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100010),
         [
             Signature::from_mask(0b00000001100100000000001000),
@@ -9096,7 +9096,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001000000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -9107,7 +9107,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110000001000010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -9118,7 +9118,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -9129,7 +9129,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000000010000100001000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -9140,7 +9140,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00001000000000010000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000001001001),
@@ -9151,7 +9151,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -9162,7 +9162,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000100000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -9173,7 +9173,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000000100000100010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100010000100100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -9184,7 +9184,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -9195,7 +9195,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -9206,7 +9206,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -9217,7 +9217,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -9228,7 +9228,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000111000001000000),
@@ -9239,7 +9239,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -9250,7 +9250,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000110000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -9261,7 +9261,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000000000000111),
@@ -9272,7 +9272,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000110000001100000),
@@ -9283,7 +9283,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000100000000000010),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -9294,7 +9294,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -9305,7 +9305,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000110100000000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -9316,7 +9316,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110010000000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -9327,7 +9327,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000000001000011),
@@ -9338,7 +9338,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000101001000),
         [
             Signature::from_mask(0b00000000000011000000010000),
@@ -9349,7 +9349,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000001010000000010000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -9360,7 +9360,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000011000001000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000100000000000100001),
@@ -9371,7 +9371,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000100000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -9382,7 +9382,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000001010000000001),
@@ -9393,7 +9393,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -9404,7 +9404,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -9415,7 +9415,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000110000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -9426,7 +9426,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -9437,7 +9437,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -9448,7 +9448,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000010000000000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -9459,7 +9459,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -9470,7 +9470,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b10000000001000100000000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -9481,7 +9481,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100101000000000010),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -9492,7 +9492,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -9503,7 +9503,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001001000001),
@@ -9514,7 +9514,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000010000000010010),
@@ -9525,7 +9525,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -9536,7 +9536,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -9547,7 +9547,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -9558,7 +9558,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100000001001000),
@@ -9569,7 +9569,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000000100000010010),
         [
             Signature::from_mask(0b00000000100000000000100001),
@@ -9580,7 +9580,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000010110100000000),
@@ -9591,7 +9591,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -9602,7 +9602,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -9613,7 +9613,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000100000000001),
         [
             Signature::from_mask(0b00000000000000000100101010),
@@ -9624,7 +9624,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -9635,7 +9635,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000001001000),
@@ -9646,7 +9646,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000001000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -9657,7 +9657,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000001001000),
@@ -9668,7 +9668,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -9679,7 +9679,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100101000000000010),
         [
             Signature::from_mask(0b00000000000000100100100000),
@@ -9690,7 +9690,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -9701,7 +9701,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000010000000000010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -9712,7 +9712,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -9723,7 +9723,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000000100000000001000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -9734,7 +9734,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100000010000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -9745,7 +9745,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000001010000),
         [
             Signature::from_mask(0b00000000000101000000000100),
@@ -9756,7 +9756,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -9767,7 +9767,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000101001010010000000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -9778,7 +9778,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000000100100100100),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -9789,7 +9789,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100100010000000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -9800,7 +9800,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000100000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000010000100000000),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -9811,7 +9811,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -9822,7 +9822,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000110000),
         [
             Signature::from_mask(0b00000000000100000001000010),
@@ -9833,7 +9833,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100011000000100),
@@ -9844,7 +9844,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100100000000010),
@@ -9855,7 +9855,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000001000000000010000),
@@ -9866,7 +9866,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010001000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000001000001000001),
@@ -9877,7 +9877,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -9888,7 +9888,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000110000110000),
@@ -9899,7 +9899,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000000000000001000000001),
         [
             Signature::from_mask(0b00000000000000010000011000),
@@ -9910,7 +9910,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000110000),
         [
             Signature::from_mask(0b00000000000001100100000010),
@@ -9921,7 +9921,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -9932,7 +9932,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -9943,7 +9943,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -9954,7 +9954,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100010),
         [
             Signature::from_mask(0b00000000100000010100000000),
@@ -9965,7 +9965,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -9976,7 +9976,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000100000000000110000),
@@ -9987,7 +9987,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -9998,7 +9998,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000100000000000000100000),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -10009,7 +10009,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00000010001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000000000001011000),
@@ -10020,7 +10020,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -10031,7 +10031,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000001000001),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -10042,7 +10042,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000111000),
@@ -10053,7 +10053,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000001000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010000000000000001011000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -10064,7 +10064,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -10075,7 +10075,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -10086,7 +10086,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000001001000),
@@ -10097,7 +10097,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000000000000000010100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -10108,7 +10108,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -10119,7 +10119,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000000000000000000010010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -10130,7 +10130,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000101000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -10141,7 +10141,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -10152,7 +10152,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000010100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -10163,7 +10163,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000000000010000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -10174,7 +10174,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000010010),
@@ -10185,7 +10185,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000001001000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -10196,7 +10196,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -10207,7 +10207,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00000101000000000000100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000000000001011),
@@ -10218,7 +10218,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000001000010000000001),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -10229,7 +10229,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000110010000001000),
@@ -10240,7 +10240,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100001000000010010),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -10251,7 +10251,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000001000010000000001),
         [
             Signature::from_mask(0b00000000000000100100001000),
@@ -10262,7 +10262,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -10273,7 +10273,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100001000000000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000001000100000000100100),
@@ -10284,7 +10284,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000000100100100000),
@@ -10295,7 +10295,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100000010010000100000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -10306,7 +10306,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000101),
@@ -10317,7 +10317,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000010001000000010000000),
@@ -10328,7 +10328,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000001011000010000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -10339,7 +10339,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010010000000000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100100000100100),
@@ -10350,7 +10350,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -10361,7 +10361,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000100010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -10372,7 +10372,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000100000000000000100000),
         [
             Signature::from_mask(0b00000000000110010000001000),
@@ -10383,7 +10383,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010010000000000010000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -10394,7 +10394,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000001011),
@@ -10405,7 +10405,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010010000100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000001001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -10416,7 +10416,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -10427,7 +10427,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000000000001),
@@ -10438,7 +10438,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -10449,7 +10449,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -10460,7 +10460,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -10471,7 +10471,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000110001001000010000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -10482,7 +10482,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000100000100000000001),
         [
             Signature::from_mask(0b00000010001000000010000000),
@@ -10493,7 +10493,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -10504,7 +10504,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000000010000000011),
@@ -10515,7 +10515,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -10526,7 +10526,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -10537,7 +10537,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -10548,7 +10548,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -10559,7 +10559,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -10570,7 +10570,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -10581,7 +10581,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -10592,7 +10592,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000000010000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000000001011000),
@@ -10603,7 +10603,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001001000010000000010000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -10614,7 +10614,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000010010100000000),
@@ -10625,7 +10625,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000000000110000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -10636,7 +10636,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000100000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000010100),
         [
             Signature::from_mask(0b00000000000100110000000010),
@@ -10647,7 +10647,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000100000000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -10658,7 +10658,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10010010000100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -10669,7 +10669,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000101100000000010),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -10680,7 +10680,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100000000100100000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000001000000100000000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -10691,7 +10691,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000000000001011000),
@@ -10702,7 +10702,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000010001000000001),
@@ -10713,7 +10713,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -10724,7 +10724,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000001000010000000001),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -10735,7 +10735,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000001000001),
         [
             Signature::from_mask(0b00000000000010001100000000),
@@ -10746,7 +10746,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b11000100000000000000100000),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -10757,7 +10757,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00100000000001000100000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -10768,7 +10768,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000100001000000000000000),
         [
             Signature::from_mask(0b00000000000010000000011000),
@@ -10779,7 +10779,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00010010000000000010000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000010000001000100001000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -10790,7 +10790,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000010000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000100000000000010010),
@@ -10801,7 +10801,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01010000100000100000000000),
         [
             Signature::from_mask(0b00000000000001000000000011),
@@ -10812,7 +10812,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00010001000110000000000000),
         [
             Signature::from_mask(0b00000000000000010100000010),
@@ -10823,7 +10823,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b11000100000001000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000100000100),
         [
             Signature::from_mask(0b00000000000010000000000001),
@@ -10834,7 +10834,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000001000100000000000010),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000000010000100000000),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -10845,7 +10845,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b00110000000000000000011000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100111000000000000),
         [
             Signature::from_mask(0b00000000000000100100001000),
@@ -10856,7 +10856,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000101000000000010),
@@ -10867,7 +10867,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -10878,7 +10878,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000000001000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000001000001),
         [
             Signature::from_mask(0b00000000000010000100001010),
@@ -10889,7 +10889,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000011000000010000),
@@ -10900,7 +10900,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000101000000010000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100001000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -10911,7 +10911,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01100000000000100000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000000100100000000010),
@@ -10922,7 +10922,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000000001000000001000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000000100000100),
         [
             Signature::from_mask(0b00000000000100000000100010),
@@ -10933,7 +10933,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000010000000000001),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000000101001000),
         [
             Signature::from_mask(0b00000000000000001000100001),
@@ -10944,7 +10944,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000001100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000100000100000010010),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -10955,7 +10955,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000100000000010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000100000000100000100000),
         [
             Signature::from_mask(0b00000000000100000000000100),
@@ -10966,7 +10966,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b01000001000010010000001000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000001000000000001),
         [
             Signature::from_mask(0b00000000000000000000011010),
@@ -10977,7 +10977,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000100100000000000000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000001000000010100100000),
         [
             Signature::from_mask(0b00000000000010000001000001),
@@ -10988,7 +10988,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b01000000100000100000001000),
         [
             Signature::from_mask(0b00000000010000001000000001),
@@ -10999,7 +10999,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10001000000000000000010100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000110010000000100),
         [
             Signature::from_mask(0b00000001000000000100100000),
@@ -11010,7 +11010,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000001000000010000),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00000000000011000100000000),
         [
             Signature::from_mask(0b00000000100000100001000000),
@@ -11021,7 +11021,7 @@ const PACKINGS: &[Packing] = &[
             Signature::from_mask(0b10000000000100000000000100),
         ],
     ),
-    Packing::new(
+    Packing::from_signatures(
         Signature::from_mask(0b00001000000000100100001000),
         [
             Signature::from_mask(0b00000000000000001000100001),

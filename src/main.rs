@@ -1,6 +1,7 @@
 use anyhow::Context;
 use wrong_wordle::packer;
 use wrong_wordle::realizer;
+use wrong_wordle::verifier;
 use wrong_wordle::words::{ANSWERS, GUESSES};
 
 use anyhow::Result;
@@ -9,6 +10,10 @@ use anyhow::Result;
 fn main() -> Result<()> {
     let packings = packer::pack(ANSWERS, GUESSES);
     let solutions = realizer::realize(ANSWERS, GUESSES, &packings);
+
+    if !verifier::verify_solutions(&solutions) {
+        anyhow::bail!("Invalid solutions");
+    }
 
     println!("There are {} packings", packings.len());
     println!(

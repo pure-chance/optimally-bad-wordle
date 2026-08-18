@@ -297,9 +297,9 @@ pub struct Packing {
 impl Packing {
     /// Construct a new `Packing`.
     ///
-    /// **Correctness**: Guesses must be sorted, otherwise equality comparisons
-    /// will not deduplicate properly.
-    pub const fn new(answer: Signature, guesses: [Signature; 6]) -> Self {
+    /// **Correctness**: The guesses must be sorted to ensure that comparisons between
+    /// packings are based on membership, and not order.
+    pub const fn from_signatures(answer: Signature, guesses: [Signature; 6]) -> Self {
         Self { answer, guesses }
     }
 
@@ -315,7 +315,7 @@ impl Packing {
             b.signatures[1],
             b.signatures[2],
         ];
-        Self::new(answer, guesses)
+        Self::from_signatures(answer, guesses)
     }
 
     /// Return the answer signature.
