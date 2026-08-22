@@ -1,9 +1,5 @@
 //! Compact bitmask representation of (5-letter) words.
 
-use std::fmt::{Debug, Display};
-
-use serde::Serialize;
-
 /// Compact bitmask representation of a word's unique letters.
 ///
 /// A `Signature` uses a 26-bit integer where bit `i` indicates whether the
@@ -14,7 +10,7 @@ use serde::Serialize;
 /// This representation enables efficient disjointness checking: two signatures
 /// are disjoint if and only if their bitwise AND equals zero.
 #[repr(transparent)]
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Signature(u32);
 
 impl Signature {
@@ -72,15 +68,16 @@ impl Signature {
     }
 }
 
-impl Debug for Signature {
+impl std::fmt::Debug for Signature {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "Signature({:026b})", self.0)
     }
 }
 
-impl Display for Signature {
+impl std::fmt::Display for Signature {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut mask = self.0;
+        // at most 5 letters + 2 braces '{' and '}'.
         let mut buf = String::with_capacity(5 + 2);
         buf.push('{');
         while mask != 0 {
@@ -90,5 +87,13 @@ impl Display for Signature {
         }
         buf.push('}');
         f.write_str(&buf)
+    }
+}
+
+impl serde::Serialize for Signature {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        // Serialize as the human-readable letter-set string (e.g. "{aelst}")
+        // rather than as a raw bitmask integer, so that JSON output is legible.
+        serializer.collect_str(self)
     }
 }

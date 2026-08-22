@@ -3,7 +3,7 @@
 use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
 use rayon::prelude::*;
-use rustc_hash::{FxHashMap as HashMap, FxHashSet as HashSet};
+use rustc_hash::FxHashMap as HashMap;
 use serde::Serialize;
 
 use crate::packer::Packing;
@@ -49,34 +49,32 @@ pub fn realize(
     let answer_realizations = compile_realizations(answers);
     let guess_realizations = compile_realizations(guesses);
 
-    let pb = ProgressBar::new(packings.len() as u64);
-    pb.set_style(
+    let progress_bar = ProgressBar::new(packings.len() as u64);
+    progress_bar.set_style(
         ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} packings")
             .expect("Progress bar template is invalid")
             .progress_chars("=> "),
     );
-    pb.set_message("Realizing");
+    progress_bar.set_message("Realizing");
 
     let solutions = packings
         .par_iter()
         .flat_map(|packing| {
-            pb.inc(1);
+            progress_bar.inc(1);
             realize_packing(&answer_realizations, &guess_realizations, packing)
         })
         .collect();
 
-    pb.finish_and_clear();
+    progress_bar.finish_and_clear();
     solutions
 }
 
 /// Build signature-to-words lookup tables.
 #[must_use]
 pub fn compile_realizations(words: &[&'static str]) -> HashMap<Signature, Vec<&'static str>> {
-    let mut map = HashMap::default();
+    let mut map: HashMap<Signature, Vec<&'static str>> = HashMap::default();
     for &word in words {
-        map.entry(Signature::new(word))
-            .or_insert_with(Vec::new)
-            .push(word);
+        map.entry(Signature::new(word)).or_default().push(word);
     }
     map
 }
@@ -91,8 +89,8 @@ pub fn realize_packing(
     answer_realizations: &HashMap<Signature, Vec<&'static str>>,
     guess_realizations: &HashMap<Signature, Vec<&'static str>>,
     packing: &Packing,
-) -> HashSet<WrongWordleSolution> {
-    let a = &packing.answer();
+) -> Vec<WrongWordleSolution> {
+    let a = packing.answer();
     let [g1, g2, g3, g4, g5, g6] = packing.guesses();
     let combinations = [
         answer_realizations[a].as_slice(),
@@ -107,7 +105,8 @@ pub fn realize_packing(
         .into_iter()
         .multi_cartesian_product()
         .map(|v| {
-            let [a, g1, g2, g3, g4, g5, g6] = v.try_into().unwrap();
+            let [a, g1, g2, g3, g4, g5, g6] =
+                v.try_into().expect("Failed to unpack cartesian product");
             WrongWordleSolution::new(a, [g1, g2, g3, g4, g5, g6])
         })
         .collect()
@@ -138,5 +137,12 @@ impl WrongWordleSolution {
     #[must_use]
     pub const fn guesses(&self) -> &[&'static str; 6] {
         &self.guesses
+    }
+}
+
+impl std::fmt::Display for WrongWordleSolution {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let [g1, g2, g3, g4, g5, g6] = self.guesses;
+        write!(f, "{} | {g1} {g2} {g3} {g4} {g5} {g6}", self.answer)
     }
 }

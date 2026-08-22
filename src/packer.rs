@@ -42,38 +42,35 @@ use crate::signature::Signature;
 ///
 /// In practice, the algorithm runs in ~15 seconds.
 #[must_use]
-pub fn pack(answers: &[&str], guesses: &[&str]) -> Vec<Packing> {
+pub fn pack(answers: &[&'static str], guesses: &[&'static str]) -> Vec<Packing> {
     let answer_signatures = signify_words(answers);
     let guess_signatures = signify_words(guesses);
 
     let partition_key = create_partition_key(&guess_signatures);
 
-    let pb = ProgressBar::new(answer_signatures.len() as u64);
-    pb.set_style(
+    let progress_bar = ProgressBar::new(answer_signatures.len() as u64);
+    progress_bar.set_style(
         ProgressStyle::with_template("{msg:.cyan} [{bar:25}] {pos}/{len} answers")
             .expect("Progress bar template is invalid")
             .progress_chars("=> "),
     );
-    pb.set_message("Packing");
+    progress_bar.set_message("Packing");
 
     let packings = answer_signatures
         .par_iter()
-        .map(|&answer| {
-            pb.inc(1);
+        .flat_map(|&answer| {
+            progress_bar.inc(1);
             pack_for_answer(answer, &guess_signatures, partition_key)
         })
-        .reduce(Vec::default, |mut acc, packings_for_answer| {
-            acc.extend(packings_for_answer);
-            acc
-        });
+        .collect();
 
-    pb.finish_and_clear();
+    progress_bar.finish_and_clear();
     packings
 }
 
 /// Convert word lists to unique, sorted signatures.
 #[must_use]
-pub fn signify_words(words: &[&str]) -> Box<[Signature]> {
+pub fn signify_words(words: &[&'static str]) -> Box<[Signature]> {
     words
         .iter()
         .map(|&w| Signature::new(w))
@@ -84,34 +81,30 @@ pub fn signify_words(words: &[&str]) -> Box<[Signature]> {
 
 /// Create a partition key by taking the 10 most common letters across all
 /// signatures.
+#[must_use]
 pub fn create_partition_key(signatures: &[Signature]) -> Signature {
     let mut frequencies = [0; 26];
     for signature in signatures {
-        for i in 0..26 {
-            frequencies[i] += ((signature.mask() >> i) & 1) as u32;
+        for (i, frequency) in frequencies.iter_mut().enumerate() {
+            *frequency += (signature.mask() >> i) & 1;
         }
     }
 
-    let mut most_common: [usize; 10] = [0; 10];
-    for i in 0..10 {
+    let mut mask: u32 = 0;
+    for _ in 0..10 {
         let mut max_freq = 0;
         let mut max_index = 0;
-        for (i, &freq) in frequencies.iter().enumerate() {
+        for (letter_index, &freq) in frequencies.iter().enumerate() {
             if freq > max_freq {
                 max_freq = freq;
-                max_index = i;
+                max_index = letter_index;
             }
         }
-        most_common[i] = max_index;
+        mask |= 1 << max_index;
         frequencies[max_index] = 0;
     }
 
-    let mut signature: u32 = 0;
-    for &letter in &most_common {
-        signature |= 1 << letter;
-    }
-
-    Signature::from_mask(signature)
+    Signature::from_mask(mask)
 }
 
 /// Find all packings for a specific answer signature.
@@ -125,7 +118,7 @@ pub fn pack_for_answer(
     guess_signatures: &[Signature],
     partition_key: Signature,
 ) -> Vec<Packing> {
-    let triples = find_triples_for_answer(&guess_signatures, answer);
+    let triples = find_triples_for_answer(guess_signatures, answer);
     let partitions = partition_triples_by_signature(&triples, partition_key);
     let packings = scan_and_merge_partitions(&partitions, answer);
     packings
@@ -152,8 +145,9 @@ fn find_triples_for_answer(guess_signatures: &[Signature], answer: Signature) ->
             if !sig_a.disjoint(sig_b) {
                 continue;
             }
-            for (_, &sig_c) in candidates.iter().enumerate().skip(j + 1) {
-                if !sig_a.union(sig_b).disjoint(sig_c) {
+            let ab_union = sig_a.union(sig_b);
+            for &sig_c in candidates.iter().skip(j + 1) {
+                if !ab_union.disjoint(sig_c) {
                     continue;
                 }
                 let triple = Triple::new(sig_a, sig_b, sig_c);
@@ -175,10 +169,10 @@ fn partition_triples_by_signature(
     triples: &[Triple],
     partition_key: Signature,
 ) -> HashMap<Signature, Vec<Triple>> {
-    let mut partitions = HashMap::default();
+    let mut partitions: HashMap<Signature, Vec<Triple>> = HashMap::default();
     for &triple in triples {
         let key = partition_key.intersection(triple.union);
-        partitions.entry(key).or_insert_with(Vec::new).push(triple);
+        partitions.entry(key).or_default().push(triple);
     }
     partitions
 }
@@ -297,8 +291,9 @@ pub struct Packing {
 impl Packing {
     /// Construct a new `Packing`.
     ///
-    /// **Correctness**: The guesses must be sorted to ensure that comparisons between
-    /// packings are based on membership, and not order.
+    /// **Correctness**: The guesses must be sorted to ensure that comparisons
+    /// between packings are based on membership, and not order.
+    #[must_use]
     pub const fn from_signatures(answer: Signature, guesses: [Signature; 6]) -> Self {
         Self { answer, guesses }
     }
@@ -306,7 +301,7 @@ impl Packing {
     /// Construct a new `Packing` from and answer and two sorted triples.
     ///
     /// Sorted triples means that a[0] < a[1] < a[2] < b[0] < b[1] < b[2].
-    fn from_ordered_triples(answer: Signature, a: Triple, b: Triple) -> Self {
+    const fn from_ordered_triples(answer: Signature, a: Triple, b: Triple) -> Self {
         let guesses = [
             a.signatures[0],
             a.signatures[1],
@@ -343,9 +338,9 @@ struct Triple {
 
 impl Triple {
     /// Construct a new `Triple` with the given signatures.
-    const fn new(ls1: Signature, ls2: Signature, ls3: Signature) -> Self {
-        let signatures = [ls1, ls2, ls3];
-        let union = ls1.union(ls2).union(ls3);
+    const fn new(a: Signature, b: Signature, c: Signature) -> Self {
+        let signatures = [a, b, c];
+        let union = a.union(b).union(c);
         Self { signatures, union }
     }
 
