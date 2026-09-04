@@ -111,7 +111,7 @@ pub fn create_partition_key(signatures: &[Signature]) -> Signature {
 ///
 /// This is done by (1) finding all triples for the answer, (2) partitioning
 /// them by signature, and (3) scanning and merging the partitions. Look at the
-/// documentation of `pack` for more details.
+/// documentation of [`pack`] for more details.
 #[must_use]
 pub fn pack_for_answer(
     answer: Signature,
@@ -180,34 +180,31 @@ fn partition_triples_by_signature(
 /// Merge disjoint triples into packings using partition-based pruning.
 ///
 /// Partition keys provide the first level of pruning: if two keys overlap,
-/// every triple in one partition overlaps every triple in the other on at least
-/// one partition-key letter. Only pairs of partitions with disjoint keys can
-/// therefore contain compatible triples.
+/// every triple in one partition overlaps every triple in the other. Only pairs
+/// of partitions with disjoint keys can contain compatible triples.
 ///
 /// # Completeness
 ///
-/// Let the six sorted guess signatures of any valid packing be
-/// `x0 < x1 < x2 < x3 < x4 < x5`. Triple enumeration produces every sorted
-/// three-element combination, so it necessarily contains both `[x0, x1, x2]`
-/// and `[x3, x4, x5]`. These triples are disjoint, their partition keys are
-/// disjoint, and [`merge_ordered_triples`] accepts them because every signature
-/// in the first triple sorts before every signature in the second. Interleaved
-/// decompositions of the same packing may be rejected, but this canonical
-/// lower-three/upper-three decomposition is always present and accepted.
+/// Let the six sorted guess signatures of any valid packing be `x₀ < x₁ < x₂ <
+/// x₃ < x₄ < x₅`. Triple enumeration produces both `[x₀, x₁, x₂]` and `[x₃, x₄,
+/// x₅]`. These triples are disjoint, their partition keys are disjoint, and
+/// [`merge_ordered_triples`] accepts them because every signature in the first
+/// triple sorts before every signature in the second. Interleaved
+/// decompositions may be rejected, but this canonical lower/upper decomposition
+/// is always accepted.
 ///
-/// The hash map does not provide a meaningful order between two distinct
-/// partitions, so each distinct partition pair is merged in both directions.
-/// This ensures the partition containing the canonical lower triple is examined
-/// as `lower_triples`. A partition paired with itself needs only one direction.
+/// The hash map provides no meaningful order between distinct partitions, so
+/// each distinct partition pair is merged in both directions. This ensures the
+/// partition containing the canonical lower triple is examined as
+/// `lower_triples`. A partition paired with itself needs only one direction.
 ///
 /// # Uniqueness
 ///
 /// A pair is emitted only when all three signatures in its lower triple sort
-/// before all three signatures in its upper triple. For any set of six distinct
+/// before all three in its upper triple. For any set of six distinct
 /// signatures, exactly one of its ten unordered splits into two triples has
-/// this property: the split between its third- and fourth-smallest signatures.
-/// Consequently, every valid packing is emitted exactly once, without a final
-/// deduplication pass.
+/// this property: the split between its third and fourth-smallest signatures.
+/// Consequently, every valid packing is emitted exactly once.
 fn scan_and_merge_partitions(
     partitions: &HashMap<Signature, Vec<Triple>>,
     answer: Signature,
@@ -226,8 +223,8 @@ fn scan_and_merge_partitions(
         merge_ordered_triples(triples_a, triples_b, answer, &mut packings);
 
         // Between partitions order is arbitrary, so for distinct partitions
-        // the canonical lower triple might be in B instead. For the same partition, the
-        // first merge already found all canonical pairs.
+        // the canonical lower triple might be in B instead. For the same partition,
+        // the first merge already found all canonical pairs.
         if key_a != key_b {
             merge_ordered_triples(triples_b, triples_a, answer, &mut packings);
         }
@@ -239,17 +236,15 @@ fn scan_and_merge_partitions(
 /// Merge one directed pair of triple partitions in canonical signature order.
 ///
 /// Triple enumeration is lexicographic, and placing triples into partitions
-/// preserves their relative order. In particular, `upper_triples` is sorted by
-/// each triple's smallest signature. For a given `lower`, `partition_point`
-/// skips directly to triples satisfying
-/// `lower.signatures[2] < upper.signatures[0]`. Since each triple is internally
-/// sorted, this is equivalent to requiring every lower signature to sort before
-/// every upper signature.
+/// preserves their order. For a given `lower`, `partition_point` skips directly
+/// to triples satisfying `lower.signatures[2] < upper.signatures[0]`. Since
+/// each triple is internally sorted, this requires every lower signature to
+/// sort before every upper signature.
 ///
-/// This ordering rule is what removes duplicate decompositions. Two disjoint
-/// triples may be interleaved and are deliberately ignored here; if they belong
-/// to a valid six-signature packing, that packing's independently enumerated
-/// lower-three and upper-three triples will be accepted instead.
+/// This ordering rule removes duplicate decompositions. Two disjoint triples
+/// may be interleaved and are deliberately ignored; if they belong to a valid
+/// six-signature packing, that packing's lower-three and upper-three triples
+/// will be accepted instead.
 ///
 /// When both slices are the same partition, an accepted pair is still emitted
 /// only once. It is found when the lower of the two triples is visited; when

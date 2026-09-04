@@ -17,8 +17,7 @@ impl Signature {
     /// Construct a new `Signature` from a word.
     ///
     /// **Correctness**: The word must be exactly 5 lowercase ASCII letters (a
-    /// valid Wordle answer / guess). This is checked by assertions in debug
-    /// builds.
+    /// valid Wordle answer / guess).
     #[inline]
     #[must_use]
     pub fn new(word: &str) -> Self {
@@ -77,8 +76,7 @@ impl std::fmt::Debug for Signature {
 impl std::fmt::Display for Signature {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut mask = self.0;
-        // at most 5 letters + 2 braces '{' and '}'.
-        let mut buf = String::with_capacity(5 + 2);
+        let mut buf = String::with_capacity(7); // `{(at most 5 letters)}`
         buf.push('{');
         while mask != 0 {
             let i = mask.trailing_zeros();
