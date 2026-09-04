@@ -14,10 +14,9 @@
 pub struct Signature(u32);
 
 impl Signature {
-    /// Construct a new `Signature` from a word.
+    /// Construct a new `Signature` from a Wordle word.
     ///
-    /// **Correctness**: The word must be exactly 5 lowercase ASCII letters (a
-    /// valid Wordle answer / guess).
+    /// **Correctness**: Wordle words must be exactly 5 lowercase ASCII letters.
     #[inline]
     #[must_use]
     pub fn new(word: &str) -> Self {
